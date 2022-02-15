@@ -1,5 +1,5 @@
 def foo(x):
-    if x % 5 == 10:
+    if x % 3 == 0:
         print("Foo")
     else:
         print("Bar")
