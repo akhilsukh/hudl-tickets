@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, SafeAreaView, ScrollView, View, Text } from 'react-native';
 import SearchBarLoader from '../components/SearchBarLoader';
-import Category2 from '../components/Category2';
+import Category from '../components/Category';
 
 import green from '../assets/green_square.png';
 import gray from '../assets/gray.png';
@@ -13,8 +13,7 @@ import org from '../assets/orangeredgradient.png';
 import ptg from '../assets/pinktan.png';
 import pbg from '../assets/purplebluegradient.png';
 import tbg from '../assets/tealbluegradient.png';
-import EventChip2 from '../components/EventChip2'
-import CarouselLoader from '../components/CarouselLoader';
+import EventChip from '../components/EventChip'
 import CarouselCards from '../components/CarouselCards';
 
 export default function ExplorePage({ navigation }) {
