@@ -59,28 +59,28 @@ export default function ExplorePage({ navigation }) {
   return (
     <ScrollView style={{flex: 1, backgroundColor:"black"}}>
        {/* <CarouselLoader image={Image1}></CarouselLoader> */}
-       <SearchBarLoader> </SearchBarLoader>
+       {/* <SearchBarLoader> </SearchBarLoader> */}
        <CarouselCards></CarouselCards>
         <Text style={{color:"white", fontWeight:'600',fontSize:14, paddingBottom:3}}>Trending</Text>
         <View style={styles.grid}>
-          <EventChip2 eventData={poof[0]} navigation={navigation}></EventChip2>
-          <EventChip2 eventData={poof[1]} navigation={navigation}></EventChip2>
-          <EventChip2 eventData={poof[2]} navigation={navigation}></EventChip2>
-          <EventChip2 eventData={poof[3]} navigation={navigation}></EventChip2>
+          <EventChip eventData={poof[0]} navigation={navigation}></EventChip>
+          <EventChip eventData={poof[1]} navigation={navigation}></EventChip>
+          <EventChip eventData={poof[2]} navigation={navigation}></EventChip>
+          <EventChip eventData={poof[3]} navigation={navigation}></EventChip>
         </View>
         <Text style={{color:"white", fontWeight:'600',fontSize:14, paddingBottom:3}}>Games Nearby</Text>
         <View style={styles.grid}>
-          <EventChip2 eventData={poof[0]} navigation={navigation}></EventChip2>
-          <EventChip2 eventData={poof[1]} navigation={navigation}></EventChip2>
+          <EventChip eventData={poof[0]} navigation={navigation}></EventChip>
+          <EventChip eventData={poof[1]} navigation={navigation}></EventChip>
         </View>
         <Text style={{color:"white", fontWeight:'600',fontSize:14, paddingBottom:3}}>Categories</Text>
         <View style={styles.grid}> 
-          <Category2 label='Soccer' image={orange}></Category2>
-          <Category2 label='Basketball' image={lightblue}></Category2>
-          <Category2 label='Football' image={lavendar}></Category2>
-          <Category2 label='Baseball' image={green}></Category2>
-          <Category2 label='Tennis' image={yellow}></Category2>
-          <Category2 label='Hockey' image={gray}></Category2>
+          <Category label='Soccer' image={orange}></Category>
+          <Category label='Basketball' image={lightblue}></Category>
+          <Category label='Football' image={lavendar}></Category>
+          <Category label='Baseball' image={green}></Category>
+          <Category label='Tennis' image={yellow}></Category>
+          <Category label='Hockey' image={gray}></Category>
         </View>
     </ScrollView>
   );
