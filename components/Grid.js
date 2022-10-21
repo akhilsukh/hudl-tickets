@@ -1,24 +1,15 @@
 import React from 'react';
-import { StyleSheet, ScrollView, View} from 'react-native';
+import { StyleSheet, View} from 'react-native';
 import Chip_P from "./Chip.js";
 
 
-export default function Grid() {
+export default function Grid({data}) {
 
   return (
     <View style={styles.grid} >
-      
-    <Chip_P eventName = "Berkeley vs Stanford"></Chip_P>
-    <Chip_P eventName = "Berkeley vs Stanford"></Chip_P>
-    <Chip_P eventName = "Berkeley vs Stanford"></Chip_P>
-  
-    <Chip_P eventName = "UCLA vs USC"></Chip_P>
-    <Chip_P eventName = "UCLA vs USC"></Chip_P>
-    <Chip_P eventName = "UCLA vs USC"></Chip_P>
-    
-    <Chip_P eventName = "OSU vs ASU"></Chip_P>
-    <Chip_P eventName = "OSU vs ASU"></Chip_P>
-    <Chip_P eventName = "OSU vs ASU"></Chip_P>
+      {data.map(p=>(
+          <Chip_P event={p}/> 
+          ))}
     </View>
   );
 }

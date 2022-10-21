@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 
-export default function Chip_P(props) {
+export default function Chip_P({event}) {
   return (
     <TouchableOpacity style={styles.card} onPress={()=>{alert("Event Information:")}}>
       <View style={styles.cardImage}>
@@ -14,10 +14,10 @@ export default function Chip_P(props) {
         </View>
       <View style={styles.cardContent}>
         <Text style={{color:"white", fontWeight:'600',fontSize:12, paddingBottom:"2%"}}>
-          {props.eventName}
+          {event.title}
         </Text>
         <Text style={{color:"white", fontWeight:'200', fontSize:9, paddingBottom:"5%"}}>
-          Oct 2, 7pm - A5
+        {event.date}, {event.time} - {event.seat}
         </Text>
       </View>
     </TouchableOpacity>    

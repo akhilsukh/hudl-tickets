@@ -1,10 +1,9 @@
 import {StyleSheet, Text, View, Button} from "react-native";
 import {useState, React} from 'react';
-import Chip_P from "./Chip.js";
 import Grid from "./Grid.js";
 
 
-export default function ArchivedTickets(props) {
+export default function ArchivedTickets({data}) {
     const [minButton, setButton] = useState("Archived Tickets");
     const [minimized, setMinimized] = useState(true);
 
@@ -17,8 +16,6 @@ export default function ArchivedTickets(props) {
             setMinimized(true);
         }
     }
-
-    const dummyData = {archivedTickets : [1, 2, 3]}
     
     return (
         <View>
@@ -26,7 +23,7 @@ export default function ArchivedTickets(props) {
         {/*dummyData.archivedTickets?.map( ticket => {*/ }
             {
                 !minimized? 
-                    (<Grid></Grid>)
+                    (<Grid data = {data} ></Grid>)
                 : []
             }
 
