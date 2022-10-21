@@ -73,8 +73,6 @@ export default function Chip_P({event}) {
             </View>
         </Modal>
       </View>
-
-
     </TouchableOpacity>    
   );
 }
