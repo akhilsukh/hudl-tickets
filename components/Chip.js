@@ -1,9 +1,25 @@
+import { popup } from 'leaflet';
 import React from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
+import { Modal, StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 
 export default function Chip_P({event}) {
+
+  const [showPopup, setShowPopup] = useState(false);
+
+  const ticketPopup = () => {
+    return (
+      <Modal 
+      visible = {showPopup}
+      onRequestClose = {() => {
+        setShowPopup(!showPopup);
+      }}>
+        Ticket Info 
+      </Modal>
+    )
+  }
+
   return (
-    <TouchableOpacity style={styles.card} onPress={()=>{alert("Event Information:")}}>
+    <TouchableOpacity style={styles.card} onPress={()=>ticketPopup()}> 
       <View style={styles.cardImage}>
           <Image
             source={event.image}
