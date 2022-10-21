@@ -1,5 +1,3 @@
-
-import React from 'react';
 import { Modal, StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import {useState, React} from 'react';
 
@@ -55,24 +53,24 @@ export default function Chip_P({event}) {
               <Text style={{color:"white", fontWeight:'600',fontSize:20, paddingBottom:"2%", paddingTop:"2%", textAlign: "center" }}>
                   {event.title}
               </Text>
-              <Text style={{color:"white", fontWeight:'200', fontSize:15, paddingBottom:"2%", textAlign: "center" }}>  
-                  {event.location}
+              <Text style={styles.modalTxt}>  
+                 {event.location}
               </Text>
-              <Text style={{color:"white", fontWeight:'200', fontSize:15, paddingBottom:"2%", textAlign: "center" }}>
+              <Text style={styles.modalTxt}>
                   {event.date}, {event.time} 
               </Text>    
-               <Text style={{color:"white", fontWeight:'200', fontSize:15, paddingBottom:"2%", textAlign: "center" }}>  
-                  {event.seat}
+               <Text style={styles.modalTxt}>  
+                  SEAT: {event.seat}
               </Text> 
-              <Text style={{color:"white", fontWeight:'200', fontSize:15, paddingBottom:"2%", textAlign: "center" }}>  
-                  {event.ticketId}
+              <Text style={styles.modalTxt}>  
+                  ID: {event.ticketId}
               </Text>
 
+              <Image 
+              source={event.qr}
+              style = { styles.qrimage}
+              />
             </View>
-            
-            <Image 
-              source={event.qr}/>
-
         </Modal>
       </View>
 
@@ -106,11 +104,27 @@ const styles = StyleSheet.create({
   overflow: 'hidden'
   },
   image: {
+    borderRadius: 15,
     marginTop: 100,
     width: '100%',
     height: 200,
   },
   modal: {
     backgroundColor: 'black',
+  },
+  qrimage: {
+    width: 220,
+    height: 220,
+    borderRadius: 15,
+    display: "block",
+    marginLeft: "auto",
+    marginRight: "auto",
+  },
+  modalTxt:{
+    color:"white",
+    fontWeight:'200', 
+    fontSize:15,
+    paddingBottom:"2%", 
+    textAlign: "center" 
   }
 });
