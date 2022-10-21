@@ -18,7 +18,7 @@ export default function Chip_P({event}) {
   }
 
   return (
-    <TouchableOpacity style={styles.card} onPress={()=>ticketPopup()}> 
+    <TouchableOpacity style={styles.card} onPress={()=>setShowPopup(true)}> 
       <View style={styles.cardImage}>
           <Image
             source={event.image}
@@ -35,6 +35,46 @@ export default function Chip_P({event}) {
         {event.date}, {event.time} - {event.seat}
         </Text>
       </View>
+
+      <View>
+        <Modal 
+        animationType = {"slide"}
+        transparent = {true}
+        visible = {showPopup}
+        presentationStyle= {'formSheet'}
+        onRequestClose = {() => {
+        setShowPopup(false)
+        }}>
+            <Image 
+              source={event.image}
+              style = { styles.image }/>
+            <View style = {styles.modal}>
+
+              <Text style={{color:"white", fontWeight:'600',fontSize:20, paddingBottom:"2%", paddingTop:"2%", textAlign: "center" }}>
+                  {event.title}
+              </Text>
+              <Text style={{color:"white", fontWeight:'200', fontSize:15, paddingBottom:"2%", textAlign: "center" }}>  
+                  {event.location}
+              </Text>
+              <Text style={{color:"white", fontWeight:'200', fontSize:15, paddingBottom:"2%", textAlign: "center" }}>
+                  {event.date}, {event.time} 
+              </Text>    
+               <Text style={{color:"white", fontWeight:'200', fontSize:15, paddingBottom:"2%", textAlign: "center" }}>  
+                  {event.seat}
+              </Text> 
+              <Text style={{color:"white", fontWeight:'200', fontSize:15, paddingBottom:"2%", textAlign: "center" }}>  
+                  {event.ticketId}
+              </Text>
+
+            </View>
+            
+            <Image 
+              source={event.qr}/>
+
+        </Modal>
+      </View>
+
+
     </TouchableOpacity>    
   );
 }
@@ -63,6 +103,12 @@ const styles = StyleSheet.create({
   width: 170,  
   overflow: 'hidden'
   },
-
-  
+  image: {
+    marginTop: 100,
+    width: '100%',
+    height: 200,
+  },
+  modal: {
+    backgroundColor: 'black',
+  }
 });

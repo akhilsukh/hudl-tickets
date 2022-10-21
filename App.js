@@ -11,7 +11,8 @@ const data = [
     title: "Somu vs Akhil",
     seat: "a4",
     ticketId: "12345",
-    image: require("./assets/color.png")
+    image: require("./assets/color.png"),
+    qr: require("./assets/qr-code.png")
   },
   {
     time: "2:00 - 4:00 PM",
@@ -20,7 +21,8 @@ const data = [
      title: "Somu vs Akhil",
      seat: "a4",
      ticketId: "12345",
-     image: require("./assets/color.png")
+     image: require("./assets/color.png"),
+     qr: require("./assets/qr-code.png")
    },
    {
     time: "2:00 - 4:00 PM",
@@ -29,7 +31,8 @@ const data = [
      title: "Somu vs Akhil",
      seat: "a4",
      ticketId: "12345",
-     image: require("./assets/color.png")
+     image: require("./assets/color.png"),
+     qr: require("./assets/qr-code.png")
    },
    {
     time: "2:00 - 4:00 PM",
@@ -38,7 +41,8 @@ const data = [
      title: "Somu vs Akhil",
      seat: "a4",
      ticketId: "12345",
-     image: require("./assets/color.png")
+     image: require("./assets/color.png"),
+     qr: require("./assets/qr-code.png")
    },
    {
     time: "2:00 - 4:00 PM",
@@ -47,7 +51,8 @@ const data = [
      title: "Somu vs Akhil",
      seat: "a4",
      ticketId: "12345",
-     image: require("./assets/color.png")
+     image: require("./assets/color.png"),
+     qr: require("./assets/qr-code.png")
    },
    {
     time: "2:00 - 4:00 PM",
@@ -56,7 +61,8 @@ const data = [
      title: "Somu vs Akhil",
      seat: "a4",
      ticketId: "12345",
-     image: require("./assets/color.png")
+     image: require("./assets/color.png"),
+     qr: require("./assets/qr-code.png")
    },
    {
     time: "2:00 - 4:00 PM",
@@ -65,8 +71,60 @@ const data = [
      title: "Somu vs Akhil",
      seat: "a4",
      ticketId: "12345",
-     image: require("./assets/color.png")
+     image: require("./assets/color.png"),
+     qr: require("./assets/qr-code.png")
    },
+   {
+    time: "2:00 - 4:00 PM",
+     date: "Oct 4",
+     location: "Berkeley",
+     title: "Somu vs Akhil",
+     seat: "a4",
+     ticketId: "12345",
+     image: require("./assets/color.png"),
+     qr: require("./assets/qr-code.png")
+   },
+   {
+    time: "2:00 - 4:00 PM",
+     date: "Oct 4",
+     location: "Berkeley",
+     title: "Somu vs Akhil",
+     seat: "a4",
+     ticketId: "12345",
+     image: require("./assets/color.png"),
+     qr: require("./assets/qr-code.png")
+   },
+   {
+    time: "2:00 - 4:00 PM",
+     date: "Oct 4",
+     location: "Berkeley",
+     title: "Somu vs Akhil",
+     seat: "a4",
+     ticketId: "12345",
+     image: require("./assets/color.png"),
+     qr: require("./assets/qr-code.png")
+   },
+   {
+    time: "2:00 - 4:00 PM",
+     date: "Oct 4",
+     location: "Berkeley",
+     title: "Somu vs Akhil",
+     seat: "a4",
+     ticketId: "12345",
+     image: require("./assets/color.png"),
+     qr: require("./assets/qr-code.png")
+   },
+   {
+    time: "2:00 - 4:00 PM",
+     date: "Oct 4",
+     location: "Berkeley",
+     title: "Somu vs Akhil",
+     seat: "a4",
+     ticketId: "12345",
+     image: require("./assets/color.png"),
+     qr: require("./assets/qr-code.png")
+   }
+  
 ]
 
 
