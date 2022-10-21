@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { StyleSheet, SafeAreaView, View, Text } from 'react-native';
+import { StyleSheet, SafeAreaView, View, Text, ScrollView } from 'react-native';
 import data from '../components/data'
 import EventChip from '../components/EventChip'
 
@@ -14,12 +14,14 @@ export default function CategoryPage({ navigation }) {
 
 
     return (
+        <ScrollView style={{flex: 1, backgroundColor:"black"}}>
         <View style={styles.grid}>
-            {filteredData.map((item) => {
-                console.log(item);
-                <EventChip eventData={item} navigation={navigation}></EventChip>
-            })}
-        </View>
+                {filteredData.map(((item) => {
+                    console.log(item);
+                    return (<EventChip eventData={item} navigation={navigation}></EventChip>)
+                }))}
+            </View>
+        </ScrollView>
     );
   }
   
