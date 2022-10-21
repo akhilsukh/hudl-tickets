@@ -24,11 +24,12 @@ export default function ArchivedTickets(props) {
         <View>
             <Button title = {minButton} color = "#FCA974" width = "100px" onPress = {clickMinimize}></Button>
         {/*dummyData.archivedTickets?.map( ticket => {*/ }
-            {(minimized == true || (dummyData && minimized == true))?
-                (<Grid></Grid>)
-                
-            : (<Text style = {{color:"white"}}>No archived tickets</Text> )
-            } 
+            {
+                !minimized? 
+                    (<Grid></Grid>)
+                : []
+            }
+
         </View>
     )
 }
