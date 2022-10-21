@@ -6,7 +6,7 @@ export default function Chip_P({event}) {
     <TouchableOpacity style={styles.card} onPress={()=>{alert("Event Information:")}}>
       <View style={styles.cardImage}>
           <Image
-            source={require("../assets/color.png")}
+            source={event.image}
             style={{
               width: 170, height:130,
             }}

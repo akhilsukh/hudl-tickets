@@ -11,53 +11,62 @@ const data = [
     title: "Somu vs Akhil",
     seat: "a4",
     ticketId: "12345",
-    image: "https://picsum.photos/id/11/200/300"
+    image: "../assets/color.png"
   },
   {
     time: "2:00 - 4:00 PM",
-    date: "Oct 4",
-    location: "Berkeley",
-    title: "Somu vs Akhil",
-    seat: "a4",
-    ticketId: "12345",
-    image: "https://picsum.photos/id/11/200/300"
-  },
-  {
+     date: "Oct 4",
+     location: "Berkeley",
+     title: "Somu vs Akhil",
+     seat: "a4",
+     ticketId: "12345",
+     image: "../assets/color.png"
+   },
+   {
     time: "2:00 - 4:00 PM",
-    date: "Oct 4",
-    location: "Berkeley",
-    title: "Somu vs Akhil",
-    seat: "A4",
-    ticketId: "12345",
-    image: "https://picsum.photos/id/11/200/300"
-  },
-  {
+     date: "Oct 4",
+     location: "Berkeley",
+     title: "Somu vs Akhil",
+     seat: "a4",
+     ticketId: "12345",
+     image: "../assets/color.png"
+   },
+   {
     time: "2:00 - 4:00 PM",
-    date: "Oct 4",
-    location: "Berkeley",
-    title: "Somu vs Akhil",
-    seat: "A4",
-    ticketId: "12345",
-    image: "https://picsum.photos/id/11/200/300"
-  },
-  {
+     date: "Oct 4",
+     location: "Berkeley",
+     title: "Somu vs Akhil",
+     seat: "a4",
+     ticketId: "12345",
+     image: "../assets/color.png"
+   },
+   {
     time: "2:00 - 4:00 PM",
-    date: "Oct 4",
-    location: "Berkeley",
-    title: "Somu vs Akhil",
-    seat: "A4",
-    ticketId: "12345",
-    image: "https://picsum.photos/id/11/200/300"
-  },
-  {
+     date: "Oct 4",
+     location: "Berkeley",
+     title: "Somu vs Akhil",
+     seat: "a4",
+     ticketId: "12345",
+     image: "../assets/color.png"
+   },
+   {
     time: "2:00 - 4:00 PM",
-    date: "Oct 4",
-    location: "Berkeley",
-    title: "Somu vs Akhil",
-    seat: "A4",
-    ticketId: "12345",
-    image: "https://picsum.photos/id/11/200/300"
-  }
+     date: "Oct 4",
+     location: "Berkeley",
+     title: "Somu vs Akhil",
+     seat: "a4",
+     ticketId: "12345",
+     image: "../assets/color.png"
+   },
+   {
+    time: "2:00 - 4:00 PM",
+     date: "Oct 4",
+     location: "Berkeley",
+     title: "Somu vs Akhil",
+     seat: "a4",
+     ticketId: "12345",
+     image: "../assets/color.png"
+   },
 ]
 
 
