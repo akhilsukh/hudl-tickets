@@ -1,6 +1,5 @@
-import { popup } from 'leaflet';
-import React from 'react';
 import { Modal, StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
+import {useState, React} from 'react';
 
 export default function Chip_P({event}) {
 
