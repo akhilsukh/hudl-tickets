@@ -1,4 +1,6 @@
-import React from 'react'
+import React from 'react';
+import { Chip } from 'react-native-paper';
+
 import { StyleSheet, SafeAreaView, ScrollView, View, Text } from 'react-native';
 import SearchBarLoader from '../components/SearchBarLoader';
 import Category from '../components/Category';
