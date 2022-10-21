@@ -60,7 +60,7 @@ export default function ExplorePage({ navigation }) {
     <ScrollView style={{flex: 1, backgroundColor:"black"}}>
        {/* <CarouselLoader image={Image1}></CarouselLoader> */}
        {/* <SearchBarLoader> </SearchBarLoader> */}
-       <CarouselCards></CarouselCards>
+       {/* <CarouselCards></CarouselCards> */}
         <Text style={{color:"white", fontWeight:'600',fontSize:14, paddingBottom:3}}>Trending</Text>
         <View style={styles.grid}>
           <EventChip eventData={poof[0]} navigation={navigation}></EventChip>
