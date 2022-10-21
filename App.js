@@ -1,11 +1,18 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+// import { StatusBar } from 'expo-status-bar';
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import Grid from "./components/Grid";
+import ArchivedTickets from "./components/ArchivedTickets.js";
+
+
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+    <ScrollView >
+      <Text style={{color:"white", fontWeight:'500', fontSize:"19", paddingTop: "25%", paddingBottom: "5%", paddingLeft:"3%"}}> Upcoming Events</Text>
+      <Grid></Grid>
+      <ArchivedTickets props = {[1, 2, 3]}></ArchivedTickets> 
+    </ScrollView >
     </View>
   );
 }
@@ -13,8 +20,8 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: 'black',
+    alignItems: 'flex-start',
+    padding: "3%"
   },
 });
