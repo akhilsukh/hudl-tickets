@@ -27,7 +27,8 @@ import Image1 from '../assets/green_square.png'
       ticketCost: "$984396802",
       location: "Berkeley",
       title: "Somu vs Akhil",
-      image: "https://picsum.photos/id/11/200/300"
+      image: "https://picsum.photos/id/11/200/300",
+      category: "soccer"
     },
     {
       teamLogos: Image1,
@@ -36,7 +37,8 @@ import Image1 from '../assets/green_square.png'
       ticketCost: "$0",
       location: "Cupertino",
       title: "Vuk vs Jenna",
-      image: "https://picsum.photos/id/10/200/300"
+      image: "https://picsum.photos/id/10/200/300",
+      category: "basketball"
     },
     {
       teamLogos: Image1,
@@ -45,7 +47,8 @@ import Image1 from '../assets/green_square.png'
       ticketCost: "$100",
       location: "San Francisco",
       title: "Icchitaa vs Rahul",
-      image: "https://picsum.photos/id/12/200/300"
+      image: "https://picsum.photos/id/12/200/300",
+      category: "volleyball"
     },
     {
       teamLogos: Image1,
@@ -54,7 +57,8 @@ import Image1 from '../assets/green_square.png'
       ticketCost: "$103940",
       location: "Tahoe",
       title: "Sathvika vs Amal",
-      image: "https://picsum.photos/id/12/200/300"
+      image: "https://picsum.photos/id/12/200/300",
+      category: "soccer"
     }
   ]
 
