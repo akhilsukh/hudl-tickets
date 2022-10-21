@@ -11,7 +11,7 @@ const data = [
     title: "Somu vs Akhil",
     seat: "a4",
     ticketId: "12345",
-    image: "../assets/color.png"
+    image: require("./assets/color.png")
   },
   {
     time: "2:00 - 4:00 PM",
@@ -20,7 +20,7 @@ const data = [
      title: "Somu vs Akhil",
      seat: "a4",
      ticketId: "12345",
-     image: "../assets/color.png"
+     image: require("./assets/color.png")
    },
    {
     time: "2:00 - 4:00 PM",
@@ -29,7 +29,7 @@ const data = [
      title: "Somu vs Akhil",
      seat: "a4",
      ticketId: "12345",
-     image: "../assets/color.png"
+     image: require("./assets/color.png")
    },
    {
     time: "2:00 - 4:00 PM",
@@ -38,7 +38,7 @@ const data = [
      title: "Somu vs Akhil",
      seat: "a4",
      ticketId: "12345",
-     image: "../assets/color.png"
+     image: require("./assets/color.png")
    },
    {
     time: "2:00 - 4:00 PM",
@@ -47,7 +47,7 @@ const data = [
      title: "Somu vs Akhil",
      seat: "a4",
      ticketId: "12345",
-     image: "../assets/color.png"
+     image: require("./assets/color.png")
    },
    {
     time: "2:00 - 4:00 PM",
@@ -56,7 +56,7 @@ const data = [
      title: "Somu vs Akhil",
      seat: "a4",
      ticketId: "12345",
-     image: "../assets/color.png"
+     image: require("./assets/color.png")
    },
    {
     time: "2:00 - 4:00 PM",
@@ -65,7 +65,7 @@ const data = [
      title: "Somu vs Akhil",
      seat: "a4",
      ticketId: "12345",
-     image: "../assets/color.png"
+     image: require("./assets/color.png")
    },
 ]
 
