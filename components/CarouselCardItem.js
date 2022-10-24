@@ -5,9 +5,13 @@ import { View, Text, StyleSheet, Dimensions, Image, TouchableOpacity } from "rea
 export const SLIDER_WIDTH = Dimensions.get('window').width + 80
 export const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7)
 
-export default function CarouselCardItem({ item, index }) {
+export default function CarouselCardItem({ item, index, route, navigation }) {
   return (
-    <TouchableOpacity onPress={()=>{alert("You clicked me")}} style={styles.card}>
+    <TouchableOpacity onPress={()=>{
+      /* 1. Navigate to the Tickets route with params */
+      navigation.navigate('Tickets Page', {
+        eventData: item
+      })}} style={styles.card}>
         <View style={styles.cardImage}>
             <ImageBackground
                 source={item.image}

@@ -17,7 +17,14 @@ export default function CarouselCards({navigation}) {
         layoutCardOffset={0}
         ref={isCarousel}
         data={data}
-        renderItem={CarouselCardItem}
+        renderItem={({item, index}) => {
+          return (<CarouselCardItem
+            item={item}
+            navigation={navigation}
+          >
+          </CarouselCardItem>);
+        }}
+        //renderItem={CarouselCardItem}
         sliderWidth={SLIDER_WIDTH}
         itemWidth={ITEM_WIDTH}
         onSnapToItem={(index) => setIndex(index)}

@@ -24,12 +24,14 @@ export default function EventChip2(props) {
         <Text style={{color:"white", fontWeight:'600',fontSize:12, paddingBottom:"5%"}}>
             {props.eventData.title}
         </Text>
-        <Text style={{color:"white", fontWeight:'200', fontSize:12, paddingBottom:"5%"}}>
-            {props.eventData.date}
-        </Text>
-        <Text style={{color:"white", fontWeight:'200', fontSize:12, paddingBottom:"5%"}}>
-            {props.eventData.ticketCost}
-        </Text>
+        <View style={styles.info}>
+          <Text style={{color:"white", fontWeight:'200', fontSize:12, paddingBottom:"5%"}}>
+              {props.eventData.date}
+          </Text>
+          <Text style={{color:"white", fontWeight:'200', fontSize:12, paddingBottom:"5%"}}>
+              {props.eventData.ticketCost}
+          </Text>
+        </View>
       </View>
     </TouchableOpacity>
   );
@@ -59,6 +61,11 @@ const styles = StyleSheet.create({
   height: 60, 
   width: 170,  
   overflow: 'hidden',
+  },
+  info:{
+    flexDirection:"row",
+    alignItems: 'flex-end',
+    justifyContent: 'space-between',
   },
   
 });

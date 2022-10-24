@@ -38,7 +38,7 @@ const data = [
     location: "San Francisco",
     title: "Ichchitaa vs Rahul",
     image: pbg,
-    category: "Volleyball"
+    category: "Football"
   },
   {
     teamLogos: Image1,
