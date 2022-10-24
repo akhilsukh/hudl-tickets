@@ -16,17 +16,31 @@ export default function EventPage(props) {
             // marginBottom: 5
         },
         col: {
-            // flex: 1,
-            // flexDirection: "row",
-            // marginTop: 5,
-            // marginBottom: 1
+            flex: 1,
+            flexDirection: "row",
+            flexWrap: 'wrap',
+            alignItems: 'flex-start',
+            marginTop: 5,
+            marginBottom: 1
+        },
+        title: {
+            fontSize: 25,
+            fontWeight: 'bold'
         },
         txt: {
-            fontSize:25 
+            fontSize: 20
+        },
+        txt1: {
+            fontSize: 20,
+            width: '40%'
         },
         img: {
             width: 100,
             height: 100
+        },
+        img2: {
+            width: '10%',
+            height: 10
         }
     });
 
@@ -34,7 +48,7 @@ export default function EventPage(props) {
         <View style = {styles.row}>
             {/* <View style = {{flex: 1, flexDirection: "row"}}> */}
             <View>
-            <Image style={styles.img} source = {{uri: hudl_image}} />
+            <Image style={styles.img} source = {{uri: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/640px-Image_created_with_a_mobile_phone.png"}} />
             </View>
             {/* <View style = {{flex: 1, flexDirection: "row"}}> */}
             <View>
@@ -42,16 +56,18 @@ export default function EventPage(props) {
             </View>
             <View>
                 {/* <Text variant="displayMedium">{props.route.params.eventData.gameName}</Text> */}
-                <Text variant="displayMedium" style={styles.txt}>Game Name</Text>
+                <Text variant="displayMedium" style={styles.title}>Fremont vs Mission San Jose</Text>
                 <View style={styles.col}>
                     {/* <Text variant="displayMedium">{props.route.params.eventData.gameTime}</Text>
                     <Text variant="displayMedium">{props.route.params.eventData.ticketCost}</Text> */}
-                    <Text variant="displayMedium" style={styles.txt}>Game time</Text>
-                    <Text variant="displayMedium" style={styles.txt}>Ticket Cost</Text>
+                    {/* <Image style={styles.img2} source = {{uri: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Calendar_icon_2.svg/989px-Calendar_icon_2.svg.png"}} /> */}
+                    <Text variant="displayMedium" style={styles.txt1}>Oct 2, 7:30 pm</Text>
+                    <Text variant="displayMedium" style={styles.txt1}>$9.99</Text>
                 </View>
-                <View>
+                <View style={styles.col}>
                     {/* <Text variant="displayMedium">{props.route.params.eventData.location}</Text> */}
-                    <Text variant="displayMedium" style={styles.txt}>Location</Text>
+                    {/* <Image style={styles.img2} source = {{uri: "https://cdn-icons-png.flaticon.com/512/64/64113.png"}} /> */}
+                    <Text variant="displayMedium" style={styles.txt1}>Fremont High School</Text>
                 </View>
                 <View>
                 <Text variant="displayMedium" style={styles.txt}>Seat Selection</Text>
