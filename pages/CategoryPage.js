@@ -3,8 +3,11 @@ import { StyleSheet, SafeAreaView, View, Text, ScrollView } from 'react-native';
 import data from '../components/data'
 import EventChip from '../components/EventChip'
 
-export default function CategoryPage({ navigation }) {
-    const category = "soccer"
+export default function CategoryPage({route, navigation }) {
+    //const category = navigation.state.params.category
+    /* 2. Get the param */
+    const { category } = route.params;
+    console.log(category)
     let filteredData = Object.entries(data)
     filteredData = data.filter((item) => item.category == category)
     console.log(filteredData)

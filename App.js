@@ -14,9 +14,9 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Category Page" component={CategoryPage} />
         <Stack.Screen name="Explore Page" component={ExplorePage} />
         <Stack.Screen name="Tickets Page" component={Tickets} />
+        <Stack.Screen name="Category Page" component={CategoryPage} />
       </Stack.Navigator>
     </NavigationContainer>
   );

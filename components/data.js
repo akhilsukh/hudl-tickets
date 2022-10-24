@@ -18,7 +18,7 @@ const data = [
     location: "Berkeley",
     title: "Somu vs Akhil",
     image: org,
-    category: "soccer"
+    category: "Soccer"
   },
   {
     teamLogos: Image1,
@@ -28,7 +28,7 @@ const data = [
     location: "Cupertino",
     title: "Vuk vs Jenna",
     image: ptg,
-    category: "basketball"
+    category: "Basketball"
   },
   {
     teamLogos: Image1,
@@ -38,7 +38,7 @@ const data = [
     location: "San Francisco",
     title: "Ichchitaa vs Rahul",
     image: pbg,
-    category: "volleyball"
+    category: "Volleyball"
   },
   {
     teamLogos: Image1,
@@ -48,7 +48,7 @@ const data = [
     location: "Tahoe",
     title: "Sathvika vs Amal",
     image: tbg,
-    category: "soccer"
+    category: "Soccer"
   }
 ]
 

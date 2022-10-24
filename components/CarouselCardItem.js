@@ -10,7 +10,7 @@ export default function CarouselCardItem({ item, index }) {
     <TouchableOpacity onPress={()=>{alert("You clicked me")}} style={styles.card}>
         <View style={styles.cardImage}>
             <ImageBackground
-                source={{ uri: item.image }}
+                source={item.image}
                 borderRadius={1}
                 paddingBottom={0}
                 style={{width: SLIDER_WIDTH, height:ITEM_WIDTH, flexGrow:1,

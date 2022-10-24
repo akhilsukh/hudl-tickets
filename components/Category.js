@@ -2,10 +2,14 @@ import React from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 
 
-export default function Category2(props) {
+export default function Category(props) {
 
   return (
-    <TouchableOpacity onPress={()=>{alert("you clicked me")}} style={styles.card}>
+    <TouchableOpacity onPress={()=>{
+      /* 1. Navigate to the Category Page route with params */
+      props.navigation.navigate('Category Page', {
+        category: props.label
+      })}} style={styles.card}>
       <View style={styles.cardImage}>
           <Image
             source={props.image}
