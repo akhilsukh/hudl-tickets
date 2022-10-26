@@ -63,7 +63,7 @@ export default function EventPage(props) {
         txt3: {
             fontSize: 20,
             marginLeft: 20,
-            color: 'white'
+            color: 'white',
         },
         txt4: {
             fontSize: 25,
@@ -71,7 +71,7 @@ export default function EventPage(props) {
             marginTop: 30,
             marginLeft: 20,
             color: 'white',
-            marginBottom: 340
+            marginBottom: 370
         },
         img: {
             width: 400,
@@ -111,12 +111,13 @@ export default function EventPage(props) {
                     {/* <Image style={styles.img2} source = {{uri: "https://cdn-icons-png.flaticon.com/512/64/64113.png"}} /> */}
                     <Text variant="displayMedium" style={styles.txt3}>Fremont High School</Text>
                 </View>
-                <View> 
-                <Text variant="displayMedium" style={styles.txt4}>Seat Selection</Text>
-                </View> 
                 <View>
                 <TicketOption/>
                 </View>
+                <View> 
+                <Text variant="displayMedium" style={styles.txt4}></Text>
+                </View> 
+                
             </View>
             {/* <TicketOption navigation={props.navigation} eventData={props.eventData}></TicketOption> */}
         </View>
