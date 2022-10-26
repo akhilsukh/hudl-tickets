@@ -52,7 +52,7 @@ export default function ExplorePage({ navigation }) {
        ></Searchbar>
        {/* <SearchBarLoader></SearchBarLoader> */}
        <CarouselCards navigation={navigation}></CarouselCards>
-        <Text style={{color:"white", fontWeight:'600',fontSize:14, paddingBottom:3}}>Trending</Text>
+        <Text style={{color:"white", fontWeight:'600',fontSize:18, paddingBottom:3, marginLeft: 10}}>Trending</Text>
         <View style={styles.grid}>
           {console.log(data[0])}
           <EventChip eventData={data[0]} navigation={navigation}></EventChip>
@@ -60,12 +60,12 @@ export default function ExplorePage({ navigation }) {
           <EventChip eventData={data[2]} navigation={navigation}></EventChip>
           <EventChip eventData={data[3]} navigation={navigation}></EventChip>
         </View>
-        <Text style={{color:"white", fontWeight:'600',fontSize:14, paddingBottom:3}}>Games Nearby</Text>
+        <Text style={{color:"white", fontWeight:'600',fontSize:18, paddingBottom:3, marginLeft: 10}}>Games Nearby</Text>
         <View style={styles.grid}>
           <EventChip eventData={data[0]} navigation={navigation}></EventChip>
           <EventChip eventData={data[1]} navigation={navigation}></EventChip>
         </View>
-        <Text style={{color:"white", fontWeight:'600',fontSize:14, paddingBottom:3}}>Categories</Text>
+        <Text style={{color:"white", fontWeight:'600',fontSize:18, paddingBottom:3, marginLeft: 10}}>Categories</Text>
         <View style={styles.grid}> 
           <Category label='Soccer' image={orange} navigation={navigation}></Category>
           <Category label='Basketball' image={lightblue} navigation={navigation}></Category>
@@ -93,14 +93,14 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     alignItems: "flex-start",
     justifyContent: "space-between",
-    padding: 5
+    padding: 10
   },
   search: {
-    backgroundColor: "#333333",
+    backgroundColor: "#5A5A5A",
     marginTop: 5
   },
   searchText: {
     color: "white",
-    backgroundColor: "#333333"
+    backgroundColor: "#5A5A5A"
   }
 });

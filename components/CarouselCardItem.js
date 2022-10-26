@@ -72,8 +72,6 @@ const styles = StyleSheet.create({
       shadowOffset:{width: 2, height:2},
       shadowColor: '#333',
       shadowOpacity: .2,
-      marginHorizontal:0,
-      marginVertical:0,
       alignItems: 'center',
       justifyContent: 'space-between',
       marginTop: 10,
@@ -91,8 +89,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent:'center',
     marginRight: 80,
-    marginBottom:0,
-    paddingBottom: 0
     },
     
   }
