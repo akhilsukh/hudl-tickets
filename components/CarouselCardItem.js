@@ -76,10 +76,7 @@ const styles = StyleSheet.create({
       marginVertical:0,
       alignItems: 'center',
       justifyContent: 'space-between',
-      marginTop: 3,
-      paddingTop: 0,
-      paddingBottom:0,
-      marginBottom:0,
+      marginTop: 10,
     },
     cardContent:{
       marginHorizontal:3,

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Chip } from 'react-native-paper';
 
-import { StyleSheet, SafeAreaView, ScrollView, View, Text } from 'react-native';
+import { StyleSheet, SafeAreaView, ScrollView, View, Text, Image } from 'react-native';
 import SearchBarLoader from '../components/SearchBarLoader';
 import Category from '../components/Category';
 
@@ -19,6 +19,7 @@ import EventChip from '../components/EventChip'
 import CarouselCards from '../components/CarouselCards';
 import data from '../components/data'
 import { Searchbar } from 'react-native-paper';
+import banner from '../assets/banner.png';
 
 export default function ExplorePage({ navigation }) {
 
@@ -36,6 +37,11 @@ export default function ExplorePage({ navigation }) {
 
   return (
     <ScrollView style={{flex: 1, backgroundColor:"black"}}>
+       {/* <Image source={banner}
+            style={{
+              width: '100%', height:'5%', marginTop: '10%'
+            }}>
+       </Image> */}
        <Searchbar
         placeholder="Search for an event"
         onChangeText={onChangeSearch}
@@ -91,7 +97,7 @@ const styles = StyleSheet.create({
   },
   search: {
     backgroundColor: "#333333",
-    
+    marginTop: 5
   },
   searchText: {
     color: "white",
