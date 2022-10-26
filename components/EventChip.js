@@ -21,12 +21,12 @@ export default function EventChip2(props) {
         </Image>
         </View>
       <View style={styles.cardContent}>
-        <Text style={{color:"white", fontWeight:'600',fontSize:12, paddingBottom:"5%"}}>
+        <Text style={{color:"white", fontWeight:'600',fontSize:12, paddingBottom:"2%", paddingTop:'2%'}}>
             {props.eventData.title}
         </Text>
         <View style={styles.info}>
           <Text style={{color:"white", fontWeight:'200', fontSize:12, paddingBottom:"5%"}}>
-              {props.eventData.date}
+              {props.eventData.date}{"  "}
           </Text>
           <Text style={{color:"white", fontWeight:'200', fontSize:12, paddingBottom:"5%"}}>
               {props.eventData.ticketCost}
@@ -47,13 +47,13 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   cardContent:{
-    marginHorizontal:3,
-    marginVertical:3,
-    alignItems: 'center'
+    // marginHorizontal:3,
+    // marginVertical:3,
+    alignItems: 'flex-start'
   },
   cardSubContent:{
-    marginHorizontal:3,
-    marginVertical:3,
+    // marginHorizontal:3,
+    // marginVertical:3,
     alignItems: 'center'
   },
   cardImage:{
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
   },
   info:{
     flexDirection:"row",
-    alignItems: 'flex-end',
+    alignItems: 'flex-start',
     justifyContent: 'space-between',
   },
   
