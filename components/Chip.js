@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
   cardImage:{
   borderRadius: 15,
   height: 130, 
-  width: 170,  
+  width: 160,  
   overflow: 'hidden'
   },
   image: {
