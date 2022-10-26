@@ -80,6 +80,12 @@ export default function EventPage(props) {
         img2: {
             width: '10%',
             height: 10
+        },
+        ticket: {
+            alignItems: "center",
+            marginTop: 30,
+            marginLeft: 20,
+            marginBottom: 50
         }
     });
 
@@ -112,12 +118,11 @@ export default function EventPage(props) {
                     <Text variant="displayMedium" style={styles.txt3}>Fremont High School</Text>
                 </View>
                 <View>
-                <TicketOption/>
+                <TicketOption style={styles.ticket}/>
                 </View>
                 <View> 
                 <Text variant="displayMedium" style={styles.txt4}></Text>
                 </View> 
-                
             </View>
             {/* <TicketOption navigation={props.navigation} eventData={props.eventData}></TicketOption> */}
         </View>
