@@ -22,24 +22,33 @@ export default function TicketOption(props) {
         })
     }
 
+
+
+
     const styles = StyleSheet.create({
         crd: {
             position: "absolute",
-            backgroundColor:"#232a31",
+            backgroundColor:"#333333",
             borderRadius: 5,
             justifyContent:"center", 
             alignItems:"center",
-            width: 350,
-            height: 50,
-            left: 10,
-            top: 600
+            width: "110%",
+            height: "100%",
+            left: "1%",
+            top: "80%"
         },
         flx: {
             flex: 1,
             flexDirection:'row'
         },
         txt: {
-            color:"white"
+            color:"white",
+            fontSize: 20,
+        },
+        numtickets: {
+            color:"white",
+            fontSize: 20,
+            padding: 12
         },
         buy: {
             backgroundColor:"#FCA974", 
@@ -47,13 +56,13 @@ export default function TicketOption(props) {
             height: 35,
             marginTop: 5
         },
-        bdge: {
-            marginTop: 0,
-            marginBottom: 20
+        ga: {
+            color:"white",
+            padding: 5
         },
         buyText: {
             color:"black",
-            fontSize: 10
+            fontSize: 13
         }
     });
 
@@ -61,13 +70,13 @@ export default function TicketOption(props) {
             <Card style={styles.crd}>
                 <View style={styles.flx}>
                     <View>
-                        <Text style={styles.txt}>General Admission</Text>
-                        <Text style={styles.txt}>x/y seats left</Text>
+                        <Text style={styles.ga}>General Admission</Text>
+                        <Text style={styles.ga}>x/y seats left</Text>
                     </View>
                     <Button onPress={minus}>
                         <Text style={styles.txt}>-</Text>
                     </Button>
-                    <Badge style={styles.bdge}>{numTickets}</Badge>
+                    <Text style={styles.numtickets}>{numTickets}</Text>
                     <Button onPress={plus}>
                         <Text style={styles.txt}>+</Text>
                     </Button>
