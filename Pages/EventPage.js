@@ -13,30 +13,69 @@ export default function EventPage(props) {
         row: {
             alignItems: "center",
             marginTop:50,
+            backgroundColor: 'black',
+            // height: 100
             // marginBottom: 5
         },
         col: {
-            flex: 1,
+            // flex: 1,
             flexDirection: "row",
-            flexWrap: 'wrap',
-            alignItems: 'flex-start',
+            // flexWrap: 'wrap',
+            // alignItems: 'flex-start',
             marginTop: 5,
-            marginBottom: 1
+            // marginBottom: 5,
+            height: 40
+        },
+        col2: {
+            // flex: 1,
+            flexDirection: "row",
+            // flexWrap: 'wrap',
+            // alignItems: 'flex-start',
+            marginTop: 5,
+            marginBottom: 1,
+            height: 35
         },
         title: {
+            // textAlign: 'center',
             fontSize: 25,
-            fontWeight: 'bold'
+            marginLeft: 20,
+            fontWeight: 'bold',
+            color: 'white'
         },
         txt: {
-            fontSize: 20
+            fontSize: 20,
+            color: 'white'
+        },
+        txt0: {
+            fontSize: 20,
+            width: '40%',
+            marginLeft: 20,
+            marginRight: 110,
+            color: 'white'
+            // marginBotton: -100
         },
         txt1: {
             fontSize: 20,
-            width: '40%'
+            width: '30%',
+            color: 'white',
+            marginRight: -20
+        },
+        txt3: {
+            fontSize: 20,
+            marginLeft: 20,
+            color: 'white'
+        },
+        txt4: {
+            fontSize: 25,
+            alignItems: 'center',
+            marginTop: 30,
+            marginLeft: 20,
+            color: 'white',
+            marginBottom: 340
         },
         img: {
-            width: 100,
-            height: 100
+            width: 400,
+            height: 200
         },
         img2: {
             width: '10%',
@@ -44,11 +83,14 @@ export default function EventPage(props) {
         }
     });
 
+    // https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/640px-Image_created_with_a_mobile_phone.png
+
     return(
         <View style = {styles.row}>
             {/* <View style = {{flex: 1, flexDirection: "row"}}> */}
             <View>
-            <Image style={styles.img} source = {{uri: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/640px-Image_created_with_a_mobile_phone.png"}} />
+                
+            <Image style={styles.img} source = {{uri: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAACoCAMAAABt9SM9AAAAA1BMVEX/SwLkYf7VAAAAR0lEQVR4nO3BAQEAAACCIP+vbkhAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAO8GxYgAAb0jQ/cAAAAASUVORK5CYII="}} />
             </View>
             {/* <View style = {{flex: 1, flexDirection: "row"}}> */}
             <View>
@@ -61,18 +103,20 @@ export default function EventPage(props) {
                     {/* <Text variant="displayMedium">{props.route.params.eventData.gameTime}</Text>
                     <Text variant="displayMedium">{props.route.params.eventData.ticketCost}</Text> */}
                     {/* <Image style={styles.img2} source = {{uri: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Calendar_icon_2.svg/989px-Calendar_icon_2.svg.png"}} /> */}
-                    <Text variant="displayMedium" style={styles.txt1}>Oct 2, 7:30 pm</Text>
+                    <Text variant="displayMedium" style={styles.txt0}>Oct 2, 7:30 pm</Text>
                     <Text variant="displayMedium" style={styles.txt1}>$9.99</Text>
                 </View>
                 <View style={styles.col}>
                     {/* <Text variant="displayMedium">{props.route.params.eventData.location}</Text> */}
                     {/* <Image style={styles.img2} source = {{uri: "https://cdn-icons-png.flaticon.com/512/64/64113.png"}} /> */}
-                    <Text variant="displayMedium" style={styles.txt1}>Fremont High School</Text>
+                    <Text variant="displayMedium" style={styles.txt3}>Fremont High School</Text>
                 </View>
+                <View> 
+                <Text variant="displayMedium" style={styles.txt4}>Seat Selection</Text>
+                </View> 
                 <View>
-                <Text variant="displayMedium" style={styles.txt}>Seat Selection</Text>
-                </View>
                 <TicketOption/>
+                </View>
             </View>
             {/* <TicketOption navigation={props.navigation} eventData={props.eventData}></TicketOption> */}
         </View>
