@@ -16,12 +16,13 @@ export default function CategoryPage({route, navigation }) {
 
     return (
         <ScrollView style={{flex: 1, backgroundColor:"black"}}>
+        <Text style={{color:"white", fontWeight:'600',fontSize:18, paddingBottom:3, justifyContent: 'flex-start', marginLeft: 10}}>{category}</Text>
         <View style={styles.grid}>
                 {filteredData.map(((item) => {
                     console.log(item);
                     return (<EventChip eventData={item} navigation={navigation}></EventChip>)
                 }))}
-            </View>
+        </View>
         </ScrollView>
     );
   }
