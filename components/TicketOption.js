@@ -1,17 +1,23 @@
 import React, { useState } from 'react';
 import {Text, View, StyleSheet} from 'react-native';
-import {Card, Badge, Button} from 'react-native-paper';
+import {Card, Button} from 'react-native-paper';
 
 export default function TicketOption(props) {
     const [numTickets, setNumTickets] = useState(0)
+    const [seatsLeft, setSeatsLeft] = useState(10)
+    const [seatsTotal, setSeatsTotal] = useState(100)
 
     const plus = () => {
-        setNumTickets(numTickets + 1)
+        if (seatsLeft > 0) {
+            setNumTickets(numTickets + 1)
+            setSeatsLeft(seatsLeft - 1)
+        }
     }
 
     const minus = () => {
         if (numTickets != 0) {
             setNumTickets(numTickets - 1)
+            setSeatsLeft(seatsLeft + 1)
         }
     }
 
@@ -21,9 +27,6 @@ export default function TicketOption(props) {
             numTickets: numTickets
         })
     }
-
-
-
 
     const styles = StyleSheet.create({
         crd: {
@@ -63,6 +66,9 @@ export default function TicketOption(props) {
         buyText: {
             color:"black",
             fontSize: 13
+        },
+        bttn: {
+            top: 5
         }
     });
 
@@ -71,13 +77,13 @@ export default function TicketOption(props) {
                 <View style={styles.flx}>
                     <View>
                         <Text style={styles.ga}>General Admission</Text>
-                        <Text style={styles.ga}>x/y seats left</Text>
+                        <Text style={styles.ga}>{seatsLeft}/{seatsTotal} seats left</Text>
                     </View>
-                    <Button onPress={minus}>
+                    <Button style={styles.bttn} onPress={minus}>
                         <Text style={styles.txt}>-</Text>
                     </Button>
                     <Text style={styles.numtickets}>{numTickets}</Text>
-                    <Button onPress={plus}>
+                    <Button style={styles.bttn} onPress={plus}>
                         <Text style={styles.txt}>+</Text>
                     </Button>
                     <Button style={styles.buy} onPress={buy}>
