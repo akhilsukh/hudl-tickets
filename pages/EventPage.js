@@ -84,20 +84,19 @@ export default function EventPage(props) {
     return(
         <View style={styles.outer}>
             <View style = {styles.row}>
-                <Image style={styles.banner} source = {require('../assets/banner.png')}/>
                 <Image style={styles.img} source = {props.route.params.eventData.image}/>
-                    <Text variant="displayMedium" style={styles.title}>{props.route.params.eventData.title}</Text>
-                    <View style={styles.col}>
-                        <Text variant="displayMedium" style={styles.txt0}>{props.route.params.eventData.gameTime}</Text>
-                        <Text variant="displayMedium" style={styles.txt1}>{props.route.params.eventData.ticketCost}</Text>
-                    </View>
-                    <View style={styles.col}>
-                        <Text variant="displayMedium" style={styles.txt3}>{props.route.params.eventData.location}</Text>
-                    </View>
-                    <View> 
-                    <Text variant="displayMedium" style={styles.txt4}></Text>
-                    </View>
-                    <TicketOption navigation={props.navigation} eventData={props.eventData} style={styles.ticket}/>
+                <Text variant="displayMedium" style={styles.title}>{props.route.params.eventData.title}</Text>
+                <View style={styles.col}>
+                    <Text variant="displayMedium" style={styles.txt0}>{props.route.params.eventData.gameTime}</Text>
+                    <Text variant="displayMedium" style={styles.txt1}>{props.route.params.eventData.ticketCost}</Text>
+                </View>
+                <View style={styles.col}>
+                    <Text variant="displayMedium" style={styles.txt3}>{props.route.params.eventData.location}</Text>
+                </View>
+                <View> 
+                <Text variant="displayMedium" style={styles.txt4}></Text>
+                </View>
+                <TicketOption navigation={props.navigation} eventData={props.eventData} style={styles.ticket}/>
             </View>
         </View>
     )
