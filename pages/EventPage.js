@@ -1,14 +1,10 @@
 import React from 'react';
 import { Text } from 'react-native-paper';
-import { View, Image, Dimensions, StyleSheet} from 'react-native';
+import { View, Image, StyleSheet} from 'react-native';
 
 import TicketOption from '../components/TicketOption';
-// import hudl_image from "../assets/hudltickets.png";
 
 export default function EventPage(props) {
-
-    const {width, height} = Dimensions.get("window");
-
     
     const styles = StyleSheet.create({
         outer: {
@@ -16,33 +12,21 @@ export default function EventPage(props) {
             height: '100%',
         },
         row: {
-            // alignItems: "center",
-            marginTop:50,
-            // height: 100
-            // marginBottom: 5
-            /* Rectangle 66 */
-
         },
         col: {
-            // flex: 1,
             flexDirection: "row",
-            // flexWrap: 'wrap',
-            // alignItems: 'flex-start',
             marginTop: 5,
-            // marginBottom: 5,
-            height: 40
+            height: 40,
+            justifyContent: "space-between",
+            width: 575
         },
         col2: {
-            // flex: 1,
             flexDirection: "row",
-            // flexWrap: 'wrap',
-            // alignItems: 'flex-start',
             marginTop: 5,
             marginBottom: 1,
             height: 35
         },
         title: {
-            // textAlign: 'center',
             fontSize: 25,
             marginLeft: 20,
             fontWeight: 'bold',
@@ -57,14 +41,15 @@ export default function EventPage(props) {
             width: '40%',
             marginLeft: 20,
             marginRight: 110,
-            color: 'white'
-            // marginBotton: -100
+            color: 'white',
+            alignItems: "flex-start"
         },
         txt1: {
             fontSize: 20,
-            width: '30%',
+            width: '100%',
             color: 'white',
-            marginRight: -20
+            right: 30,
+            alignItems: "flex-end"
         },
         txt3: {
             fontSize: 20,
@@ -80,6 +65,10 @@ export default function EventPage(props) {
             color: 'white',
             marginBottom: 370
         },
+        banner: {
+            width: 400,
+            height: 50
+        },
         img: {
             width: 400,
             height: 200
@@ -92,35 +81,23 @@ export default function EventPage(props) {
         }
     });
 
-    // https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/640px-Image_created_with_a_mobile_phone.png
-
-    //data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAACoCAMAAABt9SM9AAAAA1BMVEX/SwLkYf7VAAAAR0lEQVR4nO3BAQEAAACCIP+vbkhAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAO8GxYgAAb0jQ/cAAAAASUVORK5CYII=
     return(
         <View style={styles.outer}>
             <View style = {styles.row}>
-                {/* <View style = {{flex: 1, flexDirection: "row"}}> */}
-                <Image style={styles.img} source = {require('../assets/banner.png')}/>
-                {/* <View style = {{flex: 1, flexDirection: "row"}}> */}
-                {/* <Image source = {require(props.route.params.eventData.teamLogos)}/> */}
-                    {/* <Text variant="displayMedium">{props.route.params.eventData.gameName}</Text> */}
-                    <Text variant="displayMedium" style={styles.title}>Fremont vs Mission San Jose</Text>
+                <Image style={styles.banner} source = {require('../assets/banner.png')}/>
+                <Image style={styles.img} source = {props.route.params.eventData.image}/>
+                    <Text variant="displayMedium" style={styles.title}>{props.route.params.eventData.title}</Text>
                     <View style={styles.col}>
-                        {/* <Text variant="displayMedium">{props.route.params.eventData.gameTime}</Text>
-                        <Text variant="displayMedium">{props.route.params.eventData.ticketCost}</Text> */}
-                        <Image style={styles.img2} source = {{uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnhYT1kzT3XZ9RE6Lua9uJbau_sp9ZNP6pWQ&usqp=CAU"}} />
-                        <Text variant="displayMedium" style={styles.txt0}>Oct 2, 7:30 pm</Text>
-                        <Text variant="displayMedium" style={styles.txt1}>$9.99</Text>
+                        <Text variant="displayMedium" style={styles.txt0}>{props.route.params.eventData.gameTime}</Text>
+                        <Text variant="displayMedium" style={styles.txt1}>{props.route.params.eventData.ticketCost}</Text>
                     </View>
                     <View style={styles.col}>
-                        {/* <Text variant="displayMedium">{props.route.params.eventData.location}</Text> */}
-                        {/* <Image style={styles.img2} source = {{uri: "https://cdn-icons-png.flaticon.com/512/64/64113.png"}} /> */}
-                        <Text variant="displayMedium" style={styles.txt3}>Fremont High School</Text>
+                        <Text variant="displayMedium" style={styles.txt3}>{props.route.params.eventData.location}</Text>
                     </View>
                     <View> 
                     <Text variant="displayMedium" style={styles.txt4}></Text>
                     </View>
-                    <TicketOption style={styles.ticket}/>
-                {/* <TicketOption navigation={props.navigation} eventData={props.eventData}></TicketOption> */}
+                    <TicketOption navigation={props.navigation} eventData={props.eventData} style={styles.ticket}/>
             </View>
         </View>
     )
