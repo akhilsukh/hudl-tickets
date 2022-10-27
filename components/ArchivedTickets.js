@@ -26,7 +26,6 @@ export default function ArchivedTickets({data}) {
                     (<Grid data = {data} ></Grid>)
                 : []
             }
-
         </View>
     )
 }
@@ -42,3 +41,4 @@ const styles = StyleSheet.create({
       padding: 5
     }
   });
+  
