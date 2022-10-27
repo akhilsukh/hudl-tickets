@@ -117,6 +117,7 @@ const styles = StyleSheet.create({
     display: "block",
     marginLeft: "auto",
     marginRight: "auto",
+    marginVertical: 15
   },
   modalTxt:{
     color:"white",

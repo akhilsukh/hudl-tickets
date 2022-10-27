@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, SafeAreaView, ScrollView, View, Text, Button, Image } from 'react-native';
+import { StyleSheet, SafeAreaView, ScrollView, View, Text, Button, Image, requireNativeComponent } from 'react-native';
 import Banner from '../assets/banner.png';
 import Grid from '../components/Grid';
 import ArchivedTickets from '../components/ArchivedTickets';
@@ -17,7 +17,8 @@ export default function TicketsPage({ route, navigation }) {
       title: "Somu vs Akhil",
       seat: "a4",
       ticketId: "12345",
-      image: require("../assets/color.png")
+      image: require("../assets/color.png"),
+      qr: require("../assets/qr-code.png")
     },
     {
       time: "2:00 - 4:00 PM",
@@ -26,7 +27,8 @@ export default function TicketsPage({ route, navigation }) {
        title: "Somu vs Akhil",
        seat: "a4",
        ticketId: "12345",
-       image: require("../assets/color.png")
+       image: require("../assets/color.png"),
+       qr: require("../assets/qr-code.png")
      },
      {
       time: "2:00 - 4:00 PM",
@@ -35,7 +37,8 @@ export default function TicketsPage({ route, navigation }) {
        title: "Somu vs Akhil",
        seat: "a4",
        ticketId: "12345",
-       image: require("../assets/color.png")
+       image: require("../assets/color.png"),
+       qr: require("../assets/qr-code.png")
      },
      {
       time: "2:00 - 4:00 PM",
@@ -44,7 +47,8 @@ export default function TicketsPage({ route, navigation }) {
        title: "Somu vs Akhil",
        seat: "a4",
        ticketId: "12345",
-       image: require("../assets/color.png")
+       image: require("../assets/color.png"),
+       qr: require("../assets/qr-code.png")
      },
      {
       time: "2:00 - 4:00 PM",
@@ -53,7 +57,8 @@ export default function TicketsPage({ route, navigation }) {
        title: "Somu vs Akhil",
        seat: "a4",
        ticketId: "12345",
-       image: require("../assets/color.png")
+       image: require("../assets/color.png"),
+       qr: require("../assets/qr-code.png")
      },
      {
       time: "2:00 - 4:00 PM",
@@ -62,7 +67,8 @@ export default function TicketsPage({ route, navigation }) {
        title: "Somu vs Akhil",
        seat: "a4",
        ticketId: "12345",
-       image: require("../assets/color.png")
+       image: require("../assets/color.png"),
+       qr: require("../assets/qr-code.png")
      },
      {
       time: "2:00 - 4:00 PM",
@@ -71,7 +77,8 @@ export default function TicketsPage({ route, navigation }) {
        title: "Somu vs Akhil",
        seat: "a4",
        ticketId: "12345",
-       image: require("../assets/color.png")
+       image: require("../assets/color.png"),
+       qr: require("../assets/qr-code.png")
      },
   ]
 
