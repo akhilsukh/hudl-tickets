@@ -5,11 +5,27 @@ import { SafeAreaView, View, Image, StyleSheet } from 'react-native';
 import TicketOption from '../components/TicketOption';
 import { format } from "date-fns";
 
-export default function EventPage(props) {
+import { db } from '../firebaseConfig.js';
+import { getDoc, doc } from 'firebase/firestore';
+
+export default async function EventPage(props) {
     const eventData = props.route.params.eventData
     const date = new Date(eventData.date);
     const formattedDate = format(date, "MMMM d")
 
+    try{
+        const docRef = doc(db, "event", "WSdLAspuPv7k5JP1ZVTp");
+        const actualDoc = await getDoc(docRef);
+        
+        if(actualDoc.exists()){
+            const document = actualDoc.data();
+
+            console.log(document.location);
+        }
+    }
+    catch(error){
+        console.error(error);
+    }
 
     return (
         <SafeAreaView style={styles.outer}>
