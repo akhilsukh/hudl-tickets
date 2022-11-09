@@ -6,21 +6,16 @@ import EventChip from '../components/EventChip'
 export default function CategoryPage({route, navigation }) {
     //const category = navigation.state.params.category
     const { category } = route.params;
-    console.log(category)
     let filteredData = Object.entries(data)
     filteredData = data.filter((item) => item.category == category)
-    console.log(filteredData)
-
-
-
 
     return (
         <ScrollView style={{flex: 1, backgroundColor:"black"}}>
-        <Text style={{color:"white", fontWeight:'600',fontSize:18, paddingBottom:3, justifyContent: 'flex-start', marginLeft: 10}}>{category}</Text>
+        <Text style={styles.title}>{category}</Text>
         <View style={styles.grid}>
-                {filteredData.map(((item) => {
-                    console.log(item);
-                    return (<EventChip eventData={item} navigation={navigation}></EventChip>)
+                {filteredData.map(((item, id) => {
+                    // console.log(item);
+                    return (<EventChip key={id} eventData={item} navigation={navigation}></EventChip>)
                 }))}
         </View>
         </ScrollView>
@@ -28,6 +23,14 @@ export default function CategoryPage({route, navigation }) {
   }
   
     const styles = StyleSheet.create({
+    title: {
+      color:"white", 
+      fontWeight:'500',
+      fontSize:"22", 
+      paddingTop: "2%", 
+      paddingBottom: "5%", 
+      paddingLeft:"3%"
+    },
      grid: {
         backgroundColor: "black",
         flexDirection: "row",

@@ -82,10 +82,28 @@ export default function TicketsPage({ route, navigation }) {
      },
   ]
 
+//   <SafeAreaView style={styles.container}>
+//   {/* <Text style={{color:"white", fontWeight:'500', fontSize:"20", paddingTop: "0%", paddingBottom: "5%", paddingLeft:"3%"}}>
+//     Upcoming Events
+//   </Text> */}
+//   <FlatList
+//     data={data}
+//     renderItem={({ item }) => (
+//       <View style={{flexDirection: 'column', margin: 1, padding: 10}}>
+//         <Image style={styles.imageThumbnail} source={item.image}/>
+//         <Text style={styles.txt}>{data.}}</Text>
+//       </View>
+//     )}
+//     numColumns={2}
+//     keyExtractor={(item, index) => index}
+//   />
+//   <ArchivedTickets data = {data} ></ArchivedTickets> 
+// </SafeAreaView>
+
   return (
       <View style = {styles2.container1}>
       <ScrollView >
-      <Text style={{color:"white", fontWeight:'500', fontSize:"19", paddingTop: "25%", paddingBottom: "5%", paddingLeft:"3%"}}> Upcoming Events</Text>
+      <Text style={styles.title}> Upcoming Events</Text>
       <Grid data = {data} ></Grid>
       <ArchivedTickets data = {data} ></ArchivedTickets> 
       </ScrollView >
@@ -94,6 +112,14 @@ export default function TicketsPage({ route, navigation }) {
 }
 
 const styles = StyleSheet.create({
+  title: {
+    color:"white", 
+    fontWeight:'500',
+    fontSize:"22", 
+    paddingTop: "2%", 
+    paddingBottom: "5%", 
+    paddingLeft:"3%"
+  },
   container: {
     flex: 1,
     backgroundColor: '#fff',

@@ -7,8 +7,13 @@ import EventPage from './pages/EventPage';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Appbar } from 'react-native-paper';
-
 const Stack = createNativeStackNavigator();
+import ticket from './assets/ticket.png';
+import account from './assets/account-circle.png';
+
+// import { LogBox } from 'react-native';
+// LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
+// LogBox.ignoreAllLogs();//Ignore all log notifications
 
 // function LogoTitle() {
 //   return (
@@ -25,17 +30,22 @@ const Stack = createNativeStackNavigator();
 function CustomNavigationBar({ navigation, back }) {
   return (
     <Appbar.Header dark style={{backgroundColor:'black'}}>
-      {back ? <Appbar.BackAction onPress={navigation.goBack} /> : null}
+      {back ? 
+      <Appbar.BackAction color="white" onPress={navigation.goBack} /> : 
+      <Appbar.Action icon={account} color="#CCC" onPress={console.log("a")} />}
       <View style={{alignItems: 'center', flex: 1}}>
         <Image
           style={{ width: 168, height: 30, backgroundColor: 'black'}}
           source={require('../hudl-tickets/assets/logo.png')}
         />
       </View>
+      <Appbar.Action icon={ticket} color="#CCC" onPress={()=>{
+        navigation.navigate('Tickets Page', {
+          eventData: "all"
+        })}} />
     </Appbar.Header>
   );
 }
-
 export default function App() {
   return (
     <>

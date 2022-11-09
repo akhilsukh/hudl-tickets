@@ -1,8 +1,6 @@
 import React from 'react';
-import { Chip } from 'react-native-paper';
 
-import { StyleSheet, SafeAreaView, ScrollView, View, Text, Image } from 'react-native';
-import SearchBarLoader from '../components/SearchBarLoader';
+import { StyleSheet, ScrollView, View, Text, Image } from 'react-native';
 import Category from '../components/Category';
 
 import green from '../assets/green_square.png';
@@ -11,37 +9,27 @@ import lavendar from '../assets/lavendar.png';
 import lightblue from '../assets/light_blue.png';
 import orange from '../assets/orange.png';
 import yellow from '../assets/yellow.png';
-import org from '../assets/orangeredgradient.png';
-import ptg from '../assets/pinktan.png';
-import pbg from '../assets/purplebluegradient.png';
-import tbg from '../assets/tealbluegradient.png';
 import EventChip from '../components/EventChip'
 import CarouselCards from '../components/CarouselCards';
 import data from '../components/data'
 import { Searchbar } from 'react-native-paper';
-import banner from '../assets/banner.png';
 
 export default function ExplorePage({ navigation }) {
 
   const [searchQuery, setSearchQuery] = React.useState('');
   const [eventData, setEventData] = React.useState(data);
-  console.log(eventData);
+  // console.log(eventData);
 
   const onChangeSearch = query => {
-    console.log(query);
+    // console.log(query);
     setSearchQuery(query);
     let newData = eventData.filter((item) => item.title == query);
-    console.log(newData);
+    // console.log(newData);
     setEventData(newData);
   }
 
   return (
     <ScrollView style={{flex: 1, backgroundColor:"black"}}>
-       {/* <Image source={banner}
-            style={{
-              width: '100%', height:'5%', marginTop: '10%'
-            }}>
-       </Image> */}
        <Searchbar
         placeholder="Search for an event"
         onChangeText={onChangeSearch}
@@ -49,6 +37,11 @@ export default function ExplorePage({ navigation }) {
         style={styles.search}
         inputStyle={styles.searchText}
         iconColor="white"
+        theme={{
+          colors: {
+                text: 'white',
+             }
+       }}
        ></Searchbar>
        {/* <SearchBarLoader></SearchBarLoader> */}
        <CarouselCards navigation={navigation}></CarouselCards>
@@ -96,11 +89,11 @@ const styles = StyleSheet.create({
     padding: 10
   },
   search: {
-    backgroundColor: "#5A5A5A",
+    backgroundColor: "#222222",
     marginTop: 5
   },
   searchText: {
     color: "white",
-    backgroundColor: "#5A5A5A"
+    backgroundColor: "#222"
   }
 });
