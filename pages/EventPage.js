@@ -7,25 +7,34 @@ import { format } from "date-fns";
 
 import { db } from '../firebaseConfig.js';
 import { getDoc, doc } from 'firebase/firestore';
+import { useState, useEffect } from 'react';
 
-export default async function EventPage(props) {
+export default function EventPage(props) {
     const eventData = props.route.params.eventData
     const date = new Date(eventData.date);
     const formattedDate = format(date, "MMMM d")
 
-    try{
-        const docRef = doc(db, "event", "WSdLAspuPv7k5JP1ZVTp");
-        const actualDoc = await getDoc(docRef);
-        
-        if(actualDoc.exists()){
-            const document = actualDoc.data();
+    const [data, setData] = useState({location: "hello!"});
 
-            console.log(document.location);
+    const getDocs = async () => {
+        try{
+            const docRef = doc(db, "event", "WSdLAspuPv7k5JP1ZVTp");
+            const actualDoc = await getDoc(docRef);
+            
+            if(actualDoc.exists()){
+                const document = actualDoc.data();
+                console.log(document.location);
+                setData(document);
+            }
+        }
+        catch(error){
+            console.error(error);
         }
     }
-    catch(error){
-        console.error(error);
-    }
+
+    useEffect(() => {
+        getDocs();
+    }, []);
 
     return (
         <SafeAreaView style={styles.outer}>
@@ -36,7 +45,7 @@ export default async function EventPage(props) {
                 <Text style={styles.subtext}>{eventData.ticketCost}</Text>
             </View>
             <View style={styles.subrow}>
-                <Text style={styles.subtext}>{eventData.location}</Text>
+                <Text style={styles.subtext}>{data.location}</Text>
             </View>
             {/* <View style={styles.flex}/> */}
             <TicketOption navigation={props.navigation} eventData={props.eventData} style={styles.ticket} />
