@@ -1,7 +1,6 @@
 import { setStatusBarTranslucent } from 'expo-status-bar'
 import React from 'react'
 import { View } from "react-native"
-//import View from "deprecated-react-native-prop-types"
 import Carousel, { Pagination } from 'react-native-snap-carousel'
 import CarouselCardItem, { SLIDER_WIDTH, ITEM_WIDTH } from './CarouselCardItem'
 import data from './data'
@@ -19,12 +18,12 @@ export default function CarouselCards({navigation}) {
         data={data}
         renderItem={({item, index}) => {
           return (<CarouselCardItem
+            key={index}
             item={item}
             navigation={navigation}
           >
           </CarouselCardItem>);
         }}
-        //renderItem={CarouselCardItem}
         sliderWidth={SLIDER_WIDTH}
         itemWidth={ITEM_WIDTH}
         onSnapToItem={(index) => setIndex(index)}

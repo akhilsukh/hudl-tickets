@@ -7,11 +7,7 @@ export const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7)
 
 export default function CarouselCardItem({ item, index, route, navigation }) {
   return (
-    <TouchableOpacity onPress={()=>{
-      /* 1. Navigate to the Tickets route with params */
-      navigation.navigate('Event Page', {
-        eventData: item
-      })}} style={styles.card}>
+    <TouchableOpacity  style={styles.card}>
         <View style={styles.cardImage}>
             <ImageBackground
                 source={item.image}

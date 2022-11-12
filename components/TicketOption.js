@@ -3,7 +3,7 @@ import {Text, View, StyleSheet} from 'react-native';
 import {Card, Button} from 'react-native-paper';
 
 export default function TicketOption(props) {
-    const [numTickets, setNumTickets] = useState(0)
+    const [numTickets, setNumTickets] = useState(1)
     const [seatsLeft, setSeatsLeft] = useState(10)
     const [seatsTotal, setSeatsTotal] = useState(100)
 
@@ -15,7 +15,7 @@ export default function TicketOption(props) {
     }
 
     const minus = () => {
-        if (numTickets != 0) {
+        if (numTickets > 1) {
             setNumTickets(numTickets - 1)
             setSeatsLeft(seatsLeft + 1)
         }
@@ -28,30 +28,63 @@ export default function TicketOption(props) {
         })
     }
 
+    return (
+        <Card style={styles.crd} mode="contained">
+            {/* <Card.Title style={styles.txt} title="Card Title" subtitle="Card Subtitle" /> */}
+            {/* <View style={styles.flx}> */}
+            <Card.Content>
+                <View>
+                    <View>
+                        <Text style={styles.upper}>General Admission</Text>
+                        <Text style={styles.lower}>{seatsLeft}/{seatsTotal} seats left</Text>
+                    </View>
+                    <View style={styles.flx}>
+                        <Button style={styles.bttn} onPress={minus}>
+                            <Text style={styles.signs}>-</Text>
+                        </Button>
+                        <Text style={styles.numtickets}>{numTickets}</Text>
+                        <Button style={styles.bttn} onPress={plus}>
+                            <Text style={styles.signs}>+</Text>
+                        </Button>
+                    </View>
+                    <Button style={styles.buy} onPress={buy}>
+                        <Text style={styles.buyText}>Buy</Text>
+                    </Button>
+                </View>
+            </Card.Content>
+
+                {/* <Card.Actions>
+                <Button>Cancel</Button>
+                <Button>Ok</Button>
+                </Card.Actions> */}
+            {/* </View> */}
+        </Card>
+)
+    }
+
     const styles = StyleSheet.create({
         crd: {
-            position: "absolute",
-            backgroundColor:"#333333",
-            borderRadius: 5,
-            justifyContent:"center", 
-            alignItems:"center",
-            width: "110%",
-            height: "100%",
-            left: "1%",
-            top: "80%"
+            margin: "5%",
+            backgroundColor: "#1c1c1c"
         },
         flx: {
-            flex: 1,
-            flexDirection:'row'
+            display: "flex",
+            flexDirection:'row',
+            justifyContent: "center",
+            marginVertical: "1%"
         },
         txt: {
-            color:"white",
-            fontSize: 20,
+            color: 'red'
+        },
+        signs: {
+            color: 'white',
+            fontSize: "20"
         },
         numtickets: {
             color:"white",
-            fontSize: 20,
-            padding: 12
+            fontSize: 24,
+            padding: 12,
+            textDecorationLine: "underline"
         },
         buy: {
             backgroundColor:"#FCA974", 
@@ -59,37 +92,20 @@ export default function TicketOption(props) {
             height: 35,
             marginTop: 5
         },
-        ga: {
+        upper: {
             color:"white",
             padding: 5
+        },
+        lower: {
+            color:"white",
+            padding: 5,
+            fontSize: 11
         },
         buyText: {
             color:"black",
             fontSize: 13
         },
         bttn: {
-            top: 5
+            top: 1
         }
     });
-
-    return (
-            <Card style={styles.crd}>
-                <View style={styles.flx}>
-                    <View>
-                        <Text style={styles.ga}>General Admission</Text>
-                        <Text style={styles.ga}>{seatsLeft}/{seatsTotal} seats left</Text>
-                    </View>
-                    <Button style={styles.bttn} onPress={minus}>
-                        <Text style={styles.txt}>-</Text>
-                    </Button>
-                    <Text style={styles.numtickets}>{numTickets}</Text>
-                    <Button style={styles.bttn} onPress={plus}>
-                        <Text style={styles.txt}>+</Text>
-                    </Button>
-                    <Button style={styles.buy} onPress={buy}>
-                        <Text style={styles.buyText}>Buy</Text>
-                    </Button>
-                </View>
-            </Card>
-    )
-}

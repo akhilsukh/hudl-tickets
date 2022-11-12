@@ -4,22 +4,22 @@ import Grid from "./Grid.js";
 
 
 export default function ArchivedTickets({data}) {
-    const [minButton, setButton] = useState("Archived Tickets");
+    const [minButton, setButton] = useState("Show Archived Tickets");
     const [minimized, setMinimized] = useState(true);
 
     const clickMinimize = () => {
-        if (minButton == "Archived Tickets") {
-            setButton("Collapse");
+        if (minButton == "Show Archived Tickets") {
+            setButton("Hide Archived Tickets");
             setMinimized(false);
         } else {
-            setButton("Archived Tickets");
+            setButton("Show Archived Tickets");
             setMinimized(true);
         }
     }
     
     return (
-        <View>
-            <Button title = {minButton} color = "#FCA974" width = "100px" onPress = {clickMinimize}></Button>
+        <View style="styles">
+            <Button title = {minButton} color= "#FCA974" width="100px" onPress = {clickMinimize}></Button>
         {/*dummyData.archivedTickets?.map( ticket => {*/ }
             {
                 !minimized? 
@@ -39,6 +39,10 @@ const styles = StyleSheet.create({
       alignItems: "flex-start",
       justifyContent: "space-between",
       padding: 5
+    },
+    button: {
+        color: "#FCA974",
+        width: "100px"
     }
   });
   
