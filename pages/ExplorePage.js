@@ -21,7 +21,7 @@ export default function ExplorePage({ navigation }) {
 
  const [trendingData, setTrending] = React.useState([])
  const [nearbyData, setNearby] = React.useState([])
- let nearby = [];
+ 
 
 
 
@@ -37,11 +37,10 @@ export default function ExplorePage({ navigation }) {
         if(actualDoc.exists()){
             const document = actualDoc.data();
             console.log("37: " + document.events);
-            nearby = document.events;
-            setNearby(nearby);
-            const actualEvents = await document.events.map(getEvent)
-            // console.log("NEARBY")
-            // setNearby(actualEvents);
+            setNearby(document.events);
+            const actualEvents = document.events.map(getEvent)
+            console.log(actualEvents);
+            setNearby(actualEvents);
             console.log("test "+  nearbyData);
 
         }
@@ -135,7 +134,7 @@ const getTrending = async () => {
           <EventChip eventData={data[2]} navigation={navigation}></EventChip>
           <EventChip eventData={data[3]} navigation={navigation}></EventChip>
         </View>
-        <Text style={{color:"white", fontWeight:'600',fontSize:18, paddingBottom:3, marginLeft: 10}}>Games Nearby</Text>
+        <Text style={{color:"white", fontWeight:'600',fontSize:18, paddingBottom:3, marginLeft: 10}}>{nearbyData}</Text>
         <View style={styles.grid}>
             {nearbyData.map(((item, id) => {
                     // console.log(item);

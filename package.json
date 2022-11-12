@@ -20,11 +20,7 @@
     "date-fns": "^2.29.3",
     "expo": "~46.0.16",
     "expo-status-bar": "~1.4.0",
-<<<<<<< HEAD
-    "firebase": "^9.14.0",
-=======
     "firebase": "^9.13.0",
->>>>>>> 2d02a084756e18692a8282096d7e90134a8e0e46
     "react": "18.0.0",
     "react-native": "0.69.6",
     "react-native-paper": "^5.0.0-rc.6",
