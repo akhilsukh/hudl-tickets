@@ -38,10 +38,20 @@ export default function ExplorePage({ navigation }) {
             const document = actualDoc.data();
             console.log("37: " + document.events);
             setNearby(document.events);
-            const actualEvents = document.events.map(getEvent)
+            let actualEvents = []
+            for( let x =0; x< document.events.length; x++){
+              actualEvents+= [getEvent(document.events[x])];
+            }
+
+            // const actualEvents = document.events.map(getEvent)
             console.log(actualEvents);
             setNearby(actualEvents);
             console.log("test "+  nearbyData);
+
+            // const actualEvents = document.events.map(getEvent)
+            // console.log("HELLO" + actualEvents);
+            // setNearby(actualEvents);
+            // console.log("test "+  nearbyData);
 
         }
     }
@@ -97,7 +107,7 @@ const getTrending = async () => {
 
   useEffect(() => {
     getNearby();
-    getTrending();
+    //getTrending();
   }, []);
 
 
@@ -136,10 +146,10 @@ const getTrending = async () => {
         </View>
         <Text style={{color:"white", fontWeight:'600',fontSize:18, paddingBottom:3, marginLeft: 10}}>{nearbyData}</Text>
         <View style={styles.grid}>
-            {nearbyData.map(((item, id) => {
+            {nearbyData.map(((item) => {
                     // console.log(item);
-                    return (<EventChip key={id} eventData={item} navigation={navigation}></EventChip>)
-                }))}
+                    return (<EventChip eventData={item} navigation={navigation}></EventChip>)
+            }))}
           <EventChip eventData={data[0]} navigation={navigation}></EventChip>
           <EventChip eventData={data[1]} navigation={navigation}></EventChip>
         </View>
