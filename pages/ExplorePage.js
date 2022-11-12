@@ -20,7 +20,7 @@ import { useState, useEffect } from 'react';
 export default function ExplorePage({ navigation }) {
 
  const [trendingData, setTrending] = React.useState([])
- const [nearbyData, setNearby] = React.useState([])
+ const [nearbyData, setNearby] = React.useState(data)
  
 
 
@@ -37,16 +37,26 @@ export default function ExplorePage({ navigation }) {
         if(actualDoc.exists()){
             const document = actualDoc.data();
             console.log("37: " + document.events);
-            setNearby(document.events);
+         
             let actualEvents = []
             for( let x =0; x< document.events.length; x++){
-              actualEvents+= [getEvent(document.events[x])];
+              const docRef2 = doc(db, "event", document.events[x]);
+              const actualDoc2 = await getDoc(docRef2)
+              console.log("turtle")
+              if(actualDoc2.exists()){
+                  const document2 = actualDoc2.data();
+                  actualEvents[actualEvents.length]= document2; 
+                  console.log(actualEvents.length);
+                  console.log(x);  
+              }
             }
 
             // const actualEvents = document.events.map(getEvent)
+            console.log("Test");
             console.log(actualEvents);
             setNearby(actualEvents);
-            console.log("test "+  nearbyData);
+            console.log("Nearby data");
+            console.log(  nearbyData);
 
             // const actualEvents = document.events.map(getEvent)
             // console.log("HELLO" + actualEvents);
@@ -60,28 +70,6 @@ export default function ExplorePage({ navigation }) {
     }
 }
 
-const getEvent = async (eventID) => {
-  try{
-      const docRef = doc(db, "event", eventID);
-      const actualDoc = getDoc(docRef)
-      .then((data) => {
-        // console.log(data)
-
-        if(actualDoc.exists()){
-          const document = actualDoc.data();
-          console.log("EVENT")
-          console.log("E: "+  document);
-          return document;
-      }
-      });
-      
-
-  }
-  catch(error){
-      console.error("e: " + error);
-  }
-  return null
-}
 
 const getTrending = async () => {
   try{
@@ -89,15 +77,27 @@ const getTrending = async () => {
       const actualDoc = await getDoc(docRef);
       
       if(actualDoc.exists()){
-          const document = actualDoc.data();
-          console.log("76: " + document.events);
-          setTrending(document.events);
-          const actualEvents = document.events.map(getEvent)
-          console.log("TRENDING")
-          console.log("T: " + actualEvents);
-          setTrending(actualEvents);
-          console.log("testtrend:" +trendingData);
+        const document = actualDoc.data();
+        console.log("37: " + document.events);
+     
+        let actualEvents = []
+        for( let x =0; x< document.events.length; x++){
+          const docRef2 = doc(db, "event", document.events[x]);
+          const actualDoc2 = await getDoc(docRef2)
+          if(actualDoc2.exists()){
+              const document2 = actualDoc2.data();
+              actualEvents[actualEvents.length]= document2; 
+              console.log(actualEvents.length);
+              console.log(x);  
+          }
+        }
 
+        // const actualEvents = document.events.map(getEvent)
+        console.log("Test");
+        console.log(actualEvents);
+        setTrending(actualEvents);
+        console.log("Nearby data");
+        console.log( nearbyData);
       }
   }
   catch(error){
@@ -138,20 +138,28 @@ const getTrending = async () => {
        <CarouselCards navigation={navigation}></CarouselCards>
         <Text style={{color:"white", fontWeight:'600',fontSize:18, paddingBottom:3, marginTop: "-5%",marginLeft: 10}}>Trending</Text>
         <View style={styles.grid}>
-          {console.log(data[0])}
+        {trendingData.map((item, navigation) => 
+              
+              (
+              <EventChip eventData={item} navigation={navigation}></EventChip>
+              )
+          )}
+          {/* {console.log(data[0])}
           <EventChip eventData={data[0]} navigation={navigation}></EventChip>
           <EventChip eventData={data[1]} navigation={navigation}></EventChip>
           <EventChip eventData={data[2]} navigation={navigation}></EventChip>
-          <EventChip eventData={data[3]} navigation={navigation}></EventChip>
+          <EventChip eventData={data[3]} navigation={navigation}></EventChip> */}
         </View>
-        <Text style={{color:"white", fontWeight:'600',fontSize:18, paddingBottom:3, marginLeft: 10}}>{nearbyData}</Text>
+        <Text style={{color:"white", fontWeight:'600',fontSize:18, paddingBottom:3, marginLeft: 10}}>Games Nearby</Text>
         <View style={styles.grid}>
-            {nearbyData.map(((item) => {
-                    // console.log(item);
-                    return (<EventChip eventData={item} navigation={navigation}></EventChip>)
-            }))}
-          <EventChip eventData={data[0]} navigation={navigation}></EventChip>
-          <EventChip eventData={data[1]} navigation={navigation}></EventChip>
+        {nearbyData.map((item, navigation) => 
+              
+                    (
+                    <EventChip eventData={item} navigation={navigation}></EventChip>
+                    )
+                )}
+          {/* <EventChip eventData={data[0]} navigation={navigation}></EventChip>
+          <EventChip eventData={data[1]} navigation={navigation}></EventChip> */}
         </View>
         <Text style={{color:"white", fontWeight:'600',fontSize:18, paddingBottom:3, marginLeft: 10}}>Categories</Text>
         <View style={styles.grid}> 
