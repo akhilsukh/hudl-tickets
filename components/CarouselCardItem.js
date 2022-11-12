@@ -9,7 +9,7 @@ export default function CarouselCardItem({ item, index, route, navigation }) {
   return (
     <TouchableOpacity onPress={()=>{
       /* 1. Navigate to the Tickets route with params */
-      navigation.navigate('Tickets Page', {
+      navigation.navigate('Event Page', {
         eventData: item
       })}} style={styles.card}>
         <View style={styles.cardImage}>

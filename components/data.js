@@ -14,9 +14,9 @@ const data = [
     teamLogos: Image1,
     gameTime: "2:00 - 4:00 PM",
     date: "10/11/2022",
-    ticketCost: "$984396802",
+    ticketCost: "$9.80",
     location: "Berkeley",
-    title: "Somu vs Akhil",
+    title: "Fremont vs Monta Vista",
     image: org,
     category: "Soccer"
   },
@@ -26,7 +26,7 @@ const data = [
     date: "10/9/2022",
     ticketCost: "$0",
     location: "Cupertino",
-    title: "Vuk vs Jenna",
+    title: "Cupertino vs Homestead",
     image: ptg,
     category: "Basketball"
   },
@@ -36,7 +36,7 @@ const data = [
     date: "10/10/2022",
     ticketCost: "$100",
     location: "San Francisco",
-    title: "Ichchitaa vs Rahul",
+    title: "Lynbrook vs Los Altos",
     image: pbg,
     category: "Football"
   },
@@ -46,7 +46,7 @@ const data = [
     date: "10/20/2022",
     ticketCost: "$103940",
     location: "Tahoe",
-    title: "Sathvika vs Amal",
+    title: "Foothill vs Wilcox",
     image: tbg,
     category: "Soccer"
   }

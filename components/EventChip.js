@@ -21,7 +21,7 @@ export default function EventChip2(props) {
         </Image>
         </View>
       <View style={styles.cardContent}>
-        <Text style={{color:"white", fontWeight:'600',fontSize:12, paddingBottom:"0%", paddingTop:'2%', alignItems: "flex-start"}}>
+        <Text style={{color:"white", fontWeight:'600',fontSize:12, paddingBottom:"2%", paddingTop:'2%', alignItems: "flex-start"}}>
             {props.eventData.title}
         </Text>
         <View style={styles.info}>
@@ -41,6 +41,7 @@ const styles = StyleSheet.create({
   card: {
     alignItems: 'start',
     justifyContent: 'space-between',
+    width: "45%"
   },
   cardContent:{
     // marginHorizontal:3,
@@ -52,14 +53,14 @@ const styles = StyleSheet.create({
   cardImage:{
     borderRadius: 8,
     height: 60, 
-    width: 165,  
+    width: "100%",  
     overflow: 'hidden',
   },
   info:{
     flexDirection:"row",
     alignItems: 'flex-start',
     justifyContent: 'space-between',
-    width: 165, 
+    width: "100%", 
   },
   
 });

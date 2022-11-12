@@ -52,7 +52,7 @@ export default function ExplorePage({ navigation }) {
        ></Searchbar>
        {/* <SearchBarLoader></SearchBarLoader> */}
        <CarouselCards navigation={navigation}></CarouselCards>
-        <Text style={{color:"white", fontWeight:'600',fontSize:18, paddingBottom:3, marginLeft: 10}}>Trending</Text>
+        <Text style={{color:"white", fontWeight:'600',fontSize:18, paddingBottom:3, marginTop: "-5%",marginLeft: 10}}>Trending</Text>
         <View style={styles.grid}>
           {console.log(data[0])}
           <EventChip eventData={data[0]} navigation={navigation}></EventChip>
@@ -97,7 +97,8 @@ const styles = StyleSheet.create({
   },
   search: {
     backgroundColor: "#5A5A5A",
-    marginTop: 5
+    marginTop: 5,
+    borderRadius: 20
   },
   searchText: {
     color: "white",
