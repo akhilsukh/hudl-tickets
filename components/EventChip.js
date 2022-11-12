@@ -14,7 +14,7 @@ export default function EventChip2(props) {
       })}} style={styles.card}>
       <View style={styles.cardImage}>
           <Image
-            source={props.eventData.image}
+            source={{uri:"https://www.cmaquarium.org/app/uploads/2018/09/poolboy-hatchling-100-1200-wide.jpg"}}
             style={{
               width: 170, height:130,
             }}>
@@ -22,11 +22,12 @@ export default function EventChip2(props) {
         </View>
       <View style={styles.cardContent}>
         <Text style={{color:"white", fontWeight:'600',fontSize:13, paddingBottom:"0%", paddingTop:'2%', alignItems: "flex-start"}}>
-            {props.eventData.title}
+            {props.eventData.eventName}
+            {console.log("hi" + props.eventData)}
         </Text>
         <View style={styles.info}>
           <Text style={{color:"white", fontWeight:'300', fontSize:12, paddingBottom:"10%", alignItems: "flex-start"}}>
-              {props.eventData.date}
+              {props.eventData.dateTime}
           </Text>
           <Text style={{color:"white", fontWeight:'300', fontSize:12, paddingBottom:"10%", alignItems: "flex-end"}}>
               {props.eventData.ticketCost}
