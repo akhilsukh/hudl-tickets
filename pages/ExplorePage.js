@@ -19,39 +19,36 @@ import { useState, useEffect } from 'react';
 
 export default function ExplorePage({ navigation }) {
 
-  const [trendingData, setTrending] = React.useState([])
-  const [nearbyData, setNearby] = React.useState([])
- //let nearby = [];
+ const [trendingData, setTrending] = React.useState([])
+ const [nearbyData, setNearby] = React.useState([])
+ let nearby = [];
+
+
+
   const [searchQuery, setSearchQuery] = React.useState('');
   const [eventData, setEventData] = React.useState(data);
   // console.log(eventData);
 
-  const getNearbyIds = async () => {
+  const getNearby = async () => {
     try{
         const docRef = doc(db, "explore", "explore-nearby");
-        const actualDoc = getDoc(docRef)
-
+        const actualDoc = await getDoc(docRef);
+        
         if(actualDoc.exists()){
-          const document = actualDoc.data();
-          console.log("36: " + document.events);
-          setNearby(document.events);
-          console.log("test "+  nearbyData);
-          const nearby = nearbyData.map(getEvent)
-          setNearby(nearby)
-          console.log("NEARBY: " + nearby)
-          console.log("NEARBYDATA: " + nearbyData)
+            const document = actualDoc.data();
+            console.log("37: " + document.events);
+            nearby = document.events;
+            setNearby(nearby);
+            const actualEvents = await document.events.map(getEvent)
+            // console.log("NEARBY")
+            // setNearby(actualEvents);
+            console.log("test "+  nearbyData);
+
         }
     }
     catch(error){
         console.error(error);
     }
-}
-
-const getNearby = async () => {
-  const nearby = nearbyData.map(getEvent)
-  setNearby(nearby)
-  console.log("NEARBY: " + nearby)
-  console.log("NEARBYDATA: " + nearbyData)
 }
 
 const getEvent = async (eventID) => {
@@ -68,6 +65,8 @@ const getEvent = async (eventID) => {
           return document;
       }
       });
+      
+
   }
   catch(error){
       console.error("e: " + error);
@@ -78,7 +77,7 @@ const getEvent = async (eventID) => {
 const getTrending = async () => {
   try{
       const docRef = doc(db, "explore", "explore-trending");
-      const actualDoc = getDoc(docRef);
+      const actualDoc = await getDoc(docRef);
       
       if(actualDoc.exists()){
           const document = actualDoc.data();
@@ -98,9 +97,8 @@ const getTrending = async () => {
 }
 
   useEffect(() => {
-    getNearbyIds();
-    //getNearby();
-    //getTrending();
+    getNearby();
+    getTrending();
   }, []);
 
 
