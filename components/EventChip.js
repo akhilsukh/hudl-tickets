@@ -30,7 +30,7 @@ export default function EventChip2(props) {
               {props.eventData.dateTime}
           </Text>
           <Text style={{color:"white", fontWeight:'300', fontSize:12, paddingBottom:"10%", alignItems: "flex-end"}}>
-              {props.eventData.ticketCost}
+              {"$" + props.eventData.ticketCost}
           </Text>
         </View>
       </View>

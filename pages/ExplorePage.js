@@ -96,8 +96,6 @@ const getTrending = async () => {
         console.log("Test");
         console.log(actualEvents);
         setTrending(actualEvents);
-        console.log("Nearby data");
-        console.log( nearbyData);
       }
   }
   catch(error){
@@ -107,7 +105,7 @@ const getTrending = async () => {
 
   useEffect(() => {
     getNearby();
-    //getTrending();
+    getTrending();
   }, []);
 
 
@@ -138,7 +136,7 @@ const getTrending = async () => {
        <CarouselCards navigation={navigation}></CarouselCards>
         <Text style={{color:"white", fontWeight:'600',fontSize:18, paddingBottom:3, marginTop: "-5%",marginLeft: 10}}>Trending</Text>
         <View style={styles.grid}>
-        {trendingData.map((item, navigation) => 
+        {trendingData.map((item) => 
               
               (
               <EventChip eventData={item} navigation={navigation}></EventChip>
