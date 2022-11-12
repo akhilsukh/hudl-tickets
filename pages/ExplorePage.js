@@ -152,7 +152,7 @@ const getTrending = async () => {
         </View>
         <Text style={{color:"white", fontWeight:'600',fontSize:18, paddingBottom:3, marginLeft: 10}}>Games Nearby</Text>
         <View style={styles.grid}>
-        {nearbyData.map((item, navigation) => 
+        {nearbyData.map((item) => 
               
                     (
                     <EventChip eventData={item} navigation={navigation}></EventChip>
