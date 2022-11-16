@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
 import {Text, View, StyleSheet} from 'react-native';
 import {Card, Button} from 'react-native-paper';
+import { db } from '../firebaseConfig.js';
+import { getDoc, doc } from 'firebase/firestore';
 
 export default function TicketOption(props) {
+
+    //eventData is the doc
+
     const [numTickets, setNumTickets] = useState(1)
     const [seatsLeft, setSeatsLeft] = useState(10)
     const [seatsTotal, setSeatsTotal] = useState(100)
@@ -21,11 +26,21 @@ export default function TicketOption(props) {
         }
     }
 
-    const buy = () => {
-        props.navigation.navigate('Tickets Page', { 
-            eventData: props.eventData,
-            numTickets: numTickets
-        })
+    /** Buy ticket and create ticket object on Firestore
+        Update events page to see available tickets */
+    const buy = async () => {
+        try {
+            const docRef = await addDoc(doc(db, "tickets"),
+               {
+                    "archived": false,
+                    "timeBought": Timestamp.fromDate(new Date()),
+                    "eventId": props.event.id,
+                    "redeemed": false,
+                    //"seat": null,
+                    "section": "GA",
+                    "userId": props.userId
+                });
+        } catch (error) { console.error(error) };
     }
 
     return (
