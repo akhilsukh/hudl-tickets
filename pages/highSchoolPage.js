@@ -10,18 +10,15 @@ import { useState, useEffect } from 'react';
 export default function HighSchoolPage({ route, navigation }) {
   const [eventsData, setEvents] = useState([]);
   const getData = async () => {
-    try {
-      const eventsRef = collection(db, "events");
+      const eventsRef = collection(db, "event");
       const events = await getDocs(eventsRef);
       let eventsList = []
       events.forEach((doc) => {
        eventsList = [...eventsList, doc.data()];
       });
       setEvents(eventsList);
-    } catch(error) {
-      console.error(error);
-    }
-  };
+      console.log(eventsData);
+    } ;
   useEffect( () => {
     getData();
   }, []);
