@@ -7,9 +7,10 @@ import EventPage from './pages/EventPage';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Appbar } from 'react-native-paper';
-const Stack = createNativeStackNavigator();
 import ticket from './assets/ticket.png';
 import account from './assets/account-circle.png';
+import LoginScreen from './pages/LoginScreen';
+import HomePage from './pages/HomePage';
 
 // import { LogBox } from 'react-native';
 // LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
@@ -26,6 +27,10 @@ import account from './assets/account-circle.png';
 
 //   );
 // }
+
+
+
+const Stack = createNativeStackNavigator();
 
 function CustomNavigationBar({ navigation, back }) {
   return (
@@ -57,10 +62,13 @@ export default function App() {
             screenOptions={{
               header: (props) => <CustomNavigationBar {...props} />,
             }}>
-            <Stack.Screen name="Explore Page" component={ExplorePage}/>
+            <Stack.Screen name = "Login" component={LoginScreen} />
+            <Stack.Screen name = "Home" component={HomePage} />
+
+            {/* <Stack.Screen name="Explore Page" component={ExplorePage}/>
             <Stack.Screen name="Tickets Page" component={TicketsPage} />
             <Stack.Screen name="Category Page" component={CategoryPage} />
-            <Stack.Screen name="Event Page" component={EventPage} />
+            <Stack.Screen name="Event Page" component={EventPage} /> */}
           </Stack.Navigator>
         </NavigationContainer>
       </SafeAreaView>
