@@ -4,7 +4,7 @@ import ExplorePage from "./pages/ExplorePage";
 import CategoryPage from "./pages/CategoryPage";
 import TicketsPage from "./pages/TicketsPage";
 import EventPage from "./pages/EventPage";
-import HighSchoolPage from "./pages/HighSchoolPage.js";
+import HighSchoolPage from "./pages/HighSchoolPage";
 import LoginPage from "./pages/LoginPage";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
