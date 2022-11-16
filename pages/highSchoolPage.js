@@ -17,17 +17,18 @@ export default function HighSchoolPage({ route, navigation }) {
         events.docs.forEach((doc) => {
             eventsList = [...eventsList, doc.data()];
         });
+        console.log(eventsList);
         setEvents(eventsList);
-        console.log(eventsData);
       }
       else {
         console.log("doesnt exist")
       }
     } ;
+
   useEffect( () => {
     getData();
   }, []);
-  console.log(eventsData);
+
   return (
     <Text>{eventsData}</Text>
   )
