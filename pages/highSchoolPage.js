@@ -38,7 +38,7 @@ export default function HighSchoolPage(props) {
 
   useEffect( () => {
     getData();
-    filterbySchool();
+    filter();
   }, []);
   
 
