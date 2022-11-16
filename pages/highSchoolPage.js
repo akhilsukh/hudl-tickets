@@ -12,10 +12,10 @@ export default function HighSchoolPage({ route, navigation }) {
   const getData = async () => {
       const eventsRef = collection(db, "event");
       const events = await getDocs(eventsRef);
-      if (events.exists()) {
+      if (events.size >= 0) {
         let eventsList = []
-        events.forEach((doc) => {
-        eventsList = [...eventsList, doc.data()];
+        events.docs.forEach((doc) => {
+            eventsList = [...eventsList, doc.data()];
         });
         setEvents(eventsList);
         console.log(eventsData);
