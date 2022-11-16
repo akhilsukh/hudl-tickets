@@ -7,8 +7,9 @@ import { db } from '../firebaseConfig.js';
 import { getDocs, collection } from 'firebase/firestore';
 import { useState, useEffect } from 'react';
 
-export default function HighSchoolPage({ route, navigation }) {
+export default function HighSchoolPage({ route, navigation, highSchoolName }) {
   const [eventsData, setEvents] = useState([]);
+  const [schoolEvents, setSchoolEvents] = useState([]);
   const getData = async () => {
       const eventsRef = collection(db, "event");
       const events = await getDocs(eventsRef);
@@ -23,11 +24,23 @@ export default function HighSchoolPage({ route, navigation }) {
       else {
         console.log("doesnt exist")
       }
-    } ;
+    }
+    const filter = (highSchoolName) => {
+        let filtered = [];
+        eventsData.forEach((event) => {
+            if (event.awayTeam == highSchoolName || event.homeTeam == highSchoolName) {
+                filtered = [...filtered, event];
+            }
+        })
+        setSchoolEvents(filtered);
+    }
 
   useEffect( () => {
     getData();
+    filterbySchool();
   }, []);
+  
+
 
   return (
     <Text>{eventsData}</Text>
