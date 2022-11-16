@@ -12,15 +12,23 @@ export default function HighSchoolPage({ route, navigation }) {
   const getData = async () => {
       const eventsRef = collection(db, "event");
       const events = await getDocs(eventsRef);
-      let eventsList = []
-      events.forEach((doc) => {
-       eventsList = [...eventsList, doc.data()];
-      });
-      setEvents(eventsList);
-      console.log(eventsData);
+      if (events.exists()) {
+        let eventsList = []
+        events.forEach((doc) => {
+        eventsList = [...eventsList, doc.data()];
+        });
+        setEvents(eventsList);
+        console.log(eventsData);
+      }
+      else {
+        console.log("doesnt exist")
+      }
     } ;
   useEffect( () => {
     getData();
   }, []);
   console.log(eventsData);
+  return (
+    <Text>{eventsData}</Text>
+  )
 }
