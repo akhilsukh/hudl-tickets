@@ -4,6 +4,7 @@ import ExplorePage from "./pages/ExplorePage";
 import CategoryPage from "./pages/CategoryPage";
 import TicketsPage from "./pages/TicketsPage";
 import EventPage from "./pages/EventPage";
+import HighSchoolPage from "./pages/HighSchoolPage.js";
 import LoginPage from "./pages/LoginPage";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -71,6 +72,7 @@ export default function App() {
             <Stack.Screen name="Tickets Page" component={TicketsPage} />
             <Stack.Screen name="Category Page" component={CategoryPage} />
             <Stack.Screen name="Event Page" component={EventPage} />
+            <Stack.Screen name = "High School Page" component = {HighSchoolPage} />
           </Stack.Navigator>
         </NavigationContainer>
       </SafeAreaView>

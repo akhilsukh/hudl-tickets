@@ -7,7 +7,7 @@ import { db } from '../firebaseConfig.js';
 import { getDocs, collection } from 'firebase/firestore';
 import { useState, useEffect } from 'react';
 
-export default function HighSchoolPage({ route, navigation, highSchoolName }) {
+export default function HighSchoolPage(props) {
   const [eventsData, setEvents] = useState([]);
   const [schoolEvents, setSchoolEvents] = useState([]);
   const getData = async () => {
@@ -25,13 +25,14 @@ export default function HighSchoolPage({ route, navigation, highSchoolName }) {
         console.log("doesnt exist")
       }
     }
-    const filter = (highSchoolName) => {
+    const filter = () => {
         let filtered = [];
         eventsData.forEach((event) => {
-            if (event.awayTeam == highSchoolName || event.homeTeam == highSchoolName) {
+            if (event.awayTeam == props.away || event.homeTeam == props.name) {
                 filtered = [...filtered, event];
             }
         })
+        console.log(filtered);
         setSchoolEvents(filtered);
     }
 
@@ -43,6 +44,6 @@ export default function HighSchoolPage({ route, navigation, highSchoolName }) {
 
 
   return (
-    <Text>{eventsData}</Text>
+    <Text>{schoolEvents}</Text>
   )
 }
