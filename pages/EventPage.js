@@ -107,7 +107,6 @@ export default function EventPage(props) {
       <TicketOption
         navigation={props.navigation}
         eventData={props.eventData}
-        r
         style={styles.ticket}
       />
     </SafeAreaView>
