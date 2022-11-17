@@ -63,7 +63,7 @@ export default function App() {
               header: (props) => <CustomNavigationBar {...props} />,
             }}>
             <Stack.Screen name = "Login" component={LoginScreen} />
-            <Stack.Screen name = "Home" component={HomePage} />
+            {/* <Stack.Screen name = "Home" component={HomePage} /> */}
 
             {/* <Stack.Screen name="Explore Page" component={ExplorePage}/>
             <Stack.Screen name="Tickets Page" component={TicketsPage} />
