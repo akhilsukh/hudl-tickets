@@ -78,11 +78,7 @@ export default function EventPage(props) {
     getHighSchoolTwo();
   }, []);
 
-  const navigateToHighSchoolOne = () => {
-    props.navigation.navigate("High School Page", {
-      category: highSchoolOne.name,
-    });
-  };
+
 
   return (
     <SafeAreaView style={styles.outer}>
@@ -100,10 +96,12 @@ export default function EventPage(props) {
       <HighSchoolNavigationButton
         name={highSchoolOne.name}
         away={"Home"}
+        navigation={props.navigation}
       ></HighSchoolNavigationButton>
       <HighSchoolNavigationButton
         name={highSchoolTwo.name}
         away={"Away"}
+        navigation={props.navigation}
       ></HighSchoolNavigationButton>
 
       <TicketOption

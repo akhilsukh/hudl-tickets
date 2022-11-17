@@ -10,7 +10,7 @@ export default function HighSchoolNavigationButton(props) {
 
   const navigateToHighSchool = () => {
     props.navigation.navigate("High School Page", {
-      category: name,
+      name: name,
     });
   };
   return (
