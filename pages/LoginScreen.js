@@ -5,11 +5,15 @@ import {auth} from '../firebaseConfig'
 
 const LoginScreen = () => {
     const [email, setEmail] = useState('')
-    const [Password, setPassword] = useState('')
+    const [password, setPassword] = useState('')
 
 
     const handleSignUp = () => {
-        auth.createUser
+        auth.createUserWithEmailandPassword(email, password)
+        .then(userCredentials => {
+            const user = userCredentials.user;
+            console.log(user.email);
+        }).catch(error => alert(error.message))
     }
   return (
     <KeyboardAvoidingView
@@ -41,7 +45,7 @@ const LoginScreen = () => {
         </TouchableOpacity>
 
         <TouchableOpacity
-            onPress = {() => {}}
+            onPress = {handleSignUp}
             style = {[styles.button, styles.buttonOutline]}
         >
             <Text style = {styles.buttonOutlineText}>Register</Text>
