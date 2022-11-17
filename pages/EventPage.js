@@ -16,7 +16,7 @@ export default function EventPage(props) {
     const [data, setData] = useState({location: "hello!"});
 
     useEffect(() => {
-        setDate(getEvent("WSdLAspuPv7k5JP1ZVTp"));
+        setData(getEvent("WSdLAspuPv7k5JP1ZVTp"));
     }, []);
 
     return (

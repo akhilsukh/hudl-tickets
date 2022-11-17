@@ -1,7 +1,6 @@
 import { db } from '../../firebaseConfig';
 import { getDoc, doc } from 'firebase/firestore';
 
-
 const getEvent = async (eventId) => {
     try{
         const docRef = doc(db, "event", eventId);
