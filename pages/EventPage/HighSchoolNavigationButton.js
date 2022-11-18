@@ -7,10 +7,14 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 export default function HighSchoolNavigationButton(props) {
   const name = props.name;
   const away = props.away;
+  //const navigation = props.navigation;
+
 
   const navigateToHighSchool = () => {
     props.navigation.navigate("High School Page", {
       name: name,
+      away : away, 
+      navigation : props.navigation
     });
   };
   return (

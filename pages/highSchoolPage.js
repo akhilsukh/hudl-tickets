@@ -2,10 +2,12 @@ import React from 'react'
 import { StyleSheet, SafeAreaView, ScrollView, View, Text, Button, Image, requireNativeComponent } from 'react-native';
 import Banner from '../assets/banner.png';
 import Grid from '../components/Grid';
+import EventChip from '../components/EventChip';
 import ArchivedTickets from '../components/ArchivedTickets';
 import { db } from '../firebaseConfig.js';
 import { getDocs, collection } from 'firebase/firestore';
 import { useState, useEffect } from 'react';
+import data from '../components/data'
 
 export default function HighSchoolPage(props) {
   const [eventsData, setEvents] = useState([]);
@@ -39,11 +41,23 @@ export default function HighSchoolPage(props) {
   useEffect( () => {
     getData();
     filter();
+    console.log("School Events: ")
+    console.log(schoolEvents);
+    console.log(props);
   }, []);
   
 
-
   return (
-    <Text>{schoolEvents}</Text>
+   <View>
+    <Text>{"hello world"}</Text>
+    
+    {schoolEvents.forEach( (event) => {
+        console.log(event);
+        console.log(props.navigation);
+        return (
+            <EventChip navigation = {props.navigation} eventData = {event}></EventChip>
+        )
+    })} 
+    </View>
   )
 }
