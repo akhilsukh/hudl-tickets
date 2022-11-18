@@ -8,6 +8,7 @@ import { format } from "date-fns";
 import { db } from "../firebaseConfig.js";
 import { getDoc, doc } from "firebase/firestore";
 import { useState, useEffect } from "react";
+import { getEvent } from '../assets/api/fire-service';
 
 import { Avatar, Button, Card, Title, Paragraph } from "react-native-paper";
 import { TouchableOpacity } from "react-native-gesture-handler";
