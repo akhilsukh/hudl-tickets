@@ -21,41 +21,39 @@ export default function HighSchoolPage(props) {
             eventsList = [...eventsList, doc.data()];
         });
         console.log(eventsList);
-        setEvents(eventsList);
+        await setEvents(eventsList);
       }
       else {
         console.log("doesnt exist")
       }
     }
     const filter = () => {
-        let filtered = [];
+        /*let filtered = [];
         eventsData.forEach((event) => {
             if (event.awayTeam == props.away || event.homeTeam == props.name) {
                 filtered = [...filtered, event];
             }
         })
         console.log(filtered);
-        setSchoolEvents(filtered);
+        await setSchoolEvents(filtered);*/
     }
 
   useEffect( () => {
     getData();
     filter();
     console.log("School Events: ")
-    console.log(schoolEvents);
-    console.log(props);
   }, []);
   
 
   return (
    <View>
-    <Text>{"hello world"}</Text>
+    <Text>{props.name}</Text>
     
-    {schoolEvents.forEach( (event) => {
-        console.log(event);
-        console.log(props.navigation);
+    {eventsData.forEach( (event) => {
+        console.log(props);
+        //console.log(props.navigation);
         return (
-            <EventChip navigation = {props.navigation} eventData = {event}></EventChip>
+            <EventChip eventData = {event}></EventChip>
         )
     })} 
     </View>
