@@ -47,7 +47,6 @@ export default function ExplorePage({ navigation }) {
        <CarouselCards navigation={navigation}></CarouselCards>
         <Text style={{color:"white", fontWeight:'600',fontSize:18, paddingBottom:3, marginLeft: 10}}>Trending</Text>
         <View style={styles.grid}>
-          {console.log(data[0])}
           <EventChip eventData={data[0]} navigation={navigation}></EventChip>
           <EventChip eventData={data[1]} navigation={navigation}></EventChip>
           <EventChip eventData={data[2]} navigation={navigation}></EventChip>
