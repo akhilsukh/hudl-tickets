@@ -5,8 +5,7 @@ import { SafeAreaView, View, Image, StyleSheet } from 'react-native';
 import TicketOption from '../components/TicketOption';
 import { format } from "date-fns";
 
-import { db } from '../firebaseConfig.js';
-import { getDoc, doc } from 'firebase/firestore';
+import { getEvent } from '../assets/api/fire-service';
 import { useState, useEffect } from 'react';
 
 export default function EventPage(props) {
@@ -16,24 +15,8 @@ export default function EventPage(props) {
 
     const [data, setData] = useState({location: "hello!"});
 
-    const getDocs = async () => {
-        try{
-            const docRef = doc(db, "event", "WSdLAspuPv7k5JP1ZVTp");
-            const actualDoc = await getDoc(docRef);
-            
-            if(actualDoc.exists()){
-                const document = actualDoc.data();
-                console.log(document.location);
-                setData(document);
-            }
-        }
-        catch(error){
-            console.error(error);
-        }
-    }
-
     useEffect(() => {
-        getDocs();
+        setData(getEvent("WSdLAspuPv7k5JP1ZVTp"));
     }, []);
 
     return (

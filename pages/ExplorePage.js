@@ -13,101 +13,12 @@ import EventChip from '../components/EventChip'
 import CarouselCards from '../components/CarouselCards';
 import data from '../components/data'
 import { Searchbar } from 'react-native-paper';
-import { db } from '../firebaseConfig.js';
-import { getDoc, doc } from 'firebase/firestore';
-import { useState, useEffect } from 'react';
 
 export default function ExplorePage({ navigation }) {
-
- const [trendingData, setTrending] = React.useState([])
- const [nearbyData, setNearby] = React.useState(data)
- 
-
-
 
   const [searchQuery, setSearchQuery] = React.useState('');
   const [eventData, setEventData] = React.useState(data);
   // console.log(eventData);
-
-  const getNearby = async () => {
-    try{
-        const docRef = doc(db, "explore", "explore-nearby");
-        const actualDoc = await getDoc(docRef);
-        
-        if(actualDoc.exists()){
-            const document = actualDoc.data();
-            console.log("37: " + document.events);
-         
-            let actualEvents = []
-            for( let x =0; x< document.events.length; x++){
-              const docRef2 = doc(db, "event", document.events[x]);
-              const actualDoc2 = await getDoc(docRef2)
-              console.log("turtle")
-              if(actualDoc2.exists()){
-                  const document2 = actualDoc2.data();
-                  actualEvents[actualEvents.length]= document2; 
-                  console.log(actualEvents.length);
-                  console.log(x);  
-              }
-            }
-
-            // const actualEvents = document.events.map(getEvent)
-            console.log("Test");
-            console.log(actualEvents);
-            setNearby(actualEvents);
-            console.log("Nearby data");
-            console.log(  nearbyData);
-
-            // const actualEvents = document.events.map(getEvent)
-            // console.log("HELLO" + actualEvents);
-            // setNearby(actualEvents);
-            // console.log("test "+  nearbyData);
-
-        }
-    }
-    catch(error){
-        console.error(error);
-    }
-}
-
-
-const getTrending = async () => {
-  try{
-      const docRef = doc(db, "explore", "explore-trending");
-      const actualDoc = await getDoc(docRef);
-      
-      if(actualDoc.exists()){
-        const document = actualDoc.data();
-        console.log("37: " + document.events);
-     
-        let actualEvents = []
-        for( let x =0; x< document.events.length; x++){
-          const docRef2 = doc(db, "event", document.events[x]);
-          const actualDoc2 = await getDoc(docRef2)
-          if(actualDoc2.exists()){
-              const document2 = actualDoc2.data();
-              actualEvents[actualEvents.length]= document2; 
-              console.log(actualEvents.length);
-              console.log(x);  
-          }
-        }
-
-        // const actualEvents = document.events.map(getEvent)
-        console.log("Test");
-        console.log(actualEvents);
-        setTrending(actualEvents);
-      }
-  }
-  catch(error){
-      console.error(error);
-  }
-}
-
-  useEffect(() => {
-    getNearby();
-    getTrending();
-  }, []);
-
 
   const onChangeSearch = query => {
     // console.log(query);
@@ -167,7 +78,6 @@ const getTrending = async () => {
           <Category label='Baseball' image={green} navigation={navigation}></Category>
           <Category label='Tennis' image={yellow} navigation={navigation}></Category>
           <Category label='Hockey' image={gray} navigation={navigation}></Category>
-          
         </View>
     </ScrollView>
   );
