@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import {Text, View, StyleSheet} from 'react-native';
 import {Card, Button} from 'react-native-paper';
 import { db } from '../firebaseConfig.js';
-import { addDoc, setDoc, doc, updateDoc, collection, add } from 'firebase/firestore';
+import { addDoc, setDoc, doc, updateDoc, collection, add, Timestamp } from 'firebase/firestore';
 
 export default function TicketOption(props) {
     //props: eventRef is the document reference, eventData is all the fields of the event in json format
 
-    const [numTickets, setNumTickets] = useState(1)
-    const [seatsLeft, setSeatsLeft] = useState(props.eventData.seatsLeft - 1)
+    const [numTickets, setNumTickets] = useState(0)
+    const [seatsLeft, setSeatsLeft] = useState(props.eventData.seatsLeft)
     const [seatsTotal, setSeatsTotal] = useState(props.eventData.totalSeats)
 
     const plus = () => {
@@ -30,7 +30,8 @@ export default function TicketOption(props) {
     const buy = async () => {
         console.log(props.eventRef.id)
         try {
-            db.collection("tickets").add(
+            const dbRef = collection(db, "tickets");
+            await addDoc(dbRef,
                {
                     "archived": false,
                     "timeBought": Timestamp.fromDate(new Date()),
@@ -43,6 +44,8 @@ export default function TicketOption(props) {
         try {
             await updateDoc(props.eventRef, {seatsLeft: props.eventData.seatsLeft - numTickets})
         } catch (error) { console.error(error) };
+        setSeatsLeft(props.eventData.seatsLeft - numTickets)
+        setNumTickets(0)
     }
 
     return (

@@ -31,7 +31,7 @@ export default function EventPage(props) {
                 <Text style={styles.subtext}>{data.location}</Text>
             </View>
             {/* <View style={styles.flex}/> */}
-            <TicketOption navigation={props.navigation} eventRef={props.route.params.eventRef} eventData={eventData} style={styles.ticket} />
+            <TicketOption navigation={props.navigation} eventRef={props.route.params.eventRef} eventData={eventData} style={styles.ticket} userId={123456}/>
         </SafeAreaView>
     )
 }
