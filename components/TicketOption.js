@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import {Text, View, StyleSheet} from 'react-native';
 import {Card, Button} from 'react-native-paper';
 import { db } from '../firebaseConfig.js';
-import { addDoc, setDoc, doc, updateDoc } from 'firebase/firestore';
+import { addDoc, setDoc, doc, updateDoc, collection, add } from 'firebase/firestore';
 
 export default function TicketOption(props) {
     //props: eventRef is the document reference, eventData is all the fields of the event in json format
@@ -30,7 +30,7 @@ export default function TicketOption(props) {
     const buy = async () => {
         console.log(props.eventRef.id)
         try {
-            const ticketRef = await addDoc(doc(db, "tickets"),
+            db.collection("tickets").add(
                {
                     "archived": false,
                     "timeBought": Timestamp.fromDate(new Date()),
