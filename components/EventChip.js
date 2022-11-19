@@ -22,15 +22,14 @@ export default function EventChip2(props) {
         </View>
       <View style={styles.cardContent}>
         <Text style={{color:"white", fontWeight:'600',fontSize:13, paddingBottom:"0%", paddingTop:'2%', alignItems: "flex-start"}}>
-            {props.eventData.eventName}
-            {console.log("hi" + props.eventData)}
+            {props.eventData.title}
         </Text>
         <View style={styles.info}>
           <Text style={{color:"white", fontWeight:'300', fontSize:12, paddingBottom:"10%", alignItems: "flex-start"}}>
-              {props.eventData.dateTime}
+              {props.eventData.date}
           </Text>
           <Text style={{color:"white", fontWeight:'300', fontSize:12, paddingBottom:"10%", alignItems: "flex-end"}}>
-              {"$" + props.eventData.ticketCost}
+              {props.eventData.ticketCost}
           </Text>
         </View>
       </View>
