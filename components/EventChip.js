@@ -10,11 +10,12 @@ export default function EventChip2(props) {
     <TouchableOpacity onPress={()=>{
       /* 1. Navigate to the Tickets route with params */
       props.navigation.navigate('Event Page', {
-        eventData: props.eventData
+        eventData: props.eventData,
+        eventRef: props.eventRef
       })}} style={styles.card}>
       <View style={styles.cardImage}>
           <Image
-            source={{uri:"https://www.cmaquarium.org/app/uploads/2018/09/poolboy-hatchling-100-1200-wide.jpg"}}
+            source={props.eventData.image}
             style={{
               width: 170, height:130,
             }}>

@@ -13,8 +13,17 @@ import EventChip from '../components/EventChip'
 import CarouselCards from '../components/CarouselCards';
 import data from '../components/data'
 import { Searchbar } from 'react-native-paper';
+import { db } from '../firebaseConfig.js';
+import { getDoc, doc } from 'firebase/firestore';
+import { useState, useEffect } from 'react';
 
 export default function ExplorePage({ navigation }) {
+
+ const [trendingData, setTrending] = React.useState([])
+ const [nearbyData, setNearby] = React.useState([])
+ 
+
+
 
   const [searchQuery, setSearchQuery] = React.useState('');
   const [eventData, setEventData] = React.useState(data);
@@ -31,10 +40,9 @@ export default function ExplorePage({ navigation }) {
             for( let x =0; x< document.events.length; x++){
               const docRef2 = doc(db, "event", document.events[x]);
               const actualDoc2 = await getDoc(docRef2)
-              console.log("turtle")
               if(actualDoc2.exists()){
                   const document2 = actualDoc2.data();
-                  actualEvents[actualEvents.length]= document2; 
+                  actualEvents[actualEvents.length]= [document2, docRef2]; 
               }
             }
             setNearby(actualEvents);
@@ -54,7 +62,6 @@ const getTrending = async () => {
       
       if(actualDoc.exists()){
         const document = actualDoc.data();
-        console.log("37: " + document.events);
      
         let actualEvents = []
         for( let x =0; x< document.events.length; x++){
@@ -62,7 +69,7 @@ const getTrending = async () => {
           const actualDoc2 = await getDoc(docRef2)
           if(actualDoc2.exists()){
               const document2 = actualDoc2.data();
-              actualEvents[actualEvents.length]= document2; 
+              actualEvents[actualEvents.length]= [document2, docRef2]; 
               console.log(actualEvents.length);
               console.log(x);  
           }
@@ -108,7 +115,7 @@ const getTrending = async () => {
         {trendingData.map((item) => 
               
               (
-              <EventChip eventData={item} navigation={navigation}></EventChip>
+              <EventChip eventData={item[0]} eventRef={item[1]} navigation={navigation}></EventChip>
               )
           )}
         </View>
@@ -117,7 +124,7 @@ const getTrending = async () => {
         {nearbyData.map((item) => 
               
                     (
-                    <EventChip eventData={item} navigation={navigation}></EventChip>
+                    <EventChip eventData={item[0]} eventRef={item[1]} navigation={navigation}></EventChip>
                     )
                 )}
         </View>
@@ -129,6 +136,7 @@ const getTrending = async () => {
           <Category label='Baseball' image={green} navigation={navigation}></Category>
           <Category label='Tennis' image={yellow} navigation={navigation}></Category>
           <Category label='Hockey' image={gray} navigation={navigation}></Category>
+          
         </View>
     </ScrollView>
   );

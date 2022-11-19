@@ -10,7 +10,7 @@ import { useState, useEffect } from 'react';
 
 export default function EventPage(props) {
     const eventData = props.route.params.eventData
-    const date = new Date(eventData.dateTime);
+    const date = new Date(eventData.date);
     const formattedDate = format(date, "MMMM d")
 
     const [data, setData] = useState({location: "hello!"});
@@ -31,7 +31,7 @@ export default function EventPage(props) {
                 <Text style={styles.subtext}>{data.location}</Text>
             </View>
             {/* <View style={styles.flex}/> */}
-            <TicketOption navigation={props.navigation} eventData={props.eventData} style={styles.ticket} />
+            <TicketOption navigation={props.navigation} eventRef={props.route.params.eventRef} eventData={eventData} style={styles.ticket} />
         </SafeAreaView>
     )
 }

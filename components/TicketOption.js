@@ -2,33 +2,33 @@ import React, { useState } from 'react';
 import {Text, View, StyleSheet} from 'react-native';
 import {Card, Button} from 'react-native-paper';
 import { db } from '../firebaseConfig.js';
-import { getDoc, doc, updateDoc } from 'firebase/firestore';
-import {getEvent} from '../assets/api/fire-service'
+import { addDoc, setDoc, doc, updateDoc } from 'firebase/firestore';
 
 export default function TicketOption(props) {
     //props: eventRef is the document reference, eventData is all the fields of the event in json format
 
     const [numTickets, setNumTickets] = useState(1)
-    //const [seatsLeft, setSeatsLeft] = useState(10)
-    //const [seatsTotal, setSeatsTotal] = useState(100)
+    const [seatsLeft, setSeatsLeft] = useState(props.eventData.seatsLeft - 1)
+    const [seatsTotal, setSeatsTotal] = useState(props.eventData.totalSeats)
 
     const plus = () => {
         if (seatsLeft > 0) {
             setNumTickets(numTickets + 1)
-            //setSeatsLeft(seatsLeft - 1)
+            setSeatsLeft(seatsLeft - 1)
         }
     }
 
     const minus = () => {
         if (numTickets > 1) {
             setNumTickets(numTickets - 1)
-           // setSeatsLeft(seatsLeft + 1)
+            setSeatsLeft(seatsLeft + 1)
         }
     }
 
     /** Buy ticket and create ticket object on Firestore
-        Update events page to see available tickets */
+        Update events page to see available tickets (changes seatsLeft)*/
     const buy = async () => {
+        console.log(props.eventRef.id)
         try {
             const ticketRef = await addDoc(doc(db, "tickets"),
                {
@@ -36,7 +36,6 @@ export default function TicketOption(props) {
                     "timeBought": Timestamp.fromDate(new Date()),
                     "eventId": props.eventRef.id,
                     "redeemed": false,
-                    //"seat": null,
                     "section": "GA",
                     "userId": props.userId
                 });
