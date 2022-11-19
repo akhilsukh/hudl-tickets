@@ -29,22 +29,24 @@ export default function TicketOption(props) {
         Update events page to see available tickets (changes seatsLeft)*/
     const buy = async () => {
         console.log(props.eventRef.id)
-        try {
-            const dbRef = collection(db, "tickets");
-            await addDoc(dbRef,
-               {
-                    "archived": false,
-                    "timeBought": Timestamp.fromDate(new Date()),
-                    "eventId": props.eventRef.id,
-                    "redeemed": false,
-                    "section": "GA",
-                    "userId": props.userId
-                });
-        } catch (error) { console.error(error) };
+        for (let i=0; i<numTickets; i++) {
+            try {
+                const dbRef = collection(db, "tickets");
+                await addDoc(dbRef,
+                {
+                        "archived": false,
+                        "timeBought": Timestamp.fromDate(new Date()),
+                        "eventId": props.eventRef.id,
+                        "redeemed": false,
+                        "section": "GA",
+                        "userId": props.userId
+                    });
+            } catch (error) { console.error(error) };
+            console.log(i)
+        }
         try {
             await updateDoc(props.eventRef, {seatsLeft: props.eventData.seatsLeft - numTickets})
         } catch (error) { console.error(error) };
-        setSeatsLeft(props.eventData.seatsLeft - numTickets)
         setNumTickets(0)
     }
 
