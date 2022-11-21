@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import {Text, View, StyleSheet} from 'react-native';
 import {Card, Button} from 'react-native-paper';
 import { db } from '../firebaseConfig.js';
-import { addDoc, setDoc, doc, updateDoc, collection, add, Timestamp } from 'firebase/firestore';
+import { addDoc, updateDoc, collection, Timestamp } from 'firebase/firestore';
 
 export default function TicketOption(props) {
     //props: eventRef is the document reference, eventData is all the fields of the event in json format
@@ -19,7 +19,7 @@ export default function TicketOption(props) {
     }
 
     const minus = () => {
-        if (numTickets > 1) {
+        if (numTickets > 0) {
             setNumTickets(numTickets - 1)
             setSeatsLeft(seatsLeft + 1)
         }
@@ -28,24 +28,25 @@ export default function TicketOption(props) {
     /** Buy ticket and create ticket object on Firestore
         Update events page to see available tickets (changes seatsLeft)*/
     const buy = async () => {
-        console.log(props.eventRef.id)
-        try {
-            const dbRef = collection(db, "tickets");
-            await addDoc(dbRef,
-            {
-                    "archived": false,
-                    "timeBought": Timestamp.fromDate(new Date()),
-                    "eventId": props.eventRef.id,
-                    "redeemed": false,
-                    "section": "GA",
-                    "userId": props.userId
-                });
-        } catch (error) { console.error(error) };
-        console.log(i)
-        try {
-            await updateDoc(props.eventRef, {seatsLeft: props.eventData.seatsLeft - numTickets})
-        } catch (error) { console.error(error) };
-        setNumTickets(0)
+        if (numTickets > 0) {
+            for (let i = 0; i < numTickets; i++) {
+                try {
+                    const dbRef = collection(db, "tickets");
+                    await addDoc(dbRef,
+                    {
+                        "archived": false,
+                        "timeBought": Timestamp.fromDate(new Date()),
+                        "eventId": props.eventRef.id,
+                        "redeemed": false,
+                        "section": "GA",
+                        "userId": props.userId
+                    });
+                } catch (error) { console.error(error) };
+            }
+            try {
+                await updateDoc(props.eventRef, {seatsLeft: seatsLeft})
+            } catch (error) { console.error(error) };
+        }
     }
 
     return (
