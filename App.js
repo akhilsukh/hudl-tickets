@@ -35,7 +35,7 @@ function CustomNavigationBar({ navigation, back }) {
       {back ? (
         <Appbar.BackAction color="white" onPress={navigation.goBack} />
       ) : (
-        <Appbar.Action icon={account} color="#CCC" onPress={console.log("a")} />
+        <Appbar.Action icon={account} color="#CCC"/>
       )}
       <View style={{ alignItems: "center", flex: 1 }}>
         <Image

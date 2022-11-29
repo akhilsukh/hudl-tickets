@@ -7,8 +7,6 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 export default function HighSchoolNavigationButton(props) {
   const name = props.name;
   const away = props.away;
-  //const navigation = props.navigation;
-
 
   const navigateToHighSchool = () => {
     props.navigation.navigate("High School Page", {
@@ -24,7 +22,7 @@ export default function HighSchoolNavigationButton(props) {
           <View style={styles.imageStyle}>
             <Image
               style={styles.highSchoolImage}
-              source={require("../../assets/orange.png")}
+              source={require("../assets/orange.png")}
             ></Image>
           </View>
           <View>
@@ -50,11 +48,15 @@ const styles = StyleSheet.create({
   highSchoolTitle: {
     marginTop: 10,
     fontSize: 16,
-    // paddingLeft: "5%",
     marginLeft: 5,
-    paddingBottom: "3%",
-    fontWeight: "500",
+    fontWeight: "400",
     color: "white",
+  },
+  subtextHighSchool: {
+    fontSize: 12,
+    color: "#BBBBBB",
+    marginLeft: 5,
+    marginBottom: 10,
   },
   container: {
     marginTop: 10,
@@ -90,12 +92,6 @@ const styles = StyleSheet.create({
   subtext: {
     fontSize: 16,
     color: "#CCC",
-  },
-  subtextHighSchool: {
-    fontSize: 12,
-    color: "#BBBBBB",
-    paddingLeft: "5%",
-    marginBottom: 10,
   },
   img: {
     width: "100%",
