@@ -18,13 +18,10 @@ export default function ExplorePage({ navigation }) {
 
   const [searchQuery, setSearchQuery] = React.useState('');
   const [eventData, setEventData] = React.useState(data);
-  // console.log(eventData);
 
   const onChangeSearch = query => {
-    // console.log(query);
     setSearchQuery(query);
     let newData = eventData.filter((item) => item.title == query);
-    // console.log(newData);
     setEventData(newData);
   }
 
@@ -43,21 +40,20 @@ export default function ExplorePage({ navigation }) {
              }
        }}
        ></Searchbar>
-       {/* <SearchBarLoader></SearchBarLoader> */}
        <CarouselCards navigation={navigation}></CarouselCards>
-        <Text style={{color:"white", fontWeight:'600',fontSize:18, paddingBottom:3, marginLeft: 10}}>Trending</Text>
+        <Text style={styles.gridText}>Trending</Text>
         <View style={styles.grid}>
           <EventChip eventData={data[0]} navigation={navigation}></EventChip>
           <EventChip eventData={data[1]} navigation={navigation}></EventChip>
           <EventChip eventData={data[2]} navigation={navigation}></EventChip>
           <EventChip eventData={data[3]} navigation={navigation}></EventChip>
         </View>
-        <Text style={{color:"white", fontWeight:'600',fontSize:18, paddingBottom:3, marginLeft: 10}}>Games Nearby</Text>
+        <Text style={styles.gridText}>Games Nearby</Text>
         <View style={styles.grid}>
           <EventChip eventData={data[0]} navigation={navigation}></EventChip>
           <EventChip eventData={data[1]} navigation={navigation}></EventChip>
         </View>
-        <Text style={{color:"white", fontWeight:'600',fontSize:18, paddingBottom:3, marginLeft: 10}}>Categories</Text>
+        <Text style={styles.gridText}>Categories</Text>
         <View style={styles.grid}> 
           <Category label='Soccer' image={orange} navigation={navigation}></Category>
           <Category label='Basketball' image={lightblue} navigation={navigation}></Category>
@@ -86,6 +82,13 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     justifyContent: "space-between",
     padding: 10
+  },
+  gridText: {
+    color:"white", 
+    fontWeight:'600',
+    fontSize:18, 
+    paddingBottom:3, 
+    marginLeft: 10
   },
   search: {
     backgroundColor: "#222222",

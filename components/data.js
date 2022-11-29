@@ -17,7 +17,7 @@ const data = [
     ticketCost: "$7.50",
     location: "Fremont High School",
     title: "Fremont vs Cupertino",
-    image: org,
+    image: "https://iili.io/H9b68DG.png",
     category: "Soccer",
     homeTeam: "Fremont High School", 
     awayTeam: "Cupertino High School"
@@ -29,7 +29,7 @@ const data = [
     ticketCost: "Free",
     location: "Alameda High School",
     title: "Berkeley vs Alameda",
-    image: ptg,
+    image: "https://iili.io/H9b68DG.png",
     category: "Basketball",
     homeTeam: "Alameda High School", 
     awayTeam : "Berkeley High School"
@@ -41,7 +41,7 @@ const data = [
     ticketCost: "$5.00",
     location: "San Francisco High School",
     title: "SFHS vs SF County",
-    image: pbg,
+    image: "https://iili.io/H9b68DG.png",
     category: "Football", 
     homeTeam: "SFHS", 
     awayTeam: "SF County"
@@ -53,7 +53,7 @@ const data = [
     ticketCost: "$10.00",
     location: "Tahoe High School",
     title: "Vegas vs Tahoe",
-    image: tbg,
+    image: "https://iili.io/H9b68DG.png",
     category: "Soccer", 
     homeTeam:"Tahoe High School", 
     awayTeam:"Vegas High School"

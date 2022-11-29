@@ -1,27 +1,21 @@
 import React from "react";
 import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
-import { NavigationContainer, navigate } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 export default function EventChip2(props) {
+  console.log(props.eventData.image);
   return (
     <TouchableOpacity
       onPress={() => {
-        console.log(props);
         /* 1. Navigate to the Tickets route with params */
         props.navigation.navigate("Event Page", {
           eventData: props.eventData,
         });
       }}
-      style={styles.card}
-    >
+      style={styles.card}>
       <View style={styles.cardImage}>
         <Image
-          source={props.eventData.image}
-          style={{
-            width: 170,
-            height: 130,
-          }}
+          source={{ uri: props.eventData.image }}
+          style={{ width: 170, height: 130, }}
         ></Image>
       </View>
       <View style={styles.cardContent}>
