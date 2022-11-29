@@ -74,14 +74,14 @@ const styles = StyleSheet.create({
   },
   cardImage: {
     borderRadius: 8,
-    height: 60,
-    width: 165,
+    height: 90,
+    width: 170,
     overflow: "hidden",
   },
   info: {
     flexDirection: "row",
     alignItems: "flex-start",
     justifyContent: "space-between",
-    width: 165,
+    width: 170,
   },
 });

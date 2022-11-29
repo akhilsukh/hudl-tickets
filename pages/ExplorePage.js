@@ -34,11 +34,7 @@ export default function ExplorePage({ navigation }) {
         style={styles.search}
         inputStyle={styles.searchText}
         iconColor="white"
-        theme={{
-          colors: {
-                text: 'white',
-             }
-       }}
+        theme={{colors: {text: 'white'}}}
        ></Searchbar>
        <CarouselCards navigation={navigation}></CarouselCards>
         <Text style={styles.gridText}>Trending</Text>
@@ -86,7 +82,7 @@ const styles = StyleSheet.create({
   gridText: {
     color:"white", 
     fontWeight:'600',
-    fontSize:18, 
+    fontSize: 18, 
     paddingBottom:3, 
     marginLeft: 10
   },
