@@ -47,6 +47,7 @@ export default function TicketOption(props) {
                 await updateDoc(props.eventRef, {seatsLeft: seatsLeft})
             } catch (error) { console.error(error) };
         }
+        setNumTickets(0)
     }
 
     return (
