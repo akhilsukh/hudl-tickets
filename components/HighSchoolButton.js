@@ -5,29 +5,24 @@ import { View, Image, StyleSheet, Touchable } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 export default function HighSchoolNavigationButton(props) {
-  const name = props.name;
-  const away = props.away;
+  const highSchool = props.highSchool;
+  const home = props.home;
 
   const navigateToHighSchool = () => {
     props.navigation.navigate("High School Page", {
-      name: name,
-      away : away, 
+      highSchool: highSchool,
+      home : home, 
       navigation : props.navigation
     });
   };
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={navigateToHighSchool}>
-        <View style={{ flexDirection: "row" }}>
-          <View style={styles.imageStyle}>
-            <Image
-              style={styles.highSchoolImage}
-              source={require("../assets/orange.png")}
-            ></Image>
-          </View>
+        <View style={styles.logoTitle}>
+          <Image style={styles.highSchoolImage} source={{uri: highSchool.logo}}/>
           <View>
-            <Text style={styles.highSchoolTitle}>{name}</Text>
-            <Text style={styles.subtextHighSchool}>{away}</Text>
+            <Text style={styles.highSchoolTitle}>{highSchool.name}</Text>
+            <Text style={styles.subtextHighSchool}>{home ? 'Home' : 'Away'}</Text>
           </View>
         </View>
       </TouchableOpacity>
@@ -36,37 +31,33 @@ export default function HighSchoolNavigationButton(props) {
 }
 
 const styles = StyleSheet.create({
-  imageStyle: {
-    marginTop: 12,
-    marginLeft: -60,
-    marginRight: 10,
+  logoTitle: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center"
   },
   highSchoolImage: {
-    width: 40,
     height: 40,
+    width: 80,
+    marginVertical: "auto"
   },
   highSchoolTitle: {
     marginTop: 10,
     fontSize: 16,
     marginLeft: 5,
-    fontWeight: "400",
     color: "white",
   },
   subtextHighSchool: {
-    fontSize: 12,
+    fontSize: 14,
     color: "#BBBBBB",
     marginLeft: 5,
     marginBottom: 10,
   },
   container: {
+    marginHorizontal: 20,
     marginTop: 10,
-    marginLeft: 20,
-    marginRight: 20,
-    flex: 0.25,
-    paddingLeft: "20%",
-    justifyContent: "center",
     backgroundColor: "#1c1c1c",
-    padding: 8,
+    padding: 12,
     position: "relative",
     borderRadius: 5,
   },

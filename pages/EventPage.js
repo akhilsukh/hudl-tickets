@@ -1,6 +1,6 @@
 import React from "react";
 import { Text } from "react-native-paper";
-import { SafeAreaView, View, Image, StyleSheet, Touchable } from "react-native";
+import { SafeAreaView, View, Image, StyleSheet, ScrollView } from "react-native";
 
 import TicketOption from "../components/TicketOption";
 import { format } from "date-fns";
@@ -9,10 +9,6 @@ import { db } from "../firebaseConfig.js";
 import { getDoc, doc } from "firebase/firestore";
 import { useState, useEffect } from "react";
 import { getEvent, getHighSchool } from '../assets/api/fire-service';
-
-import { Avatar, Button, Card, Title, Paragraph } from "react-native-paper";
-import { TouchableOpacity } from "react-native-gesture-handler";
-
 import HighSchoolNavigationButton from "../components/HighSchoolButton";
 
 export default function EventPage(props) {
@@ -20,9 +16,10 @@ export default function EventPage(props) {
     const date = new Date(eventData.date);
     const formattedDate = format(date, "MMMM d");
 
-    const [data, setData] = useState({ name: "Monta Vista vs Fremont", location: "Cupertino, CA" });
+    const [data, setData] = useState({ name: "Home vs Away", location: "City, State" });
+    const [awaySchool, setAwaySchool] = useState({ name: "Away High School" });
+    const [homeSchool, setHomeSchool] = useState({ name: "Home High School" });
 
-    //   const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
 
     const getDocs = async () => {
         try {
@@ -42,43 +39,52 @@ export default function EventPage(props) {
     useEffect(() => {
         console.log("PROPS", props.route.params);
         getDocs();
-        getHighSchool("JNDx6MuZ6cYB9LfFv7Xy");
-        getHighSchool("F5uVf8uad4KdA6rxcbRT");
+        getHighSchool("JNDx6MuZ6cYB9LfFv7Xy").then((res) => {
+            setHomeSchool(res);
+
+        })
+        getHighSchool("F5uVf8uad4KdA6rxcbRT").then((res) => {
+            setAwaySchool(res);
+        })
     }, []);
 
 
     return (
         <SafeAreaView style={styles.outer}>
-            <Image style={styles.img} source={{uri: eventData.image}}/>
-            <Text style={styles.title}>{eventData.title}</Text>
-            <View style={styles.subrow}>
-                <Text style={styles.subtext}>{eventData.category}</Text>
-            </View>
-            <View style={styles.subrow}>
-                <Text style={styles.subtext}>
-                    {formattedDate} - {eventData.time}
-                </Text>
-                <Text style={styles.subtext}>{eventData.ticketCost}</Text>
-            </View>
-            <View style={styles.subrow}>
-                <Text style={styles.subtext}>{eventData.location}</Text>
-            </View>
-            <HighSchoolNavigationButton
-                name={"highSchoolOne.name"}
-                away={"Home"}
-                navigation={props.navigation}
-            ></HighSchoolNavigationButton>
-            <HighSchoolNavigationButton
-                name={"highSchoolTwo.name"}
-                away={"Away"}
-                navigation={props.navigation}
-            ></HighSchoolNavigationButton>
 
-            <TicketOption
-                navigation={props.navigation}
-                eventData={props.eventData}
-                style={styles.ticket}
-            />
+            <ScrollView>
+                <Image style={styles.img} source={{ uri: eventData.image }} />
+                <Text style={styles.title}>{eventData.title}</Text>
+                <View style={styles.subrow}>
+                    <Text style={styles.subtext}>{eventData.category}</Text>
+                </View>
+                <View style={styles.subrow}>
+                    <Text style={styles.subtext}>
+                        {formattedDate} - {eventData.time}
+                    </Text>
+                    <Text style={styles.subtext}>{eventData.ticketCost}</Text>
+                </View>
+                <View style={styles.subrow}>
+                    <Text style={styles.subtext}>{eventData.location}</Text>
+                </View>
+                <HighSchoolNavigationButton
+                    highSchool={homeSchool}
+                    home={true}
+                    navigation={props.navigation}
+                ></HighSchoolNavigationButton>
+                <HighSchoolNavigationButton
+                    highSchool={awaySchool}
+                    home={false}
+                    navigation={props.navigation}
+                ></HighSchoolNavigationButton>
+
+                <TicketOption
+                    navigation={props.navigation}
+                    eventData={props.eventData}
+                    style={styles.ticket}
+                />
+            </ScrollView>
+
         </SafeAreaView>
     );
 }
