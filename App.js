@@ -4,6 +4,7 @@ import ExplorePage from './pages/ExplorePage';
 import CategoryPage from './pages/CategoryPage';
 import TicketsPage from './pages/TicketsPage';
 import EventPage from './pages/EventPage';
+import ConfirmationPage from './pages/ConfirmationPage';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Appbar } from 'react-native-paper';
@@ -61,6 +62,7 @@ export default function App() {
             <Stack.Screen name="Tickets Page" component={TicketsPage} />
             <Stack.Screen name="Category Page" component={CategoryPage} />
             <Stack.Screen name="Event Page" component={EventPage} />
+            <Stack.Screen name="Confirmation Page" component={ConfirmationPage} />
           </Stack.Navigator>
         </NavigationContainer>
       </SafeAreaView>

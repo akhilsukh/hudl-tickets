@@ -47,7 +47,14 @@ export default function TicketOption(props) {
                 await updateDoc(props.eventRef, {seatsLeft: seatsLeft})
             } catch (error) { console.error(error) };
         }
+        let tickets = numTickets
         setNumTickets(0)
+        props.navigation.navigate('Confirmation Page', {
+            numTickets: tickets,
+            eventName: props.eventData.eventName,
+            userId: props.userId,
+            navigation: navigation
+        })
     }
 
     return (
