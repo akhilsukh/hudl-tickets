@@ -13,10 +13,10 @@ import HighSchoolNavigationButton from "../components/HighSchoolButton";
 
 export default function EventPage(props) {
     const eventData = props.route.params.eventData;
-    const date = new Date(eventData.date);
-    const formattedDate = format(date, "MMMM d");
+    const date = new Date(eventData.dateTime.seconds * 1000);
+    var formattedDate = format(date, "MMM d - h:m a")
 
-    const [data, setData] = useState({ name: "Home vs Away", location: "City, State" });
+    const [data, setData] = useState(eventData);
     const [awaySchool, setAwaySchool] = useState({ name: "Away High School" });
     const [homeSchool, setHomeSchool] = useState({ name: "Home High School" });
 
@@ -60,7 +60,7 @@ export default function EventPage(props) {
                 </View>
                 <View style={styles.subrow}>
                     <Text style={styles.subtext}>
-                        {formattedDate} - {eventData.time}
+                        {formattedDate}
                     </Text>
                     <Text style={styles.subtext}>{eventData.ticketCost}</Text>
                 </View>
