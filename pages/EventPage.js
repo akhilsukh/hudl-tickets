@@ -8,7 +8,7 @@ import { format } from "date-fns";
 import { db } from "../firebaseConfig.js";
 import { getDoc, doc } from "firebase/firestore";
 import { useState, useEffect } from "react";
-import { getEvent, getHighSchool } from '../assets/api/fire-service';
+import { getEvent, getHighSchool } from '../api/fire-service';
 import HighSchoolNavigationButton from "../components/HighSchoolButton";
 
 export default function EventPage(props) {
