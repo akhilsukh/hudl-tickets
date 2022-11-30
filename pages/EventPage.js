@@ -14,7 +14,7 @@ import HighSchoolNavigationButton from "../components/HighSchoolButton";
 export default function EventPage(props) {
     const eventData = props.route.params.eventData;
     const date = new Date(eventData.dateTime.seconds * 1000);
-    var formattedDate = format(date, "MMM d - h:m a")
+    var formattedDate = format(date, "MMM d - h:mm a")
 
     const [data, setData] = useState(eventData);
     const [awaySchool, setAwaySchool] = useState({ name: "Away High School" });
