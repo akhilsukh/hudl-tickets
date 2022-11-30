@@ -19,7 +19,7 @@ export default function ConfirmationPage(props) {
 
     return (
         <View> 
-            <Text>Congrats, you bought {props.numTickets} for {props.eventName}!</Text>
+            <Text>Congrats, you bought {props.route.params.numTickets} tickets for {props.route.params.eventName}!</Text>
             <Button onPress={goToTickets}>View tickets here</Button>
         </View>
     );

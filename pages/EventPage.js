@@ -6,17 +6,16 @@ import TicketOption from "../components/TicketOption";
 import { format } from "date-fns";
 
 import { db } from "../firebaseConfig.js";
-import { getDoc, doc } from "firebase/firestore";
+import { getDoc, doc, Timestamp } from "firebase/firestore";
 import { useState, useEffect } from "react";
 import { getEvent, getHighSchool } from '../assets/api/fire-service';
 import HighSchoolNavigationButton from "../components/HighSchoolButton";
 
 export default function EventPage(props) {
-    const eventData = props.route.params.eventData;
-    const date = new Date(eventData.dateTime.seconds * 1000);
+    const date = new Date(props.route.params.eventData.dateTime.seconds * 1000);
     var formattedDate = format(date, "MMM d - h:mm a")
 
-    const [data, setData] = useState(eventData);
+    //const [data, setData] = useState(props.route.params.eventData);
     const [awaySchool, setAwaySchool] = useState({ name: "Away High School" });
     const [homeSchool, setHomeSchool] = useState({ name: "Home High School" });
 
@@ -37,7 +36,6 @@ export default function EventPage(props) {
     };
 
     useEffect(() => {
-        console.log("PROPS", props.route.params);
         getDocs();
         getHighSchool("JNDx6MuZ6cYB9LfFv7Xy").then((res) => {
             setHomeSchool(res);
@@ -52,19 +50,19 @@ export default function EventPage(props) {
     return (
         <SafeAreaView style={styles.outer}>
             <ScrollView>
-                <Image style={styles.img} source={{ uri: eventData.image }} />
-                <Text style={styles.title}>{eventData.title}</Text>
+                <Image style={styles.img} source={{ uri: props.route.params.eventData.image }} />
+                <Text style={styles.title}>{props.route.params.eventData.title}</Text>
                 <View style={styles.subrow}>
-                    <Text style={styles.subtext}>{eventData.category}</Text>
+                    <Text style={styles.subtext}>{props.route.params.eventData.category}</Text>
                 </View>
                 <View style={styles.subrow}>
                     <Text style={styles.subtext}>
                         {formattedDate}
                     </Text>
-                    <Text style={styles.subtext}>{eventData.ticketCost}</Text>
+                    <Text style={styles.subtext}>{props.route.params.eventData.ticketCost}</Text>
                 </View>
                 <View style={styles.subrow}>
-                    <Text style={styles.subtext}>{eventData.location}</Text>
+                    <Text style={styles.subtext}>{props.route.params.eventData.location}</Text>
                 </View>
                 <HighSchoolNavigationButton
                     highSchool={homeSchool}
@@ -78,9 +76,11 @@ export default function EventPage(props) {
                 ></HighSchoolNavigationButton>
 
                 <TicketOption
-                    navigation={props.navigation}
-                    eventData={props.eventData}
+                    navigation={props.route.params.navigation}
+                    eventData={props.route.params.eventData}
                     style={styles.ticket}
+                    eventRef={props.route.params.eventRef}
+                    userId={props.route.params.userId}
                 />
             </ScrollView>
         </SafeAreaView>

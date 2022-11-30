@@ -1,7 +1,6 @@
-import React, {useState, useEffect} from 'react';
-import { StyleSheet, ScrollView, View, Text } from 'react-native';
-import { db } from '../firebaseConfig';
-import { getDoc, doc } from 'firebase/firestore';
+import React from 'react';
+
+import { StyleSheet, ScrollView, View, Text, Image } from 'react-native';
 import Category from '../components/Category';
 
 import green from '../assets/green_square.png';
@@ -12,6 +11,7 @@ import orange from '../assets/orange.png';
 import yellow from '../assets/yellow.png';
 import EventChip from '../components/EventChip'
 import CarouselCards from '../components/CarouselCards';
+import data from '../components/data'
 import { Searchbar } from 'react-native-paper';
 import { db } from '../firebaseConfig.js';
 import { getDoc, doc } from 'firebase/firestore';
@@ -19,66 +19,71 @@ import { useState, useEffect } from 'react';
 
 export default function ExplorePage({ navigation }) {
 
-  const [trendingData, setTrending] = useState([])
-  const [nearbyData, setNearby] = useState([])
-
-  const [searchQuery, setSearchQuery] = useState('');
+  const [trendingData, setTrending] = React.useState([])
+  const [nearbyData, setNearby] = React.useState([])
+ 
+  const [searchQuery, setSearchQuery] = React.useState('');
+  const [eventData, setEventData] = React.useState(data);
 
   const getNearby = async () => {
-    try {
-      const docRef = doc(db, "explore", "explore-nearby");
-      const actualDoc = await getDoc(docRef);
+    try{
+        const docRef = doc(db, "explore", "explore-nearby");
+        const actualDoc = await getDoc(docRef);
+        
+        if(actualDoc.exists()){
+            const document = actualDoc.data();
+         
+            let actualEvents = []
+            for( let x =0; x< document.events.length; x++){
+              const docRef2 = doc(db, "event", document.events[x]);
+              const actualDoc2 = await getDoc(docRef2)
+              if(actualDoc2.exists()){
+                  const document2 = actualDoc2.data();
+                  actualEvents[actualEvents.length]= [document2, docRef2]; 
+              }
+            }
+            setNearby(actualEvents);
 
-      if (actualDoc.exists()) {
-        const document = actualDoc.data();
-        let actualEvents = []
-        for (let x = 0; x < document.events.length; x++) {
-          const docRef2 = doc(db, "event", document.events[x]);
-          const actualDoc2 = await getDoc(docRef2)
-          if (actualDoc2.exists()) {
-            const document2 = actualDoc2.data();
-            actualEvents[actualEvents.length] = document2;
-          }
         }
-        setNearby(actualEvents);
-        // console.log(JSON.stringify(actualEvents, null, 2))
-      }
     }
-    catch (error) {
-      console.error(error);
+    catch(error){
+        console.error(error);
     }
-  }
+}
 
 
-  const getTrending = async () => {
-    try {
+const getTrending = async () => {
+  try{
       const docRef = doc(db, "explore", "explore-trending");
       const actualDoc = await getDoc(docRef);
-
-      if (actualDoc.exists()) {
+      
+      if(actualDoc.exists()){
         const document = actualDoc.data();
-
+     
         let actualEvents = []
-        for (let x = 0; x < document.events.length; x++) {
+        for( let x =0; x< document.events.length; x++){
           const docRef2 = doc(db, "event", document.events[x]);
           const actualDoc2 = await getDoc(docRef2)
-          if (actualDoc2.exists()) {
-            const document2 = actualDoc2.data();
-            actualEvents[actualEvents.length] = document2;
+          if(actualDoc2.exists()){
+              const document2 = actualDoc2.data();
+              actualEvents[actualEvents.length]= [document2, docRef2]; 
+              console.log(actualEvents.length);
+              console.log(x);  
           }
         }
         setTrending(actualEvents);
       }
-    }
-    catch (error) {
-      console.error(error);
-    }
   }
+  catch(error){
+      console.error(error);
+  }
+}
 
   useEffect(() => {
     getNearby();
     getTrending();
   }, []);
+
 
   const onChangeSearch = query => {
     setSearchQuery(query);
@@ -87,44 +92,49 @@ export default function ExplorePage({ navigation }) {
   }
 
   return (
-    <ScrollView style={{ flex: 1, backgroundColor: "black" }}>
-      <Searchbar
+    <ScrollView style={{flex: 1, backgroundColor:"black"}}>
+       <Searchbar
         placeholder="Search for an event"
         onChangeText={onChangeSearch}
         value={searchQuery}
         style={styles.search}
         inputStyle={styles.searchText}
         iconColor="white"
-        theme={{colors: {text: 'white'}}}
-      ></Searchbar>
-      <CarouselCards navigation={navigation}></CarouselCards>
-      <Text style={{ color: "white", fontWeight: '600', fontSize: 18, paddingBottom: 3, marginTop: "-5%", marginLeft: 10 }}>Trending</Text>
-      <View style={styles.grid}>
-        {trendingData.map((item) =>
-
-        (
-          <EventChip eventData={item} navigation={navigation}></EventChip>
-        )
-        )}
-      </View>
-      <Text style={{ color: "white", fontWeight: '600', fontSize: 18, paddingBottom: 3, marginLeft: 10 }}>Games Nearby</Text>
-      <View style={styles.grid}>
-        { nearbyData.map((item) =>
-        (
-          <EventChip eventData={item} navigation={navigation}></EventChip>
-        )
-        )}
-      </View>
-      <Text style={{ color: "white", fontWeight: '600', fontSize: 18, paddingBottom: 3, marginLeft: 10 }}>Categories</Text>
-      <View style={styles.grid}>
-        <Category label='Soccer' image={orange} navigation={navigation}></Category>
-        <Category label='Basketball' image={lightblue} navigation={navigation}></Category>
-        <Category label='Football' image={lavendar} navigation={navigation}></Category>
-        <Category label='Baseball' image={green} navigation={navigation}></Category>
-        <Category label='Tennis' image={yellow} navigation={navigation}></Category>
-        <Category label='Hockey' image={gray} navigation={navigation}></Category>
-
-      </View>
+        theme={{
+          colors: {
+                text: 'white',
+             }
+       }}
+       ></Searchbar>
+       <CarouselCards navigation={navigation}></CarouselCards>
+        <Text style={{color:"white", fontWeight:'600',fontSize:18, paddingBottom:3, marginTop: "-5%",marginLeft: 10}}>Trending</Text>
+        <View style={styles.grid}>
+        {trendingData.map((item) => 
+              
+              (
+              <EventChip eventData={item[0]} eventRef={item[1]} navigation={navigation} userId={1234}></EventChip>
+              )
+          )}
+        </View>
+        <Text style={{color:"white", fontWeight:'600',fontSize:18, paddingBottom:3, marginLeft: 10}}>Games Nearby</Text>
+        <View style={styles.grid}>
+        {nearbyData.map((item) => 
+              
+                    (
+                    <EventChip eventData={item[0]} eventRef={item[1]} navigation={navigation} userId={1234}></EventChip>
+                    )
+                )}
+        </View>
+        <Text style={{color:"white", fontWeight:'600',fontSize:18, paddingBottom:3, marginLeft: 10}}>Categories</Text>
+        <View style={styles.grid}> 
+          <Category label='Soccer' image={orange} navigation={navigation}></Category>
+          <Category label='Basketball' image={lightblue} navigation={navigation}></Category>
+          <Category label='Football' image={lavendar} navigation={navigation}></Category>
+          <Category label='Baseball' image={green} navigation={navigation}></Category>
+          <Category label='Tennis' image={yellow} navigation={navigation}></Category>
+          <Category label='Hockey' image={gray} navigation={navigation}></Category>
+          
+        </View>
     </ScrollView>
   );
 }
@@ -145,13 +155,6 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     justifyContent: "space-between",
     padding: 10
-  },
-  gridText: {
-    color:"white", 
-    fontWeight:'600',
-    fontSize: 18, 
-    paddingBottom:3, 
-    marginLeft: 10
   },
   search: {
     backgroundColor: "#222222",

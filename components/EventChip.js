@@ -3,8 +3,7 @@ import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import { format } from "date-fns";
 
 export default function EventChip2(props) {
-  const eventData = props.eventData
-  const date = new Date(eventData.dateTime.seconds * 1000);
+  const date = new Date(props.eventData.dateTime.seconds * 1000);
   var formattedDate = format(date, "MMM d")
   
   return (
@@ -12,7 +11,10 @@ export default function EventChip2(props) {
       onPress={() => {
         /* 1. Navigate to the Tickets route with params */
         props.navigation.navigate("Event Page", {
+          eventRef: props.eventRef,
           eventData: props.eventData,
+          userId: props.userId,
+          navigation: props.navigation
         });
       }}
       style={styles.card}>
@@ -24,14 +26,14 @@ export default function EventChip2(props) {
         </View>
       <View style={styles.cardContent}>
         <Text style={{color:"white", fontWeight:'600',fontSize:13, paddingBottom:"0%", paddingTop:'2%', alignItems: "flex-start"}}>
-            {eventData.title}
+            {props.eventData.title}
         </Text>
         <View style={styles.info}>
           <Text style={{color:"white", fontWeight:'300', fontSize:12, paddingBottom:"10%", alignItems: "flex-start"}}>
               {formattedDate}
           </Text>
           <Text style={{color:"white", fontWeight:'300', fontSize:12, paddingBottom:"10%", alignItems: "flex-end"}}>
-              {eventData.ticketCost}
+              {props.eventData.ticketCost}
           </Text>
         </View>
       </View>
