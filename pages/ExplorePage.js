@@ -1,6 +1,7 @@
-import React from 'react';
-
-import { StyleSheet, ScrollView, View, Text, Image } from 'react-native';
+import React, {useState, useEffect} from 'react';
+import { StyleSheet, ScrollView, View, Text } from 'react-native';
+import { db } from '../firebaseConfig';
+import { getDoc, doc } from 'firebase/firestore';
 import Category from '../components/Category';
 
 import green from '../assets/green_square.png';
@@ -15,10 +16,10 @@ import { Searchbar } from 'react-native-paper';
 
 export default function ExplorePage({ navigation }) {
 
-  const [trendingData, setTrending] = React.useState([])
-  const [nearbyData, setNearby] = React.useState([])
+  const [trendingData, setTrending] = useState([])
+  const [nearbyData, setNearby] = useState([])
 
-  const [searchQuery, setSearchQuery] = React.useState('');
+  const [searchQuery, setSearchQuery] = useState('');
 
   const getNearby = async () => {
     try {
