@@ -43,6 +43,7 @@ const styles = StyleSheet.create({
   card: {
     alignItems: "start",
     justifyContent: "space-between",
+    width: "45%"
   },
   cardContent: {
     // marginHorizontal:3,

@@ -78,7 +78,6 @@ export default function ExplorePage({ navigation }) {
     getTrending();
   }, []);
 
-
   const onChangeSearch = query => {
     setSearchQuery(query);
     let newData = eventData.filter((item) => item.title == query);
@@ -94,11 +93,7 @@ export default function ExplorePage({ navigation }) {
         style={styles.search}
         inputStyle={styles.searchText}
         iconColor="white"
-        theme={{
-          colors: {
-            text: 'white',
-          }
-        }}
+        theme={{colors: {text: 'white'}}}
       ></Searchbar>
       <CarouselCards navigation={navigation}></CarouselCards>
       <Text style={{ color: "white", fontWeight: '600', fontSize: 18, paddingBottom: 3, marginTop: "-5%", marginLeft: 10 }}>Trending</Text>
@@ -112,8 +107,7 @@ export default function ExplorePage({ navigation }) {
       </View>
       <Text style={{ color: "white", fontWeight: '600', fontSize: 18, paddingBottom: 3, marginLeft: 10 }}>Games Nearby</Text>
       <View style={styles.grid}>
-        {nearbyData.map((item) =>
-
+        { nearbyData.map((item) =>
         (
           <EventChip eventData={item} navigation={navigation}></EventChip>
         )
