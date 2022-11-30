@@ -3,13 +3,74 @@ import { StyleSheet, SafeAreaView, ScrollView, View, Text, Button, Image, requir
 import Banner from '../assets/banner.png';
 import Grid from '../components/Grid';
 import ArchivedTickets from '../components/ArchivedTickets';
+import AsyncStorage from "@react-native-async-storage/async-storage"; 
+import { db } from '../firebaseConfig';
+import { getDoc, doc } from 'firebase/firestore';
 
 export default function TicketsPage({ route, navigation }) {
   const { eventData } = route.params;
   console.log('tickets page')
   console.log(eventData)
 
-  const data = [
+  const [ticketUserData, setTicketUserData] = useState([]);
+  const [ticketInfo, setTicketInfo] = useState([]);
+  const [eventInfo, setEventInfo] = useState([]);
+  let data = [];
+
+  retrieveData = async () => {
+    try {
+      const id = await AsyncStorage.getAllKeys()[0];
+      const user_string = await AsyncStorage.getItem(id);
+      user_json= JSON.parse(user_string);
+      setTicketUserData(user_json.purchased);
+    
+    } catch (error) {
+      console.log("error retreviving");    }
+  };
+
+  const getNearby = async () => {
+    try {
+      for (let i = 0; x < ticketUserData.length; i++) {
+        let ticket={};
+        const docRef = doc(db, "tickets", ticketUserData[i]);
+        const actualDoc = await getDoc(docRef);
+        if (actualDoc.exists()) {
+          const document = actualDoc.data();
+          ticket[seat]= document.section;
+          const docRef2 = doc(db, "event", document.eventId);
+          const actualDoc2 = await getDoc(docRef2);
+          if (actualDoc2.exists()) {
+            const document2 = actualDoc2.data();
+            ticket[] = document2;
+          }
+        }
+  
+  
+      }
+     
+      if (actualDoc.exists()) {
+        const document = actualDoc.data();
+
+        let actualEvents = []
+        for (let x = 0; x < document.events.length; x++) {
+          const docRef2 = doc(db, "event", document.events[x]);
+          const actualDoc2 = await getDoc(docRef2)
+          if (actualDoc2.exists()) {
+            const document2 = actualDoc2.data();
+            actualEvents[actualEvents.length] = document2;
+          }
+        }
+        setNearby(actualEvents);
+        // console.log(JSON.stringify(actualEvents, null, 2))
+      }
+    }
+    catch (error) {
+      console.error(error);
+    }
+  }
+
+
+  const hard = [
     {
      time: "2:00 - 4:00 PM",
       date: "Oct 4",
