@@ -6,20 +6,21 @@ export default function EventChip2(props) {
   const eventData = props.eventData
   const date = new Date(eventData.dateTime.seconds * 1000);
   var formattedDate = format(date, "MMM d")
-
+  
   return (
-    <TouchableOpacity onPress={()=>{
-      /* 1. Navigate to the Tickets route with params */
-      props.navigation.navigate('Event Page', {
-        eventData: props.eventData
-      })}} style={styles.card}>
+    <TouchableOpacity
+      onPress={() => {
+        /* 1. Navigate to the Tickets route with params */
+        props.navigation.navigate("Event Page", {
+          eventData: props.eventData,
+        });
+      }}
+      style={styles.card}>
       <View style={styles.cardImage}>
-          <Image
-            source={{uri:"https://www.cmaquarium.org/app/uploads/2018/09/poolboy-hatchling-100-1200-wide.jpg"}}
-            style={{
-              width: 170, height:130,
-            }}>
-        </Image>
+        <Image
+          source={{ uri: props.eventData.image }}
+          style={{ width: 170, height: 130, }}
+        ></Image>
         </View>
       <View style={styles.cardContent}>
         <Text style={{color:"white", fontWeight:'600',fontSize:13, paddingBottom:"0%", paddingTop:'2%', alignItems: "flex-start"}}>
@@ -40,18 +41,17 @@ export default function EventChip2(props) {
 
 const styles = StyleSheet.create({
   card: {
-    alignItems: 'start',
-    justifyContent: 'space-between',
-    width: "45%"
+    alignItems: "start",
+    justifyContent: "space-between",
   },
-  cardContent:{
+  cardContent: {
     // marginHorizontal:3,
     // marginVertical:3,
     //alignItems: 'flex-start'
     //marginEnd: 10,
     //justifyContent: 'center'
   },
-  cardImage:{
+  cardImage: {
     borderRadius: 8,
     height: 60, 
     width: "100%",  
@@ -62,6 +62,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     justifyContent: 'space-between',
     width: "100%", 
+    // width was 170
+
   },
-  
 });

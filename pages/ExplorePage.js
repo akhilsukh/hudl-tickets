@@ -12,9 +12,6 @@ import yellow from '../assets/yellow.png';
 import EventChip from '../components/EventChip'
 import CarouselCards from '../components/CarouselCards';
 import { Searchbar } from 'react-native-paper';
-import { db } from '../firebaseConfig.js';
-import { getDoc, doc } from 'firebase/firestore';
-import { useState, useEffect } from 'react';
 
 export default function ExplorePage({ navigation }) {
 
@@ -151,6 +148,13 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     justifyContent: "space-between",
     padding: 10
+  },
+  gridText: {
+    color:"white", 
+    fontWeight:'600',
+    fontSize: 18, 
+    paddingBottom:3, 
+    marginLeft: 10
   },
   search: {
     backgroundColor: "#222222",
