@@ -1,6 +1,5 @@
 import React, {useState, useEffect } from 'react'
 import { StyleSheet, SafeAreaView, View, Text, ScrollView } from 'react-native';
-import data from '../components/data'
 import EventChip from '../components/EventChip'
 import { db } from '../firebaseConfig.js';
 import { collection, getDocs } from "firebase/firestore";
@@ -8,18 +7,16 @@ import { collection, getDocs } from "firebase/firestore";
 export default function CategoryPage({route, navigation }) {
     const { category } = route.params;
     
-    const [filteredData, setFiltered] = useState(data);
+    const [filteredData, setFiltered] = useState([]);
     const getEvents = async () => {
       try{
         const querySnapshot = await getDocs(collection(db, "event"));
         let snapshot = []
         querySnapshot.forEach((doc) => {
-          console.log(doc.data())
           if (doc.data().category == category) {
             snapshot[snapshot.length] = doc.data();
           }
         });
-        console.log(snapshot)
         setFiltered(snapshot)
       }
       catch(error){
@@ -36,9 +33,10 @@ export default function CategoryPage({route, navigation }) {
         <ScrollView style={{flex: 1, backgroundColor:"black"}}>
         <Text style={styles.title}>{category}</Text>
         <View style={styles.grid}>
-                {filteredData.map(((item) => {
-                    return (<EventChip eventData={item} navigation={navigation}></EventChip>)
-                }))}
+          {filteredData.map(((item, i) => {
+              console.log("item", item);
+              return (<EventChip eventData={item} navigation={navigation} key={i}></EventChip>)
+          }))}
         </View>
         </ScrollView>
     );
