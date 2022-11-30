@@ -7,7 +7,7 @@ import { collection, getDocs } from "firebase/firestore";
 export default function CategoryPage({route, navigation }) {
     const { category } = route.params;
     
-    const [filteredData, setFiltered] = useState({});
+    const [filteredData, setFiltered] = useState([]);
     const getEvents = async () => {
       try{
         const querySnapshot = await getDocs(collection(db, "event"));
