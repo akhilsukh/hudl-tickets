@@ -1,8 +1,12 @@
-import React from "react";
-import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
+import React from 'react';
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
+import { format } from "date-fns";
 
 export default function EventChip2(props) {
-  console.log(props.eventData.image);
+  const eventData = props.eventData
+  const date = new Date(eventData.dateTime.seconds * 1000);
+  var formattedDate = format(date, "MMM d")
+  
   return (
     <TouchableOpacity
       onPress={() => {
@@ -17,42 +21,17 @@ export default function EventChip2(props) {
           source={{ uri: props.eventData.image }}
           style={{ width: 170, height: 130, }}
         ></Image>
-      </View>
+        </View>
       <View style={styles.cardContent}>
-        <Text
-          style={{
-            color: "white",
-            fontWeight: "600",
-            fontSize: 13,
-            paddingBottom: "0%",
-            paddingTop: "2%",
-            alignItems: "flex-start",
-          }}
-        >
-          {props.eventData.title}
+        <Text style={{color:"white", fontWeight:'600',fontSize:13, paddingBottom:"0%", paddingTop:'2%', alignItems: "flex-start"}}>
+            {eventData.title}
         </Text>
         <View style={styles.info}>
-          <Text
-            style={{
-              color: "white",
-              fontWeight: "300",
-              fontSize: 12,
-              paddingBottom: "10%",
-              alignItems: "flex-start",
-            }}
-          >
-            {props.eventData.date}
+          <Text style={{color:"white", fontWeight:'300', fontSize:12, paddingBottom:"10%", alignItems: "flex-start"}}>
+              {formattedDate}
           </Text>
-          <Text
-            style={{
-              color: "white",
-              fontWeight: "300",
-              fontSize: 12,
-              paddingBottom: "10%",
-              alignItems: "flex-end",
-            }}
-          >
-            {props.eventData.ticketCost}
+          <Text style={{color:"white", fontWeight:'300', fontSize:12, paddingBottom:"10%", alignItems: "flex-end"}}>
+              {eventData.ticketCost}
           </Text>
         </View>
       </View>
@@ -74,14 +53,16 @@ const styles = StyleSheet.create({
   },
   cardImage: {
     borderRadius: 8,
-    height: 90,
-    width: 170,
-    overflow: "hidden",
+    height: 60, 
+    width: "100%",  
+    overflow: 'hidden',
   },
-  info: {
-    flexDirection: "row",
-    alignItems: "flex-start",
-    justifyContent: "space-between",
-    width: 170,
+  info:{
+    flexDirection:"row",
+    alignItems: 'flex-start',
+    justifyContent: 'space-between',
+    width: "100%", 
+    // width was 170
+
   },
 });
