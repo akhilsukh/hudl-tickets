@@ -1,10 +1,11 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
-import { NavigationContainer, navigate} from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
+import { format } from "date-fns";
 
 export default function EventChip2(props) {
+  const eventData = props.eventData
+  const date = new Date(eventData.dateTime.seconds * 1000);
+  var formattedDate = format(date, "MMM d")
 
   return (
     <TouchableOpacity onPress={()=>{
@@ -22,14 +23,14 @@ export default function EventChip2(props) {
         </View>
       <View style={styles.cardContent}>
         <Text style={{color:"white", fontWeight:'600',fontSize:13, paddingBottom:"0%", paddingTop:'2%', alignItems: "flex-start"}}>
-            {props.eventData.title}
+            {eventData.title}
         </Text>
         <View style={styles.info}>
           <Text style={{color:"white", fontWeight:'300', fontSize:12, paddingBottom:"10%", alignItems: "flex-start"}}>
-              {props.eventData.date}
+              {formattedDate}
           </Text>
           <Text style={{color:"white", fontWeight:'300', fontSize:12, paddingBottom:"10%", alignItems: "flex-end"}}>
-              {props.eventData.ticketCost}
+              {eventData.ticketCost}
           </Text>
         </View>
       </View>

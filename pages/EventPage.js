@@ -11,7 +11,7 @@ import { useState, useEffect } from 'react';
 
 export default function EventPage(props) {
     const eventData = props.route.params.eventData
-    const date = new Date(eventData.dateTime);
+    const date = new Date(eventData.dateTime.seconds * 1000);
     const formattedDate = format(date, "MMMM d")
 
     const [data, setData] = useState({location: "hello!"});
