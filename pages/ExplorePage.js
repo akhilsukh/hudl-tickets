@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { StyleSheet, ScrollView, View, Text, Image } from 'react-native';
+import { StyleSheet, ScrollView, View, Text, Image, TouchableOpacity } from 'react-native';
 import Category from '../components/Category';
 
 import green from '../assets/green_square.png';
@@ -14,6 +14,9 @@ import CarouselCards from '../components/CarouselCards';
 import data from '../components/data'
 import { Searchbar } from 'react-native-paper';
 
+import {auth} from '../firebaseConfig';
+import { useNavigation } from '@react-navigation/native';
+
 export default function ExplorePage({ navigation }) {
 
   const [searchQuery, setSearchQuery] = React.useState('');
@@ -26,6 +29,15 @@ export default function ExplorePage({ navigation }) {
     let newData = eventData.filter((item) => item.title == query);
     // console.log(newData);
     setEventData(newData);
+  }
+
+  const handleSignOut = () => {
+    auth
+      .signOut()
+      .then(() => {
+        navigation.replace("Login")
+      })
+      .catch(error => alert(error.message))
   }
 
   return (
@@ -67,6 +79,12 @@ export default function ExplorePage({ navigation }) {
           <Category label='Tennis' image={yellow} navigation={navigation}></Category>
           <Category label='Hockey' image={gray} navigation={navigation}></Category>
         </View>
+        <TouchableOpacity
+        onPress={handleSignOut}
+        style={styles.button}
+      >
+        <Text style={styles.buttonText}>Sign Out</Text>
+      </TouchableOpacity>
     </ScrollView>
   );
 }
@@ -95,5 +113,37 @@ const styles = StyleSheet.create({
   searchText: {
     color: "white",
     backgroundColor: "#222"
-  }
+  },
+  buttonContainer: {
+    width: '60%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 40
+  },
+  button: {
+    backgroundColor: '#0782F9',
+    width: '100%',
+    padding: 15,
+    borderRadius: 10,
+    alignItems: "center",
+    marginTop: 40
+  },
+  buttonText: {
+    color: 'white',
+    fontWight: '700',
+    fontSize: 16,
+  },
+
+  buttonOutline: {
+    backgroundColor: 'white',
+    marginTop: 5,
+    borderColor: '#0782F9',
+    borderWidth: 2
+  },
+  buttonOutlineText: {
+
+    color: '#0782F9',
+    fontWight: '700',
+    fontSize: 16,
+  },
 });

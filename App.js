@@ -62,6 +62,12 @@ export default function App() {
             screenOptions={{
               header: (props) => <CustomNavigationBar {...props} />,
             }}>
+              <Stack.Screen name="SignIn Page" component={LoginScreen}/>
+            {/* <Stack.Screen name="SignUp Page" component={SignUp}/> */}
+            <Stack.Screen name="Explore Page" component={ExplorePage}/>
+            <Stack.Screen name="Tickets Page" component={TicketsPage} />
+            <Stack.Screen name="Category Page" component={CategoryPage} />
+            <Stack.Screen name="Event Page" component={EventPage} />
             <Stack.Screen name = "Login" component={LoginScreen} />
             {/* <Stack.Screen name = "Home" component={HomePage} /> */}
 

@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TouchableOpacity, View, TextInput} from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View, TextInput, Button} from 'react-native'
 import React, {useEffect, useState} from 'react'
 import KeyboardAvoidingView from 'react-native/Libraries/Components/Keyboard/KeyboardAvoidingView'
 import {auth} from '../firebaseConfig'
@@ -14,7 +14,7 @@ const LoginScreen = () => {
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(user => {
             if (user) {
-                navigation.navigate("Home")
+                navigation.navigate("Explore Page")
             }
         })
 
@@ -30,18 +30,23 @@ const LoginScreen = () => {
     }
 
     const handleSignIn = () => {
-        auth.signInWithEmailAndPassword(auth, email, password)
+        signInWithEmailAndPassword(auth, email, password)
         .then(userCredentials => {
             const user = userCredentials.user;
             console.log(user.email);
         }).catch(error => alert(error.message))
     }
+
   return (
     <KeyboardAvoidingView
         style = {styles.container}
         behavior = "padding"
-    >
+    > 
       <View styles = {styles.inputContainer}>
+      {/* <View style={styles.container}>
+            <Text style={styles.title}>Login</Text>
+            <View style={styles.textEntryBox}> */}
+        <Text style = {styles.title}>Login Page</Text>
         <TextInput 
             placeholder = "Email"
             value = {email}
@@ -73,17 +78,29 @@ const LoginScreen = () => {
         </TouchableOpacity>
       </View>
     </KeyboardAvoidingView>
-  )
-}
+  )}
 
-export default LoginScreen
+  export default LoginScreen
+
 
 const styles = StyleSheet.create({
 
     container: {
         flex: 1,
         justifyContent: "center",
-        alignItems: "center"
+        alignItems: "center",
+        backgroundColor: "black",
+        height: 700
+
+    },
+    title: {
+        marginTop: 80,
+        fontWeight: 'bold',
+        textColor: "white",
+        color: "white",
+        fontSize: 20,
+        marginLeft: 10,
+        marginTop: -80
     },
 
     inputContainer: {
@@ -127,4 +144,4 @@ const styles = StyleSheet.create({
         fontSize: 16,
     }, 
      
-})
+});
