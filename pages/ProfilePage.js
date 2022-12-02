@@ -13,22 +13,12 @@ export default function ProfilePage(props) {
 
     const getUser = async () => {
         try {
-            console.log(props.route.params.userRef)
             const userDoc = await getDoc(props.route.params.userRef)
-            console.log(userDoc.data())
-            setUserData(userDoc.data());
-        } catch(error){
-            console.error(error);
-        }
-    }
-
-    const getFavorites = async () => {
-        try {
-            console.log("fav")
-            console.log(userData)
+            let ud = userDoc.data()
+            setUserData(ud)
             let fav = []
-            for (let i = 0; i < userData.favorites.length; i++) {
-                fav[i] = await getHighSchool(userData.favorites[i])
+            for (let i = 0; i < ud.favorites.length; i++) {
+                fav[i] = await getHighSchool(ud.favorites[i])
             }
             setFavorites(fav)
         } catch(error){
@@ -38,8 +28,6 @@ export default function ProfilePage(props) {
 
     useEffect(() => {
         getUser();
-        console.log(userData)
-        getFavorites();
       }, []);
 
     return (
