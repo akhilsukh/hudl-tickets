@@ -81,6 +81,7 @@ export default function EventPage(props) {
                     style={styles.ticket}
                     eventRef={props.route.params.eventRef}
                     userId={props.route.params.userId}
+
                 />
             </ScrollView>
         </SafeAreaView>
@@ -88,6 +89,10 @@ export default function EventPage(props) {
 }
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: 'black',
+      },    
     imageStyle: {
         marginTop: 12,
         marginLeft: -60,
