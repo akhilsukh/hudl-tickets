@@ -12,6 +12,7 @@ import { Appbar } from 'react-native-paper';
 const Stack = createNativeStackNavigator();
 import ticket from "./assets/ticket.png";
 import account from "./assets/account-circle.png";
+import ProfilePage from './pages/Profile';
 
 // import { LogBox } from 'react-native';
 // LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
@@ -35,7 +36,7 @@ function CustomNavigationBar({ navigation, back }) {
       {back ? (
         <Appbar.BackAction color="white" onPress={navigation.goBack} />
       ) : (
-        <Appbar.Action icon={account} color="#CCC"/>
+        <Appbar.Action icon={account} onPress={() => navigation.navigate("Profile Page", {})} color="#CCC"/>
       )}
       <View style={{ alignItems: "center", flex: 1 }}>
         <Image
@@ -74,6 +75,7 @@ export default function App() {
             <Stack.Screen name="Event Page" component={EventPage} />
             <Stack.Screen name="Confirmation Page" component={ConfirmationPage} />
             <Stack.Screen name = "High School Page" component = {HighSchoolPage} />
+            <Stack.Screen name = "Profile Page" component = {ProfilePage} />
           </Stack.Navigator>
         </NavigationContainer>
       </SafeAreaView>
