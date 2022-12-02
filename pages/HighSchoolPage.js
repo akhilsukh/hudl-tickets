@@ -35,7 +35,7 @@ export default function HighSchoolPage(props) {
       <Text>{props.route.params.highSchool.name}</Text>
       <Text>{props.route.params.highSchool.location}</Text>
       {console.log(eventsData)}
-      {eventsData.forEach((event) => {
+      {eventsData.map((event) => {
         return (
           <Text>{event.title}</Text>
         )
