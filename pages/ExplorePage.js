@@ -112,7 +112,8 @@ const getTrending = async () => {
         {trendingData.map((item) => 
               
               (
-              <EventChip eventData={item[0]} eventRef={item[1]} navigation={navigation} userId={1234}></EventChip>
+              <EventChip eventData={item[0]} eventRef={item[1]} navigation={navigation} userId={
+                "BYAfKsk2y0fOMF2MnUrK"}></EventChip>
               )
           )}
         </View>
@@ -121,7 +122,8 @@ const getTrending = async () => {
         {nearbyData.map((item) => 
               
                     (
-                    <EventChip eventData={item[0]} eventRef={item[1]} navigation={navigation} userId={1234}></EventChip>
+                    <EventChip eventData={item[0]} eventRef={item[1]} navigation={navigation} userId={
+                      "BYAfKsk2y0fOMF2MnUrK"}></EventChip>
                     )
                 )}
         </View>

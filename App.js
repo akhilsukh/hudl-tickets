@@ -12,7 +12,9 @@ import { Appbar } from 'react-native-paper';
 const Stack = createNativeStackNavigator();
 import ticket from "./assets/ticket.png";
 import account from "./assets/account-circle.png";
-import ProfilePage from './pages/Profile';
+import ProfilePage from './pages/ProfilePage';
+import { db } from './firebaseConfig.js';
+import { getDoc, doc } from 'firebase/firestore';
 
 // import { LogBox } from 'react-native';
 // LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
@@ -31,12 +33,13 @@ import ProfilePage from './pages/Profile';
 // }
 
 function CustomNavigationBar({ navigation, back }) {
+  
   return (
     <Appbar.Header dark style={{ backgroundColor: "black" }}>
       {back ? (
         <Appbar.BackAction color="white" onPress={navigation.goBack} />
       ) : (
-        <Appbar.Action icon={account} onPress={() => navigation.navigate("Profile Page", {})} color="#CCC"/>
+        <Appbar.Action icon={account} onPress={() => navigation.navigate("Profile Page", {userRef: doc(db, "user", "BYAfKsk2y0fOMF2MnUrK")})} color="#CCC"/>
       )}
       <View style={{ alignItems: "center", flex: 1 }}>
         <Image
