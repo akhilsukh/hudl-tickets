@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react';
 import { StyleSheet, SafeAreaView, ScrollView, View, Text, Button, Image, requireNativeComponent } from 'react-native';
 import Banner from '../assets/banner.png';
 import Grid from '../components/Grid';
@@ -9,65 +9,75 @@ import { getDoc, doc } from 'firebase/firestore';
 
 export default function TicketsPage({ route, navigation }) {
   const { eventData } = route.params;
-  console.log('tickets page')
-  console.log(eventData)
+  
 
   const [ticketUserData, setTicketUserData] = useState([]);
-  const [ticketInfo, setTicketInfo] = useState([]);
-  const [eventInfo, setEventInfo] = useState([]);
-  let data = [];
+  const [upcomingData, setUpcomingData] = useState([]);
+  const [archivedData, setArchivedData] = useState([]);
 
-  retrieveData = async () => {
+
+  const retrieveUserData = async () => {
     try {
-      const id = await AsyncStorage.getAllKeys()[0];
-      const user_string = await AsyncStorage.getItem(id);
+     
+      const key = await AsyncStorage.getAllKeys();
+      const id = key[1]
+
+      console.log(id);
+      const user_string = await AsyncStorage.getItem(String(id));
       user_json= JSON.parse(user_string);
       setTicketUserData(user_json.purchased);
-    
+      console.log(user_json.purchased);
     } catch (error) {
-      console.log("error retreviving");    }
+      console.log("error retrevivingqqq");    }
   };
 
-  const getNearby = async () => {
+  const retrieveTicketData = async () => {
     try {
-      for (let i = 0; x < ticketUserData.length; i++) {
+      let upcoming = [];
+      let archived = [];
+      for (let i = 0; i < ticketUserData.length; i++) {
         let ticket={};
+        let past = false;
+        ticket["ticketId"] = ticketUserData[i];
         const docRef = doc(db, "tickets", ticketUserData[i]);
         const actualDoc = await getDoc(docRef);
         if (actualDoc.exists()) {
           const document = actualDoc.data();
-          ticket[seat]= document.section;
+          ticket["seat"]= document.section;
           const docRef2 = doc(db, "event", document.eventId);
           const actualDoc2 = await getDoc(docRef2);
           if (actualDoc2.exists()) {
             const document2 = actualDoc2.data();
-            ticket[] = document2;
+            ticket["location"] = document2.location;
+            ticket["title"] = document2.title;
+            ticket["date"] = document2.dateTime.toDate().toLocaleDateString(); 
+            ticket["time"] = document2.dateTime.toDate().toLocaleTimeString([],{hour: 'numeric', minute:'2-digit'});
+            ticket["image"]= require("../assets/color.png");
+            ticket["qr"]= require("../assets/qr-code.png");
+            var now = new Date();
+            if (now>= document2.dateTime.toDate()) past=true ;
           }
         }
-  
-  
+        //if date is future-> push to upcoming, else push to archived
+        
+        (past) ? archived.push(ticket): upcoming.push(ticket);
+        
       }
-     
-      if (actualDoc.exists()) {
-        const document = actualDoc.data();
-
-        let actualEvents = []
-        for (let x = 0; x < document.events.length; x++) {
-          const docRef2 = doc(db, "event", document.events[x]);
-          const actualDoc2 = await getDoc(docRef2)
-          if (actualDoc2.exists()) {
-            const document2 = actualDoc2.data();
-            actualEvents[actualEvents.length] = document2;
-          }
-        }
-        setNearby(actualEvents);
-        // console.log(JSON.stringify(actualEvents, null, 2))
-      }
+      setUpcomingData(upcoming);
+      setArchivedData(archived);
     }
     catch (error) {
       console.error(error);
     }
   }
+
+  useEffect(() => {
+    const fetchData= async () => {
+      await retrieveUserData(); 
+      await retrieveTicketData();
+    }
+    fetchData();
+  }, []);
 
 
   const hard = [
@@ -165,8 +175,8 @@ export default function TicketsPage({ route, navigation }) {
       <View style = {styles2.container1}>
       <ScrollView >
       <Text style={styles.title}> Upcoming Events</Text>
-      <Grid data = {data} ></Grid>
-      <ArchivedTickets data = {data} ></ArchivedTickets> 
+      <Grid data = {upcomingData} ></Grid>
+      <ArchivedTickets data = {archivedData} ></ArchivedTickets> 
       </ScrollView >
       </View>
   );

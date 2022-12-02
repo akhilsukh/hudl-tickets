@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from 'react';
 import { StatusBar, SafeAreaView, View, Text, Image } from "react-native";
 import ExplorePage from "./pages/ExplorePage";
 import CategoryPage from "./pages/CategoryPage";
@@ -13,7 +13,7 @@ const Stack = createNativeStackNavigator();
 import ticket from "./assets/ticket.png";
 import account from "./assets/account-circle.png";
 import AsyncStorage from "@react-native-async-storage/async-storage"; 
-import { db } from '../firebaseConfig';
+import { db } from './firebaseConfig';
 import { getDoc, doc } from 'firebase/firestore';
 
 // import { LogBox } from 'react-native';
@@ -70,6 +70,7 @@ const getUserData = async () => {
       if (actualDoc.exists()) {
         const document = actualDoc.data();
         setData(document);
+
       }
     }
     catch (error) {
@@ -79,24 +80,28 @@ const getUserData = async () => {
 
   storeData = async () => {
     try {
-        console.log(document)
+  
         await AsyncStorage.setItem(USER_ID, JSON.stringify(data));
-        console.log("hi")
+        const id = await AsyncStorage.getAllKeys();
+        console.log(id);
     } catch (error) {
         // Error saving data
     }
 }
 
+// useEffect( async () => {
+//   await getUserData(); 
+//   await storeData();
+// }, []);
 
 
 useEffect(() => {
-  getUserData();
-  storeData();
-}, []);
-
-
-
-
+  const fetchData= async () => {
+    await getUserData(); 
+    await storeData();
+  }
+  fetchData();
+}, []); 
 
 
   return (
