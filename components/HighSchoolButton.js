@@ -20,9 +20,9 @@ export default function HighSchoolNavigationButton(props) {
       <TouchableOpacity onPress={navigateToHighSchool}>
         <View style={styles.logoTitle}>
           <Image style={styles.highSchoolImage} source={{uri: highSchool.logo}}/>
-          <View>
+          <View style={styles.text}>
             <Text style={styles.highSchoolTitle}>{highSchool.name}</Text>
-            <Text style={styles.subtextHighSchool}>{home ? 'Home' : 'Away'}</Text>
+            {home !== undefined && <Text style={styles.subtextHighSchool}>{home ? 'Home' : 'Away'}</Text>}
           </View>
         </View>
       </TouchableOpacity>
@@ -35,6 +35,9 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     alignItems: "center"
+  },
+  text: {
+    height: "100%",
   },
   highSchoolImage: {
     height: 40,
