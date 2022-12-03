@@ -71,7 +71,7 @@ const getUserData = async () => {
         const document = actualDoc.data();
         setData(document);
 
-      }
+      }   
     }
     catch (error) {
       console.error(error);
@@ -80,10 +80,7 @@ const getUserData = async () => {
 
   storeData = async () => {
     try {
-  
         await AsyncStorage.setItem(USER_ID, JSON.stringify(data));
-        const id = await AsyncStorage.getAllKeys();
-        console.log(id);
     } catch (error) {
         // Error saving data
     }

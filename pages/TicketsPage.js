@@ -11,34 +11,45 @@ export default function TicketsPage({ route, navigation }) {
   const { eventData } = route.params;
   
 
-  const [ticketUserData, setTicketUserData] = useState([]);
+  // const [ticketUserData, setTicketUserData] = useState([]);
   const [upcomingData, setUpcomingData] = useState([]);
   const [archivedData, setArchivedData] = useState([]);
 
 
-  const retrieveUserData = async () => {
-    try {
+  // const retrieveUserData = async () => {
+  //   try {
      
-      const key = await AsyncStorage.getAllKeys();
-      const id = key[1]
+  //     const key = await AsyncStorage.getAllKeys();
+  //     const id = key[0]
 
-      console.log(id);
-      const user_string = await AsyncStorage.getItem(String(id));
-      user_json= JSON.parse(user_string);
-      setTicketUserData(user_json.purchased);
-      console.log(user_json.purchased);
-    } catch (error) {
-      console.log("error retrevivingqqq");    }
-  };
+  //     console.log("ID1",key);
+  //     const user_string = await AsyncStorage.getItem(String(id));
+  //     user_json= JSON.parse(user_string);
+  //     setTicketUserData(user_json.purchased);
+  //     console.log(user_json.purchased);
+  //   } catch (error) {
+  //     console.log("error retrevivingqqq");    }
+  // }; 
 
   const retrieveTicketData = async () => {
     try {
+
+      const key = await AsyncStorage.getAllKeys();
+      const id = key[0]
+
+      console.log("ID1",key);
+      const user_string = await AsyncStorage.getItem(String(id));
+      user_json= JSON.parse(user_string);
+      // setTicketUserData(user_json.purchased);
+      const ticketUserData = user_json.purchased;
+
       let upcoming = [];
       let archived = [];
       for (let i = 0; i < ticketUserData.length; i++) {
         let ticket={};
         let past = false;
         ticket["ticketId"] = ticketUserData[i];
+        console.log(2)
         const docRef = doc(db, "tickets", ticketUserData[i]);
         const actualDoc = await getDoc(docRef);
         if (actualDoc.exists()) {
@@ -72,11 +83,13 @@ export default function TicketsPage({ route, navigation }) {
   }
 
   useEffect(() => {
-    const fetchData= async () => {
-      await retrieveUserData(); 
-      await retrieveTicketData();
-    }
-    fetchData();
+    // const fetchData= async () => {
+    //   await retrieveUserData(); 
+    //   await retrieveTicketData();
+    // }
+    // fetchData();
+    // retrieveUserData();
+    retrieveTicketData();
   }, []);
 
 
