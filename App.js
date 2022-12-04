@@ -10,24 +10,8 @@ import { Appbar } from 'react-native-paper';
 import ticket from './assets/ticket.png';
 import account from './assets/account-circle.png';
 import LoginScreen from './pages/LoginScreen';
+import SignUpScreen from './pages/SignUp.js';
 import HomePage from './pages/HomePage';
-
-// import { LogBox } from 'react-native';
-// LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
-// LogBox.ignoreAllLogs();//Ignore all log notifications
-
-// function LogoTitle() {
-//   return (
-//     <View style={{ backgroundColor: 'black' }}>
-//       <Image
-//         style={{ width: 168, height: 30 }}
-//         source={require('../hudl-tickets/assets/logo.jpg')}
-//       />
-//     </View>
-
-//   );
-// }
-
 
 
 const Stack = createNativeStackNavigator();
@@ -60,21 +44,14 @@ export default function App() {
           <Stack.Navigator 
             initialRouteName="Home"
             screenOptions={{
-              header: (props) => <CustomNavigationBar {...props} />,
+              header: (props) => <CustomNavigationBar {...props} />
             }}>
-              <Stack.Screen name="SignIn Page" component={LoginScreen}/>
-            {/* <Stack.Screen name="SignUp Page" component={SignUp}/> */}
+            <Stack.Screen name="Login Page" component={LoginScreen}/>
+            <Stack.Screen name="SignUp Page" component={SignUpScreen}/>
             <Stack.Screen name="Explore Page" component={ExplorePage}/>
             <Stack.Screen name="Tickets Page" component={TicketsPage} />
             <Stack.Screen name="Category Page" component={CategoryPage} />
             <Stack.Screen name="Event Page" component={EventPage} />
-            <Stack.Screen name = "Login" component={LoginScreen} />
-            {/* <Stack.Screen name = "Home" component={HomePage} /> */}
-
-            {/* <Stack.Screen name="Explore Page" component={ExplorePage}/>
-            <Stack.Screen name="Tickets Page" component={TicketsPage} />
-            <Stack.Screen name="Category Page" component={CategoryPage} />
-            <Stack.Screen name="Event Page" component={EventPage} /> */}
           </Stack.Navigator>
         </NavigationContainer>
       </SafeAreaView>

@@ -35,7 +35,7 @@ export default function ExplorePage({ navigation }) {
     auth
       .signOut()
       .then(() => {
-        navigation.replace("Login")
+        navigation.replace("Login Page")
       })
       .catch(error => alert(error.message))
   }
