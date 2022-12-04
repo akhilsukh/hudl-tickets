@@ -4,6 +4,7 @@ import KeyboardAvoidingView from 'react-native/Libraries/Components/Keyboard/Key
 import { auth } from '../firebaseConfig'
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigation } from '@react-navigation/native';
+import {Favorite} from '../components/Favorite';
 
 const LoginScreen = () => {
     const [email, setEmail] = useState('')
@@ -20,6 +21,7 @@ const LoginScreen = () => {
 
         return unsubscribe
     }, [])
+
 
     const handleSignUp = () => {
         createUserWithEmailAndPassword(auth, email, password)
@@ -46,6 +48,7 @@ const LoginScreen = () => {
             style={styles.container}
             behavior="padding"
         >
+            <Favorite uid = "123" schoolID = "abcdef" />
             <View styles={styles.container}>
                 <Text style={styles.title}>Login</Text>
                 <View style={styles.textEntryBox}>
