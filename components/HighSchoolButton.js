@@ -55,12 +55,12 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   container: {
-    marginHorizontal: 20,
-    marginTop: 10,
+    marginHorizontal: 16,
+    marginTop: 8,
     backgroundColor: "#1c1c1c",
-    padding: 12,
+    padding: 8,
     position: "relative",
-    borderRadius: 5,
+    borderRadius: 6,
   },
   flex: {
     flex: 1,

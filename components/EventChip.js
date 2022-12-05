@@ -23,14 +23,14 @@ export default function EventChip(props) {
         ></Image>
         </View>
       <View style={styles.cardContent}>
-        <Text style={{color:"white", fontWeight:'600',fontSize:13, paddingBottom:"0%", paddingTop:'2%', alignItems: "flex-start"}}>
+        <Text style={{color:"white", fontWeight:'600',fontSize:14, paddingBottom:"0%", paddingTop:'2%', alignItems: "flex-start"}}>
             {eventData.title}
         </Text>
         <View style={styles.info}>
-          <Text style={{color:"white", fontWeight:'300', fontSize:12, paddingBottom:"10%", alignItems: "flex-start"}}>
+          <Text style={{color:"white", fontWeight:'300', fontSize:13, paddingBottom:"10%", alignItems: "flex-start"}}>
               {formattedDate}
           </Text>
-          <Text style={{color:"white", fontWeight:'300', fontSize:12, paddingBottom:"10%", alignItems: "flex-end"}}>
+          <Text style={{color:"white", fontWeight:'300', fontSize:13, paddingBottom:"10%", alignItems: "flex-end"}}>
               {eventData.ticketCost}
           </Text>
         </View>

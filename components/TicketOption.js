@@ -4,8 +4,10 @@ import { Card, Button } from 'react-native-paper';
 
 export default function TicketOption(props) {
 	const [numTickets, setNumTickets] = useState(1)
-	const [seatsLeft, setSeatsLeft] = useState(10)
-	const [seatsTotal, setSeatsTotal] = useState(100)
+	const [seatsLeft, setSeatsLeft] = useState(99)
+	const totalSeats = 99
+
+	console.log("ASDASDASDSDASD", props);
 
 	const plus = () => {
 		if (seatsLeft > 0) {
@@ -29,14 +31,12 @@ export default function TicketOption(props) {
 	}
 
 	return (
-		<Card style={styles.crd} mode="contained">
-			{/* <Card.Title style={styles.txt} title="Card Title" subtitle="Card Subtitle" /> */}
-			{/* <View style={styles.flx}> */}
+		<Card style={styles.container} mode="contained">
 			<Card.Content>
 				<View>
 					<View>
 						<Text style={styles.upper}>General Admission</Text>
-						<Text style={styles.lower}>{seatsLeft}/{seatsTotal} seats left</Text>
+						<Text style={styles.lower}>{seatsLeft}/{totalSeats} seats left</Text>
 					</View>
 					<View style={styles.flx}>
 						<Button style={styles.bttn} onPress={minus}>
@@ -52,26 +52,22 @@ export default function TicketOption(props) {
 					</Button>
 				</View>
 			</Card.Content>
-
-			{/* <Card.Actions>
-                <Button>Cancel</Button>
-                <Button>Ok</Button>
-                </Card.Actions> */}
-			{/* </View> */}
 		</Card>
 	)
 }
 
 const styles = StyleSheet.create({
-	crd: {
-		margin: "5%",
-		backgroundColor: "#1c1c1c"
+	container: {
+		marginHorizontal: 16,
+		marginVertical: 8,
+		padding: 4,
+		backgroundColor: "#1c1c1c",
+		borderRadius: 6
 	},
 	flx: {
 		display: "flex",
 		flexDirection: 'row',
 		justifyContent: "center",
-		marginVertical: "1%"
 	},
 	txt: {
 		color: 'red'
@@ -88,18 +84,17 @@ const styles = StyleSheet.create({
 	},
 	buy: {
 		backgroundColor: "#FCA974",
-		borderRadius: 5,
+		borderRadius: 6,
 		height: 35,
 		marginTop: 5
 	},
 	upper: {
 		color: "white",
-		padding: 5
+		fontSize: 16
 	},
 	lower: {
-		color: "white",
-		padding: 5,
-		fontSize: 11
+		color: "#BBBBBB",
+		fontSize: 14,
 	},
 	buyText: {
 		color: "black",

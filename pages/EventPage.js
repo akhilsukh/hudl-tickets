@@ -66,45 +66,44 @@ export default function EventPage(props) {
                 <View style={styles.subrow}>
                     <Text style={styles.subtext}>{eventData.location}</Text>
                 </View>
-                <HighSchoolNavigationButton
-                    highSchool={homeSchool}
-                    home={true}
-                    highSchoolId={eventData.homeTeamId}
-                    navigation={props.navigation}
-                ></HighSchoolNavigationButton>
-                <HighSchoolNavigationButton
-                    highSchool={awaySchool}
-                    home={false}
-                    highSchoolId={eventData.awayTeamId}
-                    navigation={props.navigation}
-                ></HighSchoolNavigationButton>
+                <View>
+                    <Text style={styles.groupText}>Teams</Text>
+                    <HighSchoolNavigationButton
+                        highSchool={homeSchool}
+                        home={true}
+                        highSchoolId={eventData.homeTeamId}
+                        navigation={props.navigation}
+                    ></HighSchoolNavigationButton>
+                    <HighSchoolNavigationButton
+                        highSchool={awaySchool}
+                        home={false}
+                        highSchoolId={eventData.awayTeamId}
+                        navigation={props.navigation}
+                    ></HighSchoolNavigationButton>
+                </View>
 
-                <TicketOption
-                    navigation={props.navigation}
-                    eventData={props.eventData}
-                    style={styles.ticket}
-                />
+                <View>
+                    <Text style={styles.groupText}>Tickets</Text>
+                    <TicketOption
+                        navigation={props.navigation}
+                        eventData={props.eventData}
+                        style={styles.ticket}
+                    />
+                </View>
+
             </ScrollView>
         </SafeAreaView>
     );
 }
 
 const styles = StyleSheet.create({
-    imageStyle: {
-        marginTop: 12,
-        marginLeft: -60,
-        marginRight: 10,
-    },
-    container: {
-        marginTop: 10,
-        marginLeft: 20,
-        marginRight: 25,
-        flex: 0.25,
-        paddingLeft: "20%",
-        justifyContent: "center",
-        backgroundColor: "#333333",
-        padding: 8,
-        position: "relative",
+    groupText: {
+        color: "white",
+        fontWeight: '500',
+        fontSize: 18,
+        paddingBottom: 3,
+        margin: 16,
+        marginBottom: 0
     },
     flex: {
         flex: 1,
@@ -116,8 +115,8 @@ const styles = StyleSheet.create({
     subrow: {
         flexDirection: "row",
         justifyContent: "space-between",
-        paddingHorizontal: "5%",
-        paddingVertical: "1%",
+        paddingHorizontal: 16,
+        paddingVertical: 4,
     },
     title: {
         fontSize: 24,
@@ -129,18 +128,9 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: "#CCC",
     },
-    subtextHighSchool: {
-        fontSize: 12,
-        color: "#BBBBBB",
-        paddingLeft: "5%",
-        marginBottom: 10,
-    },
     img: {
         width: "100%",
         height: 150,
         margin: "auto",
-    },
-    highSchoolName: {
-        // font:r
     },
 });
