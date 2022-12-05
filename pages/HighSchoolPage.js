@@ -42,18 +42,18 @@ export default function HighSchoolPage(props) {
 
         <Text style={styles.homeGameTitle}>Home Games</Text>
         <View style={styles.grid}>
-          {homeEventsData.map((event) => {
+          {homeEventsData.map((event, id) => {
             return (
-              <EventChip style={{ color: "white" }} eventData={event.data()} navigation={props.route.params.navigation}></EventChip>
+              <EventChip style={{ color: "white" }} key={id} eventData={event.data()} navigation={props.route.params.navigation}></EventChip>
             )
           })}
         </View>
 
         <Text style={styles.homeGameTitle}>Away Games</Text>
         <View style={styles.grid}>
-          {awayEventsData.map((event) =>
+          {awayEventsData.map((event, id) =>
           (
-            <EventChip style={{ color: "white" }} eventData={event.data()} navigation={props.route.params.navigation}></EventChip>
+            <EventChip style={{ color: "white" }} key={id} eventData={event.data()} navigation={props.route.params.navigation}></EventChip>
           )
           )}
         </View>
