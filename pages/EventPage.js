@@ -39,11 +39,11 @@ export default function EventPage(props) {
     useEffect(() => {
         console.log("PROPS", props.route.params);
         getDocs();
-        getHighSchool("JNDx6MuZ6cYB9LfFv7Xy").then((res) => {
+        getHighSchool(eventData.homeTeamId).then((res) => {
             setHomeSchool(res);
 
         })
-        getHighSchool("F5uVf8uad4KdA6rxcbRT").then((res) => {
+        getHighSchool(eventData.awayTeamId).then((res) => {
             setAwaySchool(res);
         })
     }, []);
@@ -51,7 +51,6 @@ export default function EventPage(props) {
 
     return (
         <SafeAreaView style={styles.outer}>
-
             <ScrollView>
                 <Image style={styles.img} source={{ uri: eventData.image }} />
                 <Text style={styles.title}>{eventData.title}</Text>
@@ -70,11 +69,13 @@ export default function EventPage(props) {
                 <HighSchoolNavigationButton
                     highSchool={homeSchool}
                     home={true}
+                    highSchoolId={eventData.homeTeamId}
                     navigation={props.navigation}
                 ></HighSchoolNavigationButton>
                 <HighSchoolNavigationButton
                     highSchool={awaySchool}
                     home={false}
+                    highSchoolId={eventData.awayTeamId}
                     navigation={props.navigation}
                 ></HighSchoolNavigationButton>
 
@@ -84,7 +85,6 @@ export default function EventPage(props) {
                     style={styles.ticket}
                 />
             </ScrollView>
-
         </SafeAreaView>
     );
 }

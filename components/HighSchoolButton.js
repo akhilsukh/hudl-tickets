@@ -11,8 +11,9 @@ export default function HighSchoolNavigationButton(props) {
   const navigateToHighSchool = () => {
     props.navigation.navigate("High School Page", {
       highSchool: highSchool,
-      home : home, 
-      navigation : props.navigation
+      home : home,
+      highSchoolId: props.highSchoolId,
+      navigation: props.navigation
     });
   };
   return (

@@ -5,55 +5,122 @@ import Grid from '../components/Grid';
 import EventChip from '../components/EventChip';
 import ArchivedTickets from '../components/ArchivedTickets';
 import { db } from '../firebaseConfig.js';
-import { getDocs, collection } from 'firebase/firestore';
+import { getDocs, collection, query, where} from 'firebase/firestore';
 import { useState, useEffect } from 'react';
 import data from '../components/data';
 
 export default function HighSchoolPage(props) {
-  const [eventsData, setEvents] = useState([]);
- 
+  const [homeEventsData, setHomeEvents] = useState([]);
+  const [awayEventsData, setAwayEvents] = useState([]);
 
-  //console.log("PROPS PARAMS");
-  //console.log("-->>>>", JSON.stringify(props.route.params.name, null, 2));
-  // console.log("-->>>>", props.route.params);
-  
+  const highschool = props.route.params.highSchool
+
   const getData = async () => {
-      const eventsRef = collection(db, "event");
-      const events = await getDocs(eventsRef);
-      if (events.size >= 0) {
-        let eventsList = [];
-        events.docs.forEach((doc) => {
-          let keyWords = doc.data().title.split(" ");
-          if (keyWords.includes(props.route.params.highSchool.name.split(" ")[0])) {
-            eventsList = [...eventsList, doc.data()];
-          }});
-       
-        await setEvents(eventsList);
-      }
-      else {
-        //console.log("doesnt exist")
-      }
-    };
- 
+    const eventsRef = collection(db, "event");
 
-  useEffect( () => {
-    getData();
-  
+    // query(citiesRef, where("name", ">=", "San Francisco"));
+    console.log("HIGHSCHOOL ID", props);
+    const homeQuery =  query(eventsRef, where("homeTeamId", "==", props.route.params.highSchoolId));
+    const awayQuery =  query(eventsRef, where("awayTeamId", "==", props.route.params.highSchoolId));
+
+    const homeDocs = await getDocs(homeQuery)
+    const awayDocs = await getDocs(awayQuery)
+
+    setHomeEvents(homeDocs.docs);
+    setAwayEvents(awayDocs.docs);
+  };
+
+
+  useEffect(() => {
+    getData()
   }, []);
 
   return (
-    <View style = {{flex : 1, color : "white", backgroundColor : "black"}}>
-      <Text style = {{color : "white", marginLeft : "32.5%"}} >{props.route.params.highSchool.name}</Text>
-      <Text style = {{color: "white", marginLeft : "32.5%"}}>{props.route.params.highSchool.location}</Text>
-      <Text style = {{color: "white", marginLeft : "32.5%"}}>Games:</Text>
+    <SafeAreaView style={styles.outer}>
+      <ScrollView>
+        <Image style={styles.img} source={{ uri: highschool.image }} />
+        <Text style={{ color: "white", fontWeight: "600", fontSize: 24, margin: 12 }} >{highschool.name}</Text>
+        <Text style={{ color: "white", fontSize: 16, marginHorizontal: 12 }}>{highschool.location}</Text>
 
-      
-      {eventsData.map((event) => {
-       console.log("events" + eventsData);
-        return (
-          <EventChip style = {{color: "white"}} eventData = {event} navigation = {props.route.params.navigation}></EventChip>
-        )
-    })}
-    </View>
+        <View>
+          <Text style={{ color: "white" }}>Home Games:</Text>
+
+          {homeEventsData.map((event) => {
+            return (
+              <EventChip style={{ color: "white" }} eventData={event.data()} navigation={props.route.params.navigation}></EventChip>
+            )
+          })}
+        </View>
+
+        <View>
+          <Text style={{ color: "white" }}>Away Games:</Text>
+
+          {awayEventsData.map((event) => {
+            return (
+              <EventChip style={{ color: "white" }} eventData={event.data()} navigation={props.route.params.navigation}></EventChip>
+            )
+          })}
+        </View>
+
+      </ScrollView>
+
+    </SafeAreaView>
+
   )
 }
+
+const styles = StyleSheet.create({
+  imageStyle: {
+    marginTop: 12,
+    marginLeft: -60,
+    marginRight: 10,
+  },
+  container: {
+    marginTop: 10,
+    marginLeft: 20,
+    marginRight: 25,
+    flex: 0.25,
+    paddingLeft: "20%",
+    justifyContent: "center",
+    backgroundColor: "#333333",
+    padding: 8,
+    position: "relative",
+  },
+  flex: {
+    flex: 1,
+  },
+  outer: {
+    backgroundColor: "#000",
+    height: "100%",
+  },
+  subrow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingHorizontal: "5%",
+    paddingVertical: "1%",
+  },
+  title: {
+    fontSize: 24,
+    padding: "5%",
+    fontWeight: "500",
+    color: "white",
+  },
+  subtext: {
+    fontSize: 16,
+    color: "#CCC",
+  },
+  subtextHighSchool: {
+    fontSize: 12,
+    color: "#BBBBBB",
+    paddingLeft: "5%",
+    marginBottom: 10,
+  },
+  img: {
+    width: "100%",
+    height: 150,
+    margin: "auto",
+  },
+  highSchoolName: {
+    // font:r
+  },
+});
