@@ -62,13 +62,6 @@ export default function TicketOption(props) {
         })
     }
 
-	const buy = () => {
-		props.navigation.navigate('Tickets Page', {
-			eventData: props.eventData,
-			numTickets: numTickets
-		})
-	}
-
 	return (
 		<Card style={styles.container} mode="contained">
 			<Card.Content>

@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: 'black',
-      },    
+    },
     imageStyle: {
         marginTop: 12,
         marginLeft: -60,
@@ -114,6 +114,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#333333",
         padding: 8,
         position: "relative",
+    },
     groupText: {
         color: "white",
         fontWeight: '500',
@@ -149,5 +150,5 @@ const styles = StyleSheet.create({
         width: "100%",
         height: 150,
         margin: "auto",
-    },
+    }
 });

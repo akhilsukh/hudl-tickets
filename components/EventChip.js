@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import { format } from "date-fns";
 
 export default function EventChip(props) {
+  console.log("EVENTCHOP",props);
   const eventData = props.eventData
   const date = new Date(eventData.dateTime.seconds * 1000);
   var formattedDate = format(date, "MMM d")

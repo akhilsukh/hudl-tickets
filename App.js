@@ -1,4 +1,4 @@
-import React from 'react'
+import {React, useEffect} from 'react'
 import { StatusBar, SafeAreaView, View, Text, Image } from 'react-native';
 import ExplorePage from './pages/ExplorePage';
 import CategoryPage from './pages/CategoryPage';
@@ -61,7 +61,6 @@ function CustomNavigationBar({ navigation, back }) {
 }
 
 export default function App() {
-  const [data, setData] = useState([]);
   const USER_ID = "BYAfKsk2y0fOMF2MnUrK";
 
   const getUserData = async () => {
