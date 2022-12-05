@@ -51,7 +51,7 @@ export default function TicketOption(props) {
         setNumTickets(0)
         props.navigation.navigate('Confirmation Page', {
             numTickets: tickets,
-            eventName: props.eventData.title,
+            eventData: props.eventData,
             userId: props.userId,
             navigation: props.navigation
         })
