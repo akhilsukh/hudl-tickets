@@ -1,17 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import { StatusBar, SafeAreaView, View, Text, Image } from "react-native";
-import ExplorePage from "./pages/ExplorePage";
-import CategoryPage from "./pages/CategoryPage";
-import TicketsPage from "./pages/TicketsPage";
-import EventPage from "./pages/EventPage";
+import React from 'react'
+import { StatusBar, SafeAreaView, View, Text, Image } from 'react-native';
+import ExplorePage from './pages/ExplorePage';
+import CategoryPage from './pages/CategoryPage';
+import TicketsPage from './pages/TicketsPage';
+import EventPage from './pages/EventPage';
+import ConfirmationPage from './pages/ConfirmationPage';
 import HighSchoolPage from "./pages/HighSchoolPage";
-import LoginPage from "./pages/LoginPage";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { Appbar } from "react-native-paper";
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Appbar } from 'react-native-paper';
 const Stack = createNativeStackNavigator();
 import ticket from "./assets/ticket.png";
 import account from "./assets/account-circle.png";
+import ProfilePage from './pages/Profile';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { db } from './firebaseConfig';
 import { getDoc, doc } from 'firebase/firestore';
@@ -38,7 +39,7 @@ function CustomNavigationBar({ navigation, back }) {
       {back ? (
         <Appbar.BackAction color="white" onPress={navigation.goBack} />
       ) : (
-        <Appbar.Action icon={account} color="#CCC" />
+        <Appbar.Action icon={account} onPress={() => navigation.navigate("Profile Page", {})} color="#CCC"/>
       )}
       <View style={{ alignItems: "center", flex: 1 }}>
         <Image
@@ -101,7 +102,9 @@ export default function App() {
             <Stack.Screen name="Tickets Page" component={TicketsPage} />
             <Stack.Screen name="Category Page" component={CategoryPage} />
             <Stack.Screen name="Event Page" component={EventPage} />
-            <Stack.Screen name="High School Page" component={HighSchoolPage} />
+            <Stack.Screen name="Confirmation Page" component={ConfirmationPage} />
+            <Stack.Screen name = "High School Page" component = {HighSchoolPage} />
+            <Stack.Screen name = "Profile Page" component = {ProfilePage} />
           </Stack.Navigator>
         </NavigationContainer>
       </SafeAreaView>

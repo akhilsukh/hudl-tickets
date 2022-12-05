@@ -1,27 +1,66 @@
 import React, { useState } from 'react';
-import { Text, View, StyleSheet } from 'react-native';
-import { Card, Button } from 'react-native-paper';
+import {Text, View, StyleSheet} from 'react-native';
+import {Card, Button} from 'react-native-paper';
+import { db } from '../firebaseConfig.js';
+import { addDoc, updateDoc, collection, Timestamp, getDoc } from 'firebase/firestore';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function TicketOption(props) {
-	const [numTickets, setNumTickets] = useState(1)
-	const [seatsLeft, setSeatsLeft] = useState(99)
-	const totalSeats = 99
+    //props: eventRef is the document reference, eventData is all the fields of the event in json format
 
-	console.log("ASDASDASDSDASD", props);
+    const [numTickets, setNumTickets] = useState(0)
+    const [seatsLeft, setSeatsLeft] = useState(props.eventData.seatsLeft)
+    const [seatsTotal, setSeatsTotal] = useState(props.eventData.totalSeats)
 
-	const plus = () => {
-		if (seatsLeft > 0) {
-			setNumTickets(numTickets + 1)
-			setSeatsLeft(seatsLeft - 1)
-		}
-	}
+    const minus = () => {
+        if (numTickets > 0) {
+            setNumTickets(numTickets - 1)
+            setSeatsLeft(seatsLeft + 1)
+        }
+    }
 
-	const minus = () => {
-		if (numTickets > 1) {
-			setNumTickets(numTickets - 1)
-			setSeatsLeft(seatsLeft + 1)
-		}
-	}
+    /** Buy ticket and create ticket object on Firestore
+        Update events page to see available tickets (changes seatsLeft)*/
+    const buy = async () => {
+        if (numTickets > 0) {
+            const id = await AsyncStorage.getItem("user_id");
+            const userRef = doc(db, "user", id);
+
+            let newPurchased = user_info.purchased;
+
+            for (let i = 0; i < numTickets; i++) {
+                try {
+                    const dbRef = collection(db, "tickets");
+                    const docRef = await addDoc(dbRef,
+                    {
+                        "archived": false,
+                        "timeBought": Timestamp.fromDate(new Date()),
+                        "eventId": props.eventRef.id,
+                        "redeemed": false,
+                        "section": "GA",
+                        "userId": props.userId
+                    });
+                    const user_info = await getDoc(userRef);
+                    newPurchased = [...newPurchased, docRef.id];
+
+                } catch (error) { console.error(error) };
+            }
+            try {
+                await updateDoc(props.eventRef, {seatsLeft: seatsLeft})
+				// get the user ref id
+                await updateDoc(userRef, {purchased: newPurchased});
+            } catch (error) { console.error(error) };
+        }
+        let tickets = numTickets
+        setNumTickets(0)
+		// TODO: add check that num isn't 0
+        props.navigation.navigate('Confirmation Page', {
+            numTickets: tickets,
+            eventData: props.eventData,
+            userId: props.userId,
+            navigation: props.navigation
+        })
+    }
 
 	const buy = () => {
 		props.navigation.navigate('Tickets Page', {

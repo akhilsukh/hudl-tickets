@@ -12,7 +12,10 @@ export default function EventChip(props) {
       onPress={() => {
         /* 1. Navigate to the Tickets route with params */
         props.navigation.navigate("Event Page", {
+          eventRef: props.eventRef,
           eventData: props.eventData,
+          userId: props.userId,
+          navigation: props.navigation
         });
       }}
       style={styles.card}>
