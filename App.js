@@ -69,7 +69,7 @@ export default function App() {
       const document = await getDoc(docRef);
 
       if (document.exists()) {
-        await AsyncStorage.setItem(USER_ID, JSON.stringify(document.data()));
+        await AsyncStorage.setItem("user_id", USER_ID);
       }
     }
     catch (error) {

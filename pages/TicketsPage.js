@@ -19,44 +19,51 @@ export default function TicketsPage({ route, navigation }) {
   const retrieveTicketData = async () => {
     try {
 
-      const key = await AsyncStorage.getAllKeys();
-      const id = key[0]
-      const user_string = await AsyncStorage.getItem(String(id));
-      user_json = JSON.parse(user_string);
-      const ticketUserData = user_json.purchased;
+      // const key = await AsyncStorage.getAllKeys();
+      // const id = key[0]
+      // const user_string = await AsyncStorage.getItem(String(id));
 
-      let upcoming = [];
-      let archived = [];
-      for (let i = 0; i < ticketUserData.length; i++) {
-        let ticket = {};
-        let past = false;
-        ticket["ticketId"] = ticketUserData[i];
-        const docRef = doc(db, "tickets", ticketUserData[i]);
-        const actualDoc = await getDoc(docRef);
-        if (actualDoc.exists()) {
-          const document = actualDoc.data();
-          ticket["seat"] = document.section;
-          const docRef2 = doc(db, "event", document.eventId);
-          const actualDoc2 = await getDoc(docRef2);
-          if (actualDoc2.exists()) {
-            const document2 = actualDoc2.data();
-            ticket["location"] = document2.location;
-            ticket["title"] = document2.title;
-            ticket["date"] = document2.dateTime.toDate().toLocaleDateString();
-            ticket["time"] = document2.dateTime.toDate().toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
-            ticket["image"] = document2.image;
-            ticket["qr"] = require("../assets/qr-code.png");
-            var now = new Date();
-            if (now >= document2.dateTime.toDate()) past = true;
+      const id = await AsyncStorage.getItem("user_id");
+
+      const docRef = doc(db, "user", id);
+      const document = await getDoc(docRef);
+
+      if (document.exists()) {
+        const ticketUserData = document.data().purchased;
+
+        let upcoming = [];
+        let archived = [];
+        for (let i = 0; i < ticketUserData.length; i++) {
+          let ticket = {};
+          let past = false;
+          ticket["ticketId"] = ticketUserData[i];
+          const docRef = doc(db, "tickets", ticketUserData[i]);
+          const actualDoc = await getDoc(docRef);
+          if (actualDoc.exists()) {
+            const document = actualDoc.data();
+            ticket["seat"] = document.section;
+            const docRef2 = doc(db, "event", document.eventId);
+            const actualDoc2 = await getDoc(docRef2);
+            if (actualDoc2.exists()) {
+              const document2 = actualDoc2.data();
+              ticket["location"] = document2.location;
+              ticket["title"] = document2.title;
+              ticket["date"] = document2.dateTime.toDate().toLocaleDateString();
+              ticket["time"] = document2.dateTime.toDate().toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+              ticket["image"] = document2.image;
+              ticket["qr"] = require("../assets/qr-code.png");
+              var now = new Date();
+              if (now >= document2.dateTime.toDate()) past = true;
+            }
           }
+          //if date is future-> push to upcoming, else push to archived
+
+          (past) ? archived.push(ticket) : upcoming.push(ticket);
+
         }
-        //if date is future-> push to upcoming, else push to archived
-
-        (past) ? archived.push(ticket) : upcoming.push(ticket);
-
+        setUpcomingData(upcoming);
+        setArchivedData(archived);
       }
-      setUpcomingData(upcoming);
-      setArchivedData(archived);
     }
     catch (error) {
       console.error(error);
