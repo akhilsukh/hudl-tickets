@@ -21,7 +21,7 @@ export default function Chip_P({ event }) {
     <TouchableOpacity style={styles.card} onPress={() => setShowPopup(true)}>
       <View style={styles.cardImage}>
         <Image
-          source={event.image}
+          source={{ uri: event.image }}
           style={{
             width: 170, height: 130,
           }}
@@ -75,8 +75,6 @@ export default function Chip_P({ event }) {
     </TouchableOpacity>
   );
 }
-
-
 
 
 const styles = StyleSheet.create({

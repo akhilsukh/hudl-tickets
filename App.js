@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { StatusBar, SafeAreaView, View, Text, Image } from "react-native";
 import ExplorePage from "./pages/ExplorePage";
 import CategoryPage from "./pages/CategoryPage";
@@ -12,7 +12,7 @@ import { Appbar } from "react-native-paper";
 const Stack = createNativeStackNavigator();
 import ticket from "./assets/ticket.png";
 import account from "./assets/account-circle.png";
-import AsyncStorage from "@react-native-async-storage/async-storage"; 
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { db } from './firebaseConfig';
 import { getDoc, doc } from 'firebase/firestore';
 
@@ -38,7 +38,7 @@ function CustomNavigationBar({ navigation, back }) {
       {back ? (
         <Appbar.BackAction color="white" onPress={navigation.goBack} />
       ) : (
-        <Appbar.Action icon={account} color="#CCC"/>
+        <Appbar.Action icon={account} color="#CCC" />
       )}
       <View style={{ alignItems: "center", flex: 1 }}>
         <Image
@@ -58,47 +58,31 @@ function CustomNavigationBar({ navigation, back }) {
     </Appbar.Header>
   );
 }
+
 export default function App() {
   const [data, setData] = useState([]);
   const USER_ID = "BYAfKsk2y0fOMF2MnUrK";
 
-const getUserData = async () => {
+  const getUserData = async () => {
     try {
       const docRef = doc(db, "user", USER_ID);
-      const actualDoc = await getDoc(docRef);
+      const document = await getDoc(docRef);
 
-      if (actualDoc.exists()) {
-        const document = actualDoc.data();
-        setData(document);
-
-      }   
+      if (document.exists()) {
+        await AsyncStorage.setItem(USER_ID, JSON.stringify(document.data()));
+      }
     }
     catch (error) {
       console.error(error);
     }
-  }  
-
-  storeData = async () => {
-    try {
-        await AsyncStorage.setItem(USER_ID, JSON.stringify(data));
-    } catch (error) {
-        // Error saving data
-    }
-}
-
-// useEffect( async () => {
-//   await getUserData(); 
-//   await storeData();
-// }, []);
-
-
-useEffect(() => {
-  const fetchData= async () => {
-    await getUserData(); 
-    await storeData();
   }
-  fetchData();
-}, []); 
+
+  useEffect(() => {
+    const fetchData = async () => {
+      await getUserData();
+    }
+    fetchData();
+  }, []);
 
 
   return (
@@ -117,7 +101,7 @@ useEffect(() => {
             <Stack.Screen name="Tickets Page" component={TicketsPage} />
             <Stack.Screen name="Category Page" component={CategoryPage} />
             <Stack.Screen name="Event Page" component={EventPage} />
-            <Stack.Screen name = "High School Page" component = {HighSchoolPage} />
+            <Stack.Screen name="High School Page" component={HighSchoolPage} />
           </Stack.Navigator>
         </NavigationContainer>
       </SafeAreaView>
