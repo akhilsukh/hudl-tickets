@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from 'react';
 import { StatusBar, SafeAreaView, View, Text, Image } from "react-native";
 import ExplorePage from "./pages/ExplorePage";
 import CategoryPage from "./pages/CategoryPage";
@@ -12,6 +12,9 @@ import { Appbar } from "react-native-paper";
 const Stack = createNativeStackNavigator();
 import ticket from "./assets/ticket.png";
 import account from "./assets/account-circle.png";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { db } from './firebaseConfig';
+import { getDoc, doc } from 'firebase/firestore';
 
 // import { LogBox } from 'react-native';
 // LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
@@ -35,7 +38,7 @@ function CustomNavigationBar({ navigation, back }) {
       {back ? (
         <Appbar.BackAction color="white" onPress={navigation.goBack} />
       ) : (
-        <Appbar.Action icon={account} color="#CCC"/>
+        <Appbar.Action icon={account} color="#CCC" />
       )}
       <View style={{ alignItems: "center", flex: 1 }}>
         <Image
@@ -55,7 +58,33 @@ function CustomNavigationBar({ navigation, back }) {
     </Appbar.Header>
   );
 }
+
 export default function App() {
+  const [data, setData] = useState([]);
+  const USER_ID = "BYAfKsk2y0fOMF2MnUrK";
+
+  const getUserData = async () => {
+    try {
+      const docRef = doc(db, "user", USER_ID);
+      const document = await getDoc(docRef);
+
+      if (document.exists()) {
+        await AsyncStorage.setItem(USER_ID, JSON.stringify(document.data()));
+      }
+    }
+    catch (error) {
+      console.error(error);
+    }
+  }
+
+  useEffect(() => {
+    const fetchData = async () => {
+      await getUserData();
+    }
+    fetchData();
+  }, []);
+
+
   return (
     <>
       <SafeAreaView style={{ flex: 1, backgroundColor: "black" }}>
@@ -72,7 +101,7 @@ export default function App() {
             <Stack.Screen name="Tickets Page" component={TicketsPage} />
             <Stack.Screen name="Category Page" component={CategoryPage} />
             <Stack.Screen name="Event Page" component={EventPage} />
-            <Stack.Screen name = "High School Page" component = {HighSchoolPage} />
+            <Stack.Screen name="High School Page" component={HighSchoolPage} />
           </Stack.Navigator>
         </NavigationContainer>
       </SafeAreaView>
