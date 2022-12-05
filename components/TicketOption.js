@@ -39,7 +39,8 @@ export default function TicketOption(props) {
                         "eventId": props.eventRef.id,
                         "redeemed": false,
                         "section": "GA",
-                        "userId": props.userId
+                        "userId": props.userId,
+                        "image": props.eventData.image
                     });
                 } catch (error) { console.error(error) };
             }
