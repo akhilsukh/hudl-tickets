@@ -45,10 +45,13 @@ export default function TicketOption(props) {
             }
             try {
                 await updateDoc(props.eventRef, {seatsLeft: seatsLeft})
+				// get the user ref id
+				
             } catch (error) { console.error(error) };
         }
         let tickets = numTickets
         setNumTickets(0)
+		// TODO: add check that num isn't 0
         props.navigation.navigate('Confirmation Page', {
             numTickets: tickets,
             eventData: props.eventData,
