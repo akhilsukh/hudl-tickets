@@ -5,7 +5,7 @@ import Grid from '../components/Grid';
 import EventChip from '../components/EventChip';
 import ArchivedTickets from '../components/ArchivedTickets';
 import { db } from '../firebaseConfig.js';
-import { getDocs, collection, query, where} from 'firebase/firestore';
+import { getDocs, collection, query, where } from 'firebase/firestore';
 import { useState, useEffect } from 'react';
 import data from '../components/data';
 
@@ -18,10 +18,8 @@ export default function HighSchoolPage(props) {
   const getData = async () => {
     const eventsRef = collection(db, "event");
 
-    // query(citiesRef, where("name", ">=", "San Francisco"));
-    console.log("HIGHSCHOOL ID", props);
-    const homeQuery =  query(eventsRef, where("homeTeamId", "==", props.route.params.highSchoolId));
-    const awayQuery =  query(eventsRef, where("awayTeamId", "==", props.route.params.highSchoolId));
+    const homeQuery = query(eventsRef, where("homeTeamId", "==", props.route.params.highSchoolId));
+    const awayQuery = query(eventsRef, where("awayTeamId", "==", props.route.params.highSchoolId));
 
     const homeDocs = await getDocs(homeQuery)
     const awayDocs = await getDocs(awayQuery)
@@ -42,9 +40,8 @@ export default function HighSchoolPage(props) {
         <Text style={{ color: "white", fontWeight: "600", fontSize: 24, margin: 12 }} >{highschool.name}</Text>
         <Text style={{ color: "white", fontSize: 16, marginHorizontal: 12 }}>{highschool.location}</Text>
 
-        <View>
-          <Text style={{ color: "white" }}>Home Games:</Text>
-
+        <Text style={styles.homeGameTitle}>Home Games</Text>
+        <View style={styles.grid}>
           {homeEventsData.map((event) => {
             return (
               <EventChip style={{ color: "white" }} eventData={event.data()} navigation={props.route.params.navigation}></EventChip>
@@ -52,14 +49,13 @@ export default function HighSchoolPage(props) {
           })}
         </View>
 
-        <View>
-          <Text style={{ color: "white" }}>Away Games:</Text>
-
-          {awayEventsData.map((event) => {
-            return (
-              <EventChip style={{ color: "white" }} eventData={event.data()} navigation={props.route.params.navigation}></EventChip>
-            )
-          })}
+        <Text style={styles.homeGameTitle}>Away Games</Text>
+        <View style={styles.grid}>
+          {awayEventsData.map((event) =>
+          (
+            <EventChip style={{ color: "white" }} eventData={event.data()} navigation={props.route.params.navigation}></EventChip>
+          )
+          )}
         </View>
 
       </ScrollView>
@@ -70,10 +66,20 @@ export default function HighSchoolPage(props) {
 }
 
 const styles = StyleSheet.create({
-  imageStyle: {
-    marginTop: 12,
-    marginLeft: -60,
-    marginRight: 10,
+  homeGameTitle: {
+    color: "white",
+    marginHorizontal: 12,
+    fontSize: 18,
+    marginVertical: 8,
+    fontWeight: "500"
+  },
+  grid: {
+    backgroundColor: "black",
+    flexDirection: "row",
+    flexWrap: "wrap",
+    alignItems: "flex-start",
+    justifyContent: "space-between",
+    padding: 10
   },
   container: {
     marginTop: 10,
