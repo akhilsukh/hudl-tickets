@@ -19,7 +19,7 @@ export default function EventChip2(props) {
       <View style={styles.cardImage}>
         <Image
           source={{ uri: props.eventData.image }}
-          style={{ width: 170, height: 130, }}
+          style={{ width: 180, height: 110 }}
         ></Image>
         </View>
       <View style={styles.cardContent}>
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
   card: {
     alignItems: "start",
     justifyContent: "space-between",
-    width: "45%"
+    width: "48%"
   },
   cardContent: {
     // marginHorizontal:3,
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
   },
   cardImage: {
     borderRadius: 8,
-    height: 60, 
+    height: 100, 
     width: "100%",  
     overflow: 'hidden',
   },

@@ -99,7 +99,6 @@ export default function ExplorePage({ navigation }) {
       <Text style={{ color: "white", fontWeight: '600', fontSize: 18, paddingBottom: 3, marginTop: "-5%", marginLeft: 10 }}>Trending</Text>
       <View style={styles.grid}>
         {trendingData.map((item) =>
-
         (
           <EventChip eventData={item} navigation={navigation}></EventChip>
         )
