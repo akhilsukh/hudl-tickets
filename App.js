@@ -13,6 +13,9 @@ const Stack = createNativeStackNavigator();
 import ticket from "./assets/ticket.png";
 import account from "./assets/account-circle.png";
 import ProfilePage from './pages/Profile';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { db } from './firebaseConfig';
+import { getDoc, doc } from 'firebase/firestore';
 
 // import { LogBox } from 'react-native';
 // LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
@@ -56,7 +59,33 @@ function CustomNavigationBar({ navigation, back }) {
     </Appbar.Header>
   );
 }
+
 export default function App() {
+  const [data, setData] = useState([]);
+  const USER_ID = "BYAfKsk2y0fOMF2MnUrK";
+
+  const getUserData = async () => {
+    try {
+      const docRef = doc(db, "user", USER_ID);
+      const document = await getDoc(docRef);
+
+      if (document.exists()) {
+        await AsyncStorage.setItem("user_id", USER_ID);
+      }
+    }
+    catch (error) {
+      console.error(error);
+    }
+  }
+
+  useEffect(() => {
+    const fetchData = async () => {
+      await getUserData();
+    }
+    fetchData();
+  }, []);
+
+
   return (
     <>
       <SafeAreaView style={{ flex: 1, backgroundColor: "black" }}>

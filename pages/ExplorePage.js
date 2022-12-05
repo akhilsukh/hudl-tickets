@@ -100,41 +100,35 @@ const getTrending = async () => {
         style={styles.search}
         inputStyle={styles.searchText}
         iconColor="white"
-        theme={{
-          colors: {
-                text: 'white',
-             }
-       }}
-       ></Searchbar>
-       <CarouselCards navigation={navigation}></CarouselCards>
-        <Text style={{color:"white", fontWeight:'600',fontSize:18, paddingBottom:3, marginTop: "-5%",marginLeft: 10}}>Trending</Text>
-        <View style={styles.grid}>
-        {trendingData.map((item) => 
-              
-              (
-              <EventChip eventData={item[0]} eventRef={item[1]} navigation={navigation} userId={1234}></EventChip>
-              )
-          )}
-        </View>
-        <Text style={{color:"white", fontWeight:'600',fontSize:18, paddingBottom:3, marginLeft: 10}}>Games Nearby</Text>
-        <View style={styles.grid}>
-        {nearbyData.map((item) => 
-              
-                    (
-                    <EventChip eventData={item[0]} eventRef={item[1]} navigation={navigation} userId={1234}></EventChip>
-                    )
-                )}
-        </View>
-        <Text style={{color:"white", fontWeight:'600',fontSize:18, paddingBottom:3, marginLeft: 10}}>Categories</Text>
-        <View style={styles.grid}> 
-          <Category label='Soccer' image={orange} navigation={navigation}></Category>
-          <Category label='Basketball' image={lightblue} navigation={navigation}></Category>
-          <Category label='Football' image={lavendar} navigation={navigation}></Category>
-          <Category label='Baseball' image={green} navigation={navigation}></Category>
-          <Category label='Tennis' image={yellow} navigation={navigation}></Category>
-          <Category label='Hockey' image={gray} navigation={navigation}></Category>
-          
-        </View>
+        theme={{colors: {text: 'white'}}}
+      ></Searchbar>
+      <CarouselCards navigation={navigation}></CarouselCards>
+      <Text style={{ color: "white", fontWeight: '600', fontSize: 18, paddingBottom: 3, marginTop: "-5%", marginLeft: 10 }}>Trending</Text>
+      <View style={styles.grid}>
+        {trendingData.map((item) =>
+        (
+          <EventChip eventData={item} navigation={navigation}></EventChip>
+        )
+        )}
+      </View>
+      <Text style={{ color: "white", fontWeight: '600', fontSize: 18, paddingBottom: 3, marginLeft: 10 }}>Games Nearby</Text>
+      <View style={styles.grid}>
+        { nearbyData.map((item) =>
+        (
+          <EventChip eventData={item} navigation={navigation}></EventChip>
+        )
+        )}
+      </View>
+      <Text style={{ color: "white", fontWeight: '600', fontSize: 18, paddingBottom: 3, marginLeft: 10 }}>Categories</Text>
+      <View style={styles.grid}>
+        <Category label='Soccer' image={orange} navigation={navigation}></Category>
+        <Category label='Basketball' image={lightblue} navigation={navigation}></Category>
+        <Category label='Football' image={lavendar} navigation={navigation}></Category>
+        <Category label='Baseball' image={green} navigation={navigation}></Category>
+        <Category label='Tennis' image={yellow} navigation={navigation}></Category>
+        <Category label='Hockey' image={gray} navigation={navigation}></Category>
+
+      </View>
     </ScrollView>
   );
 }

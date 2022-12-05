@@ -8,7 +8,7 @@ import { format } from "date-fns";
 import { db } from "../firebaseConfig.js";
 import { getDoc, doc, Timestamp } from "firebase/firestore";
 import { useState, useEffect } from "react";
-import { getEvent, getHighSchool } from '../assets/api/fire-service';
+import { getEvent, getHighSchool } from '../api/fire-service';
 import HighSchoolNavigationButton from "../components/HighSchoolButton";
 
 export default function EventPage(props) {
@@ -37,11 +37,11 @@ export default function EventPage(props) {
 
     useEffect(() => {
         getDocs();
-        getHighSchool("JNDx6MuZ6cYB9LfFv7Xy").then((res) => {
+        getHighSchool(eventData.homeTeamId).then((res) => {
             setHomeSchool(res);
 
         })
-        getHighSchool("F5uVf8uad4KdA6rxcbRT").then((res) => {
+        getHighSchool(eventData.awayTeamId).then((res) => {
             setAwaySchool(res);
         })
     }, []);
@@ -64,25 +64,31 @@ export default function EventPage(props) {
                 <View style={styles.subrow}>
                     <Text style={styles.subtext}>{props.route.params.eventData.location}</Text>
                 </View>
-                <HighSchoolNavigationButton
-                    highSchool={homeSchool}
-                    home={true}
-                    navigation={props.navigation}
-                ></HighSchoolNavigationButton>
-                <HighSchoolNavigationButton
-                    highSchool={awaySchool}
-                    home={false}
-                    navigation={props.navigation}
-                ></HighSchoolNavigationButton>
-
-                <TicketOption
-                    navigation={props.route.params.navigation}
-                    eventData={props.route.params.eventData}
-                    style={styles.ticket}
-                    eventRef={props.route.params.eventRef}
-                    userId={props.route.params.userId}
-
-                />
+                <View>
+                    <Text style={styles.groupText}>Teams</Text>
+                    <HighSchoolNavigationButton
+                        highSchool={homeSchool}
+                        home={true}
+                        highSchoolId={eventData.homeTeamId}
+                        navigation={props.navigation}
+                    ></HighSchoolNavigationButton>
+                    <HighSchoolNavigationButton
+                        highSchool={awaySchool}
+                        home={false}
+                        highSchoolId={eventData.awayTeamId}
+                        navigation={props.navigation}
+                    ></HighSchoolNavigationButton>
+                </View>
+                <View>
+                    <Text style={styles.groupText}>Tickets</Text>
+                    <TicketOption
+                        navigation={props.navigation}
+                        eventData={props.eventData}
+                        eventRef={props.route.params.eventRef}
+                        userId={props.route.params.userId}
+                        style={styles.ticket}
+                    />
+                </View>
             </ScrollView>
         </SafeAreaView>
     );
@@ -108,6 +114,13 @@ const styles = StyleSheet.create({
         backgroundColor: "#333333",
         padding: 8,
         position: "relative",
+    groupText: {
+        color: "white",
+        fontWeight: '500',
+        fontSize: 18,
+        paddingBottom: 3,
+        margin: 16,
+        marginBottom: 0
     },
     flex: {
         flex: 1,
@@ -119,8 +132,8 @@ const styles = StyleSheet.create({
     subrow: {
         flexDirection: "row",
         justifyContent: "space-between",
-        paddingHorizontal: "5%",
-        paddingVertical: "1%",
+        paddingHorizontal: 16,
+        paddingVertical: 4,
     },
     title: {
         fontSize: 24,
@@ -132,18 +145,9 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: "#CCC",
     },
-    subtextHighSchool: {
-        fontSize: 12,
-        color: "#BBBBBB",
-        paddingLeft: "5%",
-        marginBottom: 10,
-    },
     img: {
         width: "100%",
         height: 150,
         margin: "auto",
-    },
-    highSchoolName: {
-        // font:r
     },
 });
