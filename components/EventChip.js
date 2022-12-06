@@ -3,7 +3,6 @@ import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import { format } from "date-fns";
 
 export default function EventChip(props) {
-  console.log("EVENTCHOP",props);
   const eventData = props.eventData
   const date = new Date(eventData.dateTime.seconds * 1000);
   var formattedDate = format(date, "MMM d")
@@ -22,7 +21,7 @@ export default function EventChip(props) {
       style={styles.card}>
       <View style={styles.cardImage}>
         <Image
-          source={{ uri: props.eventData.image }}
+          source={{ uri: eventData.image }}
           style={{ width: 180, height: 110 }}
         ></Image>
         </View>

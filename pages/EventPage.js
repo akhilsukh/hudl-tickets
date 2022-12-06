@@ -12,10 +12,10 @@ import { getEvent, getHighSchool } from '../api/fire-service';
 import HighSchoolNavigationButton from "../components/HighSchoolButton";
 
 export default function EventPage(props) {
-    const date = new Date(props.route.params.eventData.dateTime.seconds * 1000);
+    const eventData = props.route.params.eventData
+    const date = new Date(eventData.dateTime.seconds * 1000);
     var formattedDate = format(date, "MMM d - h:mm a")
 
-    //const [data, setData] = useState(props.route.params.eventData);
     const [awaySchool, setAwaySchool] = useState({ name: "Away High School" });
     const [homeSchool, setHomeSchool] = useState({ name: "Home High School" });
 
@@ -83,7 +83,7 @@ export default function EventPage(props) {
                     <Text style={styles.groupText}>Tickets</Text>
                     <TicketOption
                         navigation={props.navigation}
-                        eventData={props.eventData}
+                        eventData={eventData}
                         eventRef={props.route.params.eventRef}
                         userId={props.route.params.userId}
                         style={styles.ticket}

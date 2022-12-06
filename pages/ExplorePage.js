@@ -21,63 +21,61 @@ export default function ExplorePage({ navigation }) {
 
   const [trendingData, setTrending] = React.useState([])
   const [nearbyData, setNearby] = React.useState([])
- 
+
   const [searchQuery, setSearchQuery] = React.useState('');
   const [eventData, setEventData] = React.useState(data);
 
   const getNearby = async () => {
-    try{
-        const docRef = doc(db, "explore", "explore-nearby");
-        const actualDoc = await getDoc(docRef);
-        
-        if(actualDoc.exists()){
-            const document = actualDoc.data();
-         
-            let actualEvents = []
-            for( let x =0; x< document.events.length; x++){
-              const docRef2 = doc(db, "event", document.events[x]);
-              const actualDoc2 = await getDoc(docRef2)
-              if(actualDoc2.exists()){
-                  const document2 = actualDoc2.data();
-                  actualEvents[actualEvents.length]= [document2, docRef2]; 
-              }
-            }
-            setNearby(actualEvents);
-
-        }
-    }
-    catch(error){
-        console.error(error);
-    }
-}
-
-
-const getTrending = async () => {
-  try{
-      const docRef = doc(db, "explore", "explore-trending");
+    try {
+      const docRef = doc(db, "explore", "explore-nearby");
       const actualDoc = await getDoc(docRef);
-      
-      if(actualDoc.exists()){
+
+      if (actualDoc.exists()) {
         const document = actualDoc.data();
-     
+
         let actualEvents = []
-        for( let x =0; x< document.events.length; x++){
+        for (let x = 0; x < document.events.length; x++) {
           const docRef2 = doc(db, "event", document.events[x]);
           const actualDoc2 = await getDoc(docRef2)
-          if(actualDoc2.exists()){
-              const document2 = actualDoc2.data();
-              actualEvents[actualEvents.length]= [document2, docRef2]; 
-              console.log(actualEvents.length);
-              console.log(x);  
+          if (actualDoc2.exists()) {
+            const document2 = actualDoc2.data();
+            actualEvents[actualEvents.length] = [document2, docRef2];
+          }
+        }
+        setNearby(actualEvents);
+
+      }
+    }
+    catch (error) {
+      console.error(error);
+    }
+  }
+
+
+  const getTrending = async () => {
+    try {
+      const docRef = doc(db, "explore", "explore-trending");
+      const actualDoc = await getDoc(docRef);
+
+      if (actualDoc.exists()) {
+        const document = actualDoc.data();
+
+        let actualEvents = []
+        for (let x = 0; x < document.events.length; x++) {
+          const docRef2 = doc(db, "event", document.events[x]);
+          const actualDoc2 = await getDoc(docRef2)
+          if (actualDoc2.exists()) {
+            const document2 = actualDoc2.data();
+            actualEvents[actualEvents.length] = [document2, docRef2];
           }
         }
         setTrending(actualEvents);
       }
-  }
-  catch(error){
+    }
+    catch (error) {
       console.error(error);
+    }
   }
-}
 
   useEffect(() => {
     getNearby();
@@ -92,30 +90,30 @@ const getTrending = async () => {
   }
 
   return (
-    <ScrollView style={{flex: 1, backgroundColor:"black"}}>
-       <Searchbar
+    <ScrollView style={{ flex: 1, backgroundColor: "black" }}>
+      <Searchbar
         placeholder="Search for an event"
         onChangeText={onChangeSearch}
         value={searchQuery}
         style={styles.search}
         inputStyle={styles.searchText}
         iconColor="white"
-        theme={{colors: {text: 'white'}}}
+        theme={{ colors: { text: 'white' } }}
       ></Searchbar>
       <CarouselCards navigation={navigation}></CarouselCards>
       <Text style={{ color: "white", fontWeight: '600', fontSize: 18, paddingBottom: 3, marginTop: "-5%", marginLeft: 10 }}>Trending</Text>
       <View style={styles.grid}>
-        {trendingData.map((item) =>
+        {trendingData.map((item, index) =>
         (
-          <EventChip eventData={item} navigation={navigation}></EventChip>
+          <EventChip eventData={item[0]} key={index} navigation={navigation}></EventChip>
         )
         )}
       </View>
       <Text style={{ color: "white", fontWeight: '600', fontSize: 18, paddingBottom: 3, marginLeft: 10 }}>Games Nearby</Text>
       <View style={styles.grid}>
-        { nearbyData.map((item) =>
+        {nearbyData.map((item, index) =>
         (
-          <EventChip eventData={item} navigation={navigation}></EventChip>
+          <EventChip eventData={item[0]} key={index} navigation={navigation}></EventChip>
         )
         )}
       </View>

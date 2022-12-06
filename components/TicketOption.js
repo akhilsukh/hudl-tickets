@@ -7,10 +7,15 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function TicketOption(props) {
     //props: eventRef is the document reference, eventData is all the fields of the event in json format
-
     const [numTickets, setNumTickets] = useState(0)
     const [seatsLeft, setSeatsLeft] = useState(props.eventData.seatsLeft)
-    const [seatsTotal, setSeatsTotal] = useState(props.eventData.totalSeats)
+
+	const plus = () => {
+		if (seatsLeft > 0) {
+			setNumTickets(numTickets + 1)
+			setSeatsLeft(seatsLeft - 1)
+		}
+	}
 
     const minus = () => {
         if (numTickets > 0) {
@@ -68,7 +73,7 @@ export default function TicketOption(props) {
 				<View>
 					<View>
 						<Text style={styles.upper}>General Admission</Text>
-						<Text style={styles.lower}>{seatsLeft}/{totalSeats} seats left</Text>
+						<Text style={styles.lower}>{seatsLeft}/{props.eventData.totalSeats} seats left</Text>
 					</View>
 					<View style={styles.flx}>
 						<Button style={styles.bttn} onPress={minus}>
