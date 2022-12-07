@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import {Text, View, StyleSheet} from 'react-native';
 import {Card, Button} from 'react-native-paper';
 import { db } from '../firebaseConfig.js';
-import { addDoc, updateDoc, collection, Timestamp, getDoc } from 'firebase/firestore';
+import { addDoc, updateDoc, collection, Timestamp, getDoc, doc } from 'firebase/firestore';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function TicketOption(props) {
@@ -31,7 +31,9 @@ export default function TicketOption(props) {
             const id = await AsyncStorage.getItem("user_id");
             const userRef = doc(db, "user", id);
 
-            let newPurchased = user_info.purchased;
+            const user_info = await getDoc(userRef);
+
+            let newPurchased = user_info.data().purchased;
 
             for (let i = 0; i < numTickets; i++) {
                 try {
@@ -43,9 +45,8 @@ export default function TicketOption(props) {
                         "eventId": props.eventRef.id,
                         "redeemed": false,
                         "section": "GA",
-                        "userId": props.userId
+                        "userId": id
                     });
-                    const user_info = await getDoc(userRef);
                     newPurchased = [...newPurchased, docRef.id];
 
                 } catch (error) { console.error(error) };

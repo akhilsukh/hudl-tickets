@@ -105,7 +105,7 @@ export default function ExplorePage({ navigation }) {
       <View style={styles.grid}>
         {trendingData.map((item, index) =>
         (
-          <EventChip eventData={item[0]} key={index} navigation={navigation}></EventChip>
+          <EventChip eventData={item[0]} eventRef={item[1]} key={index} navigation={navigation}></EventChip>
         )
         )}
       </View>
@@ -113,7 +113,7 @@ export default function ExplorePage({ navigation }) {
       <View style={styles.grid}>
         {nearbyData.map((item, index) =>
         (
-          <EventChip eventData={item[0]} key={index} navigation={navigation}></EventChip>
+          <EventChip eventData={item[0]} eventRef={item[1]} key={index} navigation={navigation}></EventChip>
         )
         )}
       </View>
