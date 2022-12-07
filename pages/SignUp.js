@@ -1,45 +1,39 @@
 import { View, Text, TouchableOpacity, TextInput, StyleSheet, Button, Alert } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { auth } from '../firebaseConfig'
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
-import {db} from './firebaseConfig.js';
-import {collection, getDocs, addDoc} from 'firebase/firestore';
+import { db, auth } from '../firebaseConfig.js'
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, getCurrentUser} from 'firebase/auth';
+import { collection, getDocs, addDoc } from 'firebase/firestore';
 
 const SignUp = () => {
     const navigation = useNavigation()
     const [FirstName, setFirstName] = useState('')
     const [LastName, setLastName] = useState('')
-    const [UserName, setUserName] = useState('')    
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const usersCollectionRef = collection(db, "user");
 
-
     const navigateLogin = () => {
-        navigation.replace("Login Page");
+        navigation.reset("Explore Page")
+        // navigation.replace("Explore Page");
     }
 
     const createUser = async () => {
-        user = FirebaseAuth.getInstance().getCurrentUser();
-        await addDoc(usersCollectionRef, {
-            address: "",
-            dob: "",
-            favorites: [],
+        const newUserRef = doc(db, "user", email);
+        await setDoc(newUserRef, {
             firstName: FirstName,
-            id: user.getUid(),
-            image: "",
             lastName: LastName,
-            purchased: [],
-            schoolName: "",
-            username: UserName
-        })
-
+            email: email,
+            favorites: [],
+            image: "",
+            purchased: []
+        });
     }
 
     const handleSignUp = () => {
         createUserWithEmailAndPassword(auth, email, password)
-            .then(() => {createUser}).catch(error => alert(error.message))
+            .then(() => { createUser() }
+            ).catch(error => alert(error.message))
     }
 
     return (

@@ -1,10 +1,13 @@
-import { StyleSheet, Text, TouchableOpacity, View, TextInput, Button } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View, TextInput, ScrollView } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import KeyboardAvoidingView from 'react-native/Libraries/Components/Keyboard/KeyboardAvoidingView'
-import { auth } from '../firebaseConfig'
+import { db, auth } from '../firebaseConfig'
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigation } from '@react-navigation/native';
-import {Favorite} from '../components/Favorite';
+import { Favorite } from '../components/Favorite';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { doc } from 'firebase/firestore';
 
 const LoginScreen = () => {
     const [email, setEmail] = useState('')
@@ -12,24 +15,33 @@ const LoginScreen = () => {
 
     const navigation = useNavigation()
 
+    const getUserData = async () => {
+        try {
+          const docRef = doc(db, "user", email);
+          const document = await getDoc(docRef);
+    
+          if (document.exists()) {
+            await AsyncStorage.setItem("user_id", USER_ID);
+          }
+        }
+        catch (error) {
+          console.error(error);
+        }
+    }
+    
     useEffect(() => {
+
+        const fetchData = async () => {
+            await getUserData();
+        }
+        
         const unsubscribe = auth.onAuthStateChanged(user => {
             if (user) {
-                navigation.navigate("Explore Page")
+                fetchData();
+                navigation.replace("Explore Page")
             }
         })
-
-        return unsubscribe
     }, [])
-
-
-    const handleSignUp = () => {
-        createUserWithEmailAndPassword(auth, email, password)
-            .then(userCredentials => {
-                const user = userCredentials.user;
-                console.log(user.email);
-            }).catch(error => alert(error.message))
-    }
 
     const handleSignIn = () => {
         signInWithEmailAndPassword(auth, email, password)
@@ -44,12 +56,9 @@ const LoginScreen = () => {
     }
 
     return (
-        <KeyboardAvoidingView
-            style={styles.container}
-            behavior="padding"
-        >
-            <Favorite uid = "123" schoolID = "abcdef" />
-            <View styles={styles.container}>
+        <ScrollView style={{flex: 1, backgroundColor:"black"}}>
+            {/* <Favorite uid="123" schoolID="abcdef" /> */}
+            <View>
                 <Text style={styles.title}>Login</Text>
                 <View style={styles.textEntryBox}>
                     <TextInput
@@ -58,7 +67,6 @@ const LoginScreen = () => {
                         onChangeText={(email) => setEmail(email)}
                         autoCapitalize="none"
                         autoCorrect={false}
-                        textAlign="left"
                         textColor="white"
                         placeholderTextColor={"white"}
                         onChangeTextColor="white"
@@ -94,7 +102,7 @@ const LoginScreen = () => {
                     <Text style={styles.text}>New User? Create New Account</Text>
                 </TouchableOpacity>
             </View>
-        </KeyboardAvoidingView>
+        </ScrollView>
     )
 }
 
@@ -102,7 +110,7 @@ const styles = StyleSheet.create(
     {
         container: {
             backgroundColor: "black",
-            height: 700
+            height: "auto"
         },
         title: {
             marginTop: 80,
@@ -118,7 +126,7 @@ const styles = StyleSheet.create(
             paddingTop: "5%",
             paddingBotton: "5%",
             // margin: "5%"
-        },  
+        },
         buttonBox: {
             justifyContent: "center",
             alignItems: "stretch",
@@ -126,13 +134,14 @@ const styles = StyleSheet.create(
             // margin: "5%"
         },
         box: {
-            width: "95%",
             height: 45,
             marginTop: 10,
             borderWidth: 1,
-            borderRadius: 10,
+            borderRadius: 8,
             borderColor: "gray",
-            marginLeft: 10,
+            marginHorizontal: 12,
+            marginVertical: 4,
+            padding: 10
         },
         button: {
             marginTop: 10,
@@ -156,7 +165,7 @@ const styles = StyleSheet.create(
             alignItems: "center",
             justifyContent: "center",
             padding: "5%",
-    
+
         }
     })
 
