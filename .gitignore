@@ -24,3 +24,4 @@ package-lock.json
 
 # Expo build output
 .expo
+.DS_Store
