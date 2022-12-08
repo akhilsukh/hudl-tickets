@@ -9,6 +9,9 @@ import HighSchoolPage from "./pages/HighSchoolPage";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Appbar } from 'react-native-paper';
+import LoginScreen from './pages/LoginScreen';
+import SignUpScreen from './pages/SignUp.js';
+import HomePage from './pages/HomePage';
 const Stack = createNativeStackNavigator();
 import ticket from "./assets/ticket.png";
 import account from "./assets/account-circle.png";
@@ -17,21 +20,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { db } from './firebaseConfig';
 import { getDoc, doc } from 'firebase/firestore';
 
-// import { LogBox } from 'react-native';
-// LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
-// LogBox.ignoreAllLogs();//Ignore all log notifications
 
-// function LogoTitle() {
-//   return (
-//     <View style={{ backgroundColor: 'black' }}>
-//       <Image
-//         style={{ width: 168, height: 30 }}
-//         source={require('../hudl-tickets/assets/logo.jpg')}
-//       />
-//     </View>
-
-//   );
-// }
+const Stack = createNativeStackNavigator();
 
 function CustomNavigationBar({ navigation, back }) {
   return (
@@ -93,11 +83,11 @@ export default function App() {
           <Stack.Navigator
             initialRouteName="Home"
             screenOptions={{
-              header: (props) => <CustomNavigationBar {...props} />,
-            }}
-          >
-            {/* <Stack.Screen name="Login Page" component={LoginPage} /> */}
-            <Stack.Screen name="Explore Page" component={ExplorePage} />
+              header: (props) => <CustomNavigationBar {...props} />
+            }}>
+            <Stack.Screen name="Login Page" component={LoginScreen}/>
+            <Stack.Screen name="SignUp Page" component={SignUpScreen}/>
+            <Stack.Screen name="Explore Page" component={ExplorePage}/>
             <Stack.Screen name="Tickets Page" component={TicketsPage} />
             <Stack.Screen name="Category Page" component={CategoryPage} />
             <Stack.Screen name="Event Page" component={EventPage} />
