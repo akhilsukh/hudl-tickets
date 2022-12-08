@@ -14,7 +14,6 @@ import account from './assets/account-circle.png';
 import LoginScreen from './pages/LoginScreen';
 import SignUpScreen from './pages/SignUp.js';
 import HomePage from './pages/HomePage';
-const Stack = createNativeStackNavigator();
 import ProfilePage from './pages/Profile';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { db } from './firebaseConfig';
@@ -27,8 +26,7 @@ function CustomNavigationBar({ navigation, back }) {
   return (
     <Appbar.Header dark style={{backgroundColor:'black'}}>
       {back ? <Appbar.BackAction color="white" onPress={navigation.goBack} /> : 
-      <Appbar.Action icon={account} color="#CCC" onPress={console.log("a")} />}
-      {console.log("NAVIGATION", navigation.getParent())}
+      <Appbar.Action icon={account} color="#CCC" onPress={() => navigation.navigate("Profile Page", {})} />}
       <View style={{alignItems: 'center', flex: 1}}>
 
         <Image
@@ -50,29 +48,6 @@ function CustomNavigationBar({ navigation, back }) {
 }
 
 export default function App() {
-  const USER_ID = "BYAfKsk2y0fOMF2MnUrK";
-
-  const getUserData = async () => {
-    try {
-      const docRef = doc(db, "user", USER_ID);
-      const document = await getDoc(docRef);
-
-      if (document.exists()) {
-        await AsyncStorage.setItem("user_id", USER_ID);
-      }
-    }
-    catch (error) {
-      console.error(error);
-    }
-  }
-
-  useEffect(() => {
-    const fetchData = async () => {
-      await getUserData();
-    }
-    fetchData();
-  }, []);
-
 
   return (
     <>
