@@ -39,11 +39,12 @@ export default function CarouselCards({navigation}) {
           width: 8,
           height: 8,
           borderRadius: 5,
-          backgroundColor: 'white'
+          backgroundColor: 'white',
         }}
         inactiveDotOpacity={0.4}
         inactiveDotScale={0.6}
         tappableDots={true}
+        containerStyle={{marginTop: "-5%"}}
       />
     </View>
   )
