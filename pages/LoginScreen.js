@@ -1,11 +1,8 @@
 import { StyleSheet, Text, TouchableOpacity, View, TextInput, ScrollView } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import KeyboardAvoidingView from 'react-native/Libraries/Components/Keyboard/KeyboardAvoidingView'
 import { db, auth } from '../firebaseConfig'
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigation } from '@react-navigation/native';
-import { Favorite } from '../components/Favorite';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { doc, getDoc} from 'firebase/firestore';
 
@@ -91,7 +88,7 @@ const LoginScreen = () => {
             <View style={styles.buttonBox}>
                 <TouchableOpacity
                     onPress={handleSignIn}
-                    style={styles.TOstyle}
+                    style={styles.button}
                 >
                     <Text style={styles.text}>LOGIN</Text>
                 </TouchableOpacity>
@@ -118,15 +115,13 @@ const styles = StyleSheet.create(
             fontWeight: 'bold',
             textColor: "white",
             color: "white",
-            fontSize: 20,
-            marginLeft: 10,
+            fontSize: 24,
+            margin: 12,
         },
         textEntryBox: {
             justifyContent: "flex-start",
             alignItems: "stretch",
-            paddingTop: "5%",
-            paddingBotton: "5%",
-            // margin: "5%"
+            marginVertical: 12,
         },
         buttonBox: {
             justifyContent: "center",
@@ -145,19 +140,20 @@ const styles = StyleSheet.create(
             padding: 10
         },
         button: {
-            marginTop: 10,
-            // backgroundColor: 'orange',
+            margin: 12,
+            padding: 10,
+            backgroundColor: '#555',
             borderWidth: 1,
             borderRadius: 10,
             textColor: 'white',
-            // color: "orange",
-            width: "95%"
+            color: "orange",
         },
         text: {
             color: "white",
             justifyContent: "center",
             alignItems: "center",
             textAlign: "center",
+            
             // textColor: "orange",
             // backgroundColor: "orange"
         },

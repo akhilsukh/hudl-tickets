@@ -19,9 +19,9 @@ const Stack = createNativeStackNavigator();
 function CustomNavigationBar({ navigation, back }) {
   return (
     <Appbar.Header dark style={{backgroundColor:'black'}}>
-      {back ? 
-      <Appbar.BackAction color="white" onPress={navigation.goBack} /> : 
+      {back ? <Appbar.BackAction color="white" onPress={navigation.goBack} /> : 
       <Appbar.Action icon={account} color="#CCC" onPress={console.log("a")} />}
+      {console.log("NAVIGATION", navigation.getParent())}
       <View style={{alignItems: 'center', flex: 1}}>
         <Image
           style={{ width: 168, height: 30, backgroundColor: 'black'}}
