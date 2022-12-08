@@ -7,7 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 import { Favorite } from '../components/Favorite';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { doc } from 'firebase/firestore';
+import { doc, getDoc} from 'firebase/firestore';
 
 const LoginScreen = () => {
     const [email, setEmail] = useState('')
@@ -17,11 +17,12 @@ const LoginScreen = () => {
 
     const getUserData = async () => {
         try {
-          const docRef = doc(db, "user", email);
+          const currUser = auth.currentUser;
+          const docRef = doc(db, "user", currUser.uid);
           const document = await getDoc(docRef);
     
           if (document.exists()) {
-            await AsyncStorage.setItem("user_id", USER_ID);
+            await AsyncStorage.setItem("user_id", currUser.uid);
           }
         }
         catch (error) {

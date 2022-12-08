@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { db, auth } from '../firebaseConfig.js'
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, getCurrentUser} from 'firebase/auth';
-import { collection, getDocs, addDoc } from 'firebase/firestore';
+import { doc, setDoc} from 'firebase/firestore';
 
 const SignUp = () => {
     const navigation = useNavigation()
@@ -11,28 +11,28 @@ const SignUp = () => {
     const [LastName, setLastName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const usersCollectionRef = collection(db, "user");
 
     const navigateLogin = () => {
         navigation.reset("Explore Page")
         // navigation.replace("Explore Page");
     }
 
-    const createUser = async () => {
-        const newUserRef = doc(db, "user", email);
+    const createUser = async (userCredential) => {
+        const newUserRef = doc(db, "user", userCredential.user.uid);
         await setDoc(newUserRef, {
             firstName: FirstName,
             lastName: LastName,
             email: email,
             favorites: [],
             image: "",
-            purchased: []
+            purchased: [],
+            id: userCredential.user.uid
         });
     }
 
     const handleSignUp = () => {
         createUserWithEmailAndPassword(auth, email, password)
-            .then(() => { createUser() }
+            .then((userCredential) => { createUser(userCredential) }
             ).catch(error => alert(error.message))
     }
 
