@@ -8,6 +8,7 @@ import { db } from '../firebaseConfig.js';
 import { getDocs, collection, query, where } from 'firebase/firestore';
 import { useState, useEffect } from 'react';
 import data from '../components/data';
+import Favorite from '../components/Favorite';
 
 export default function HighSchoolPage(props) {
   const [homeEventsData, setHomeEvents] = useState([]);
@@ -39,7 +40,7 @@ export default function HighSchoolPage(props) {
         <Image style={styles.img} source={{ uri: highschool.image }} />
         <Text style={{ color: "white", fontWeight: "600", fontSize: 24, margin: 12 }} >{highschool.name}</Text>
         <Text style={{ color: "white", fontSize: 16, marginHorizontal: 12 }}>{highschool.location}</Text>
-
+        <Favorite schoolID={props.route.params.highSchoolId}></Favorite>
         <Text style={styles.homeGameTitle}>Home Games</Text>
         <View style={styles.grid}>
           {homeEventsData.map((event, id) => {
