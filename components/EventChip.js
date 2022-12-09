@@ -2,8 +2,9 @@ import React from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import { format } from "date-fns";
 
-export default function EventChip2(props) {
-  const date = new Date(props.eventData.dateTime.seconds * 1000);
+export default function EventChip(props) {
+  const eventData = props.eventData
+  const date = new Date(eventData.dateTime.seconds * 1000);
   var formattedDate = format(date, "MMM d")
   
   return (
@@ -20,20 +21,20 @@ export default function EventChip2(props) {
       style={styles.card}>
       <View style={styles.cardImage}>
         <Image
-          source={{ uri: props.eventData.image }}
-          style={{ width: 170, height: 130, }}
+          source={{ uri: eventData.image }}
+          style={{ width: 180, height: 110 }}
         ></Image>
         </View>
       <View style={styles.cardContent}>
-        <Text style={{color:"white", fontWeight:'600',fontSize:13, paddingBottom:"0%", paddingTop:'2%', alignItems: "flex-start"}}>
-            {props.eventData.title}
+        <Text style={{color:"white", fontWeight:'600',fontSize:14, paddingBottom:"0%", paddingTop:'2%', alignItems: "flex-start"}}>
+            {eventData.title}
         </Text>
         <View style={styles.info}>
-          <Text style={{color:"white", fontWeight:'300', fontSize:12, paddingBottom:"10%", alignItems: "flex-start"}}>
+          <Text style={{color:"white", fontWeight:'300', fontSize:13, paddingBottom:"10%", alignItems: "flex-start"}}>
               {formattedDate}
           </Text>
-          <Text style={{color:"white", fontWeight:'300', fontSize:12, paddingBottom:"10%", alignItems: "flex-end"}}>
-              {props.eventData.ticketCost}
+          <Text style={{color:"white", fontWeight:'300', fontSize:13, paddingBottom:"10%", alignItems: "flex-end"}}>
+              {eventData.ticketCost}
           </Text>
         </View>
       </View>
@@ -45,7 +46,7 @@ const styles = StyleSheet.create({
   card: {
     alignItems: "start",
     justifyContent: "space-between",
-    width: "45%"
+    width: "48%"
   },
   cardContent: {
     // marginHorizontal:3,
@@ -56,7 +57,7 @@ const styles = StyleSheet.create({
   },
   cardImage: {
     borderRadius: 8,
-    height: 60, 
+    height: 100, 
     width: "100%",  
     overflow: 'hidden',
   },

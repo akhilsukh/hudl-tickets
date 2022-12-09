@@ -1,4 +1,4 @@
-import React from 'react'
+import {React, useEffect} from 'react'
 import { StatusBar, SafeAreaView, View, Text, Image } from 'react-native';
 import ExplorePage from './pages/ExplorePage';
 import CategoryPage from './pages/CategoryPage';
@@ -9,39 +9,35 @@ import HighSchoolPage from "./pages/HighSchoolPage";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Appbar } from 'react-native-paper';
-const Stack = createNativeStackNavigator();
 import ticket from "./assets/ticket.png";
 import account from "./assets/account-circle.png";
 import ProfilePage from './pages/ProfilePage';
-import { db } from './firebaseConfig.js';
+import LoginScreen from './pages/LoginScreen';
+import SignUpScreen from './pages/SignUp.js';
+import HomePage from './pages/HomePage';
+import ProfilePage from './pages/Profile';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { db } from './firebaseConfig';
 import { getDoc, doc } from 'firebase/firestore';
 
-// import { LogBox } from 'react-native';
-// LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
-// LogBox.ignoreAllLogs();//Ignore all log notifications
 
-// function LogoTitle() {
-//   return (
-//     <View style={{ backgroundColor: 'black' }}>
-//       <Image
-//         style={{ width: 168, height: 30 }}
-//         source={require('../hudl-tickets/assets/logo.jpg')}
-//       />
-//     </View>
-
-//   );
-// }
+const Stack = createNativeStackNavigator();
 
 function CustomNavigationBar({ navigation, back }) {
   
   return (
-    <Appbar.Header dark style={{ backgroundColor: "black" }}>
-      {back ? (
-        <Appbar.BackAction color="white" onPress={navigation.goBack} />
-      ) : (
-        <Appbar.Action icon={account} onPress={() => navigation.navigate("Profile Page", {userRef: doc(db, "user", "BYAfKsk2y0fOMF2MnUrK")})} color="#CCC"/>
-      )}
-      <View style={{ alignItems: "center", flex: 1 }}>
+//    <Appbar.Header dark style={{ backgroundColor: "black" }}>
+//      {back ? (
+//        <Appbar.BackAction color="white" onPress={navigation.goBack} />
+//      ) : (
+//        <Appbar.Action icon={account} onPress={() => navigation.navigate("Profile Page", {userRef: doc(db, "user", "BYAfKsk2y0fOMF2MnUrK")})} color="#CCC"/>
+//      )}
+//      <View style={{ alignItems: "center", flex: 1 }}>
+    <Appbar.Header dark style={{backgroundColor:'black'}}>
+      {back ? <Appbar.BackAction color="white" onPress={navigation.goBack} /> : 
+      <Appbar.Action icon={account} color="#CCC" onPress={() => navigation.navigate("Profile Page", {})} />}
+      <View style={{alignItems: 'center', flex: 1}}>
+
         <Image
           style={{ width: 168, height: 30, backgroundColor: "black" }}
           source={require("../hudl-tickets/assets/logo.png")}
@@ -59,7 +55,9 @@ function CustomNavigationBar({ navigation, back }) {
     </Appbar.Header>
   );
 }
+
 export default function App() {
+
   return (
     <>
       <SafeAreaView style={{ flex: 1, backgroundColor: "black" }}>
@@ -68,11 +66,11 @@ export default function App() {
           <Stack.Navigator
             initialRouteName="Home"
             screenOptions={{
-              header: (props) => <CustomNavigationBar {...props} />,
-            }}
-          >
-            {/* <Stack.Screen name="Login Page" component={LoginPage} /> */}
-            <Stack.Screen name="Explore Page" component={ExplorePage} />
+              header: (props) => <CustomNavigationBar {...props} />
+            }}>
+            <Stack.Screen name="Login Page" component={LoginScreen}/>
+            <Stack.Screen name="SignUp Page" component={SignUpScreen}/>
+            <Stack.Screen name="Explore Page" component={ExplorePage}/>
             <Stack.Screen name="Tickets Page" component={TicketsPage} />
             <Stack.Screen name="Category Page" component={CategoryPage} />
             <Stack.Screen name="Event Page" component={EventPage} />

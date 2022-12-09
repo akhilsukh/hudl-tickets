@@ -19,7 +19,7 @@ export default function Category(props) {
         </Image>
         </View>
       <View style={styles.cardContent}>
-        <Text style={{color:"white", fontWeight:'600',fontSize:12, paddingBottom:"2%"}}>
+        <Text style={{color:"white", fontWeight:'600',fontSize:14, paddingBottom:"2%"}}>
             {props.label}
         </Text>
       </View>
