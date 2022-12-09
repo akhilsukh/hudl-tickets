@@ -12,11 +12,6 @@ const SignUp = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
-    const navigateLogin = () => {
-        navigation.reset("Explore Page")
-        // navigation.replace("Explore Page");
-    }
-
     const createUser = async (userCredential) => {
         const newUserRef = doc(db, "user", userCredential.user.uid);
         await setDoc(newUserRef, {
@@ -32,8 +27,15 @@ const SignUp = () => {
 
     const handleSignUp = () => {
         createUserWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => { createUser(userCredential) }
+            .then((userCredential) => {
+                createUser(userCredential)
+                navigation.reset("Explore Page")
+            }
             ).catch(error => alert(error.message))
+    }
+
+    const navigateLogin = () => {
+        navigation.replace("Login Page");
     }
 
     return (
@@ -91,6 +93,13 @@ const SignUp = () => {
                     style={styles.button}
                 >
                     <Text style={styles.text}>CREATE ACCOUNT</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                    onPress={navigateLogin}
+                    style={styles.TOStyle}
+                >
+                    <Text style={styles.text}>Already have an account? Login</Text>
                 </TouchableOpacity>
 
             </View>

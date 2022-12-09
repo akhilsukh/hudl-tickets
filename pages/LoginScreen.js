@@ -28,7 +28,6 @@ const LoginScreen = () => {
     }
     
     useEffect(() => {
-
         const fetchData = async () => {
             await getUserData();
         }
@@ -50,7 +49,7 @@ const LoginScreen = () => {
     }
 
     const navigateCreateAccount = () => {
-        navigation.navigate("SignUp Page");
+        navigation.replace("SignUp Page");
     }
 
     return (
