@@ -9,8 +9,9 @@ import HighSchoolPage from "./pages/HighSchoolPage";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Appbar } from 'react-native-paper';
-import ticket from './assets/ticket.png';
-import account from './assets/account-circle.png';
+import ticket from "./assets/ticket.png";
+import account from "./assets/account-circle.png";
+import ProfilePage from './pages/ProfilePage';
 import LoginScreen from './pages/LoginScreen';
 import SignUpScreen from './pages/SignUp.js';
 import HomePage from './pages/HomePage';
@@ -23,7 +24,15 @@ import { getDoc, doc } from 'firebase/firestore';
 const Stack = createNativeStackNavigator();
 
 function CustomNavigationBar({ navigation, back }) {
+  
   return (
+//    <Appbar.Header dark style={{ backgroundColor: "black" }}>
+//      {back ? (
+//        <Appbar.BackAction color="white" onPress={navigation.goBack} />
+//      ) : (
+//        <Appbar.Action icon={account} onPress={() => navigation.navigate("Profile Page", {userRef: doc(db, "user", "BYAfKsk2y0fOMF2MnUrK")})} color="#CCC"/>
+//      )}
+//      <View style={{ alignItems: "center", flex: 1 }}>
     <Appbar.Header dark style={{backgroundColor:'black'}}>
       {back ? <Appbar.BackAction color="white" onPress={navigation.goBack} /> : 
       <Appbar.Action icon={account} color="#CCC" onPress={() => navigation.navigate("Profile Page", {})} />}
