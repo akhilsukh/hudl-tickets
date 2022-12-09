@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { getDoc, doc } from 'firebase/firestore';
 import { getHighSchool } from "../api/fire-service";
 import HighSchoolNavigationButton from "../components/HighSchoolButton.js";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { db } from '../firebaseConfig.js';
 
 
 export default function ProfilePage(props) {
@@ -12,14 +14,21 @@ export default function ProfilePage(props) {
 
     const getUser = async () => {
         try {
-            const userDoc = await getDoc(props.route.params.userRef)
-            let ud = userDoc.data()
-            setUserData(ud)
-            let fav = []
+            const uid = await AsyncStorage.getItem("user_id");
+            const userRef = doc(db, "user", uid);
+
+            const userDoc = await getDoc(userRef);
+
+            let ud = userDoc.data();
+            let fav = [];
+
             for (let i = 0; i < ud.favorites.length; i++) {
-                fav[i] = await getHighSchool(ud.favorites[i])
+                fav[i] = await getHighSchool(ud.favorites[i]);
             }
-            setFavorites(fav)
+
+            setUserData(ud);
+            setFavorites(fav);
+
         } catch(error){
             console.error(error);
         }
@@ -39,14 +48,16 @@ export default function ProfilePage(props) {
                     style={styles.image}
                 ></Image>
                 <Text style={styles.bold}>{userData.firstName} {userData.lastName}</Text>
-                <Text style={styles.reg}>@{userData.username}</Text>
+                <Text style={styles.reg}>{userData.email}</Text>
                 {/* <Text style={styles.text}>{userData.schoolName} ~ {userData.address}</Text> */}
             </View>
             <Text style={styles.marg}>Favorites:</Text>
-            {favorites.map((item) => 
+            {favorites.map((item, i) => 
                 (
                     <HighSchoolNavigationButton
                         highSchool={item}
+                        home={false}
+                        highSchoolId={userData.favorites[i]}
                         navigation={props.navigation}
                     ></HighSchoolNavigationButton>
                 )

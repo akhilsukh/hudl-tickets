@@ -63,7 +63,7 @@ export default function HighSchoolPage(props) {
         <Text style={{ color: "white", fontWeight: "600", fontSize: 24, margin: 12 }} >{highschool.name}</Text>
         <Text style={{ color: "white", fontSize: 16, marginHorizontal: 12 }}>{highschool.location}</Text>
         <View style={{ margin: 12 }}>
-          {favorited ?
+          {!favorited ?
             <FontAwesome.Button name="heart-o" color="#000" backgroundColor="#FCA974" onPress={updateFavorite}>
               <Text>Favorite {highschool.name}</Text>
             </FontAwesome.Button> :
