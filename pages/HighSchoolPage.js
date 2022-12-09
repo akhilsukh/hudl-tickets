@@ -1,34 +1,56 @@
 import React from 'react';
-import { StyleSheet, SafeAreaView, ScrollView, View, Text, Button, Image, requireNativeComponent } from 'react-native';
-import Banner from '../assets/banner.png';
-import Grid from '../components/Grid';
+import { StyleSheet, SafeAreaView, ScrollView, View, Text, Image } from 'react-native';
 import EventChip from '../components/EventChip';
-import ArchivedTickets from '../components/ArchivedTickets';
 import { db } from '../firebaseConfig.js';
-import { getDocs, collection, query, where } from 'firebase/firestore';
+import { getDocs, collection, query, where, doc, getDoc, updateDoc } from 'firebase/firestore';
 import { useState, useEffect } from 'react';
-import data from '../components/data';
-import Favorite from '../components/Favorite';
+import FontAwesome from '@expo/vector-icons/FontAwesome';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function HighSchoolPage(props) {
   const [homeEventsData, setHomeEvents] = useState([]);
   const [awayEventsData, setAwayEvents] = useState([]);
+  const [favorited, setFavorite] = useState(false)
 
   const highschool = props.route.params.highSchool
 
   const getData = async () => {
+    const uid = await AsyncStorage.getItem("user_id");
     const eventsRef = collection(db, "event");
+    const userDoc = doc(db, "user", uid);
 
     const homeQuery = query(eventsRef, where("homeTeamId", "==", props.route.params.highSchoolId));
     const awayQuery = query(eventsRef, where("awayTeamId", "==", props.route.params.highSchoolId));
 
+    const userDocument = await getDoc(userDoc);
     const homeDocs = await getDocs(homeQuery)
     const awayDocs = await getDocs(awayQuery)
 
+    const oldFavs = userDocument.data().favorites
+
     setHomeEvents(homeDocs.docs);
     setAwayEvents(awayDocs.docs);
+    if (oldFavs.includes(props.route.params.highSchoolId)) {
+      setFavorite(true)
+    }
   };
 
+  const updateFavorite = async () => {
+    const uid = await AsyncStorage.getItem("user_id");
+
+    const userDoc = doc(db, "user", uid);
+    const userDocument = await getDoc(userDoc);
+
+    let oldFavs = userDocument.data().favorites
+
+    if (favorited) {
+      await updateDoc(userDoc, { favorites: oldFavs.filter(v => v !== props.route.params.highSchoolId) });
+    } else {
+      await updateDoc(userDoc, { favorites: [...oldFavs, props.route.params.highSchoolId] });
+    }
+
+    setFavorite(!favorited)
+  }
 
   useEffect(() => {
     getData()
@@ -40,7 +62,16 @@ export default function HighSchoolPage(props) {
         <Image style={styles.img} source={{ uri: highschool.image }} />
         <Text style={{ color: "white", fontWeight: "600", fontSize: 24, margin: 12 }} >{highschool.name}</Text>
         <Text style={{ color: "white", fontSize: 16, marginHorizontal: 12 }}>{highschool.location}</Text>
-        <Favorite schoolID={props.route.params.highSchoolId}></Favorite>
+        <View style={{ margin: 12 }}>
+          {favorited ?
+            <FontAwesome.Button name="heart-o" color="#000" backgroundColor="#FCA974" onPress={updateFavorite}>
+              <Text>Favorite {highschool.name}</Text>
+            </FontAwesome.Button> :
+            <FontAwesome.Button name="heart" color="#000" backgroundColor="#FCA974" onPress={updateFavorite}>
+              <Text>Unfavorite {highschool.name}</Text>
+            </FontAwesome.Button>
+          }
+        </View>
         <Text style={styles.homeGameTitle}>Home Games</Text>
         <View style={styles.grid}>
           {homeEventsData.map((event, id) => {
@@ -81,17 +112,6 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     justifyContent: "space-between",
     padding: 10
-  },
-  container: {
-    marginTop: 10,
-    marginLeft: 20,
-    marginRight: 25,
-    flex: 0.25,
-    paddingLeft: "20%",
-    justifyContent: "center",
-    backgroundColor: "#333333",
-    padding: 8,
-    position: "relative",
   },
   flex: {
     flex: 1,
