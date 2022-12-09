@@ -14,11 +14,6 @@ import account from "./assets/account-circle.png";
 import ProfilePage from './pages/ProfilePage';
 import LoginScreen from './pages/LoginScreen';
 import SignUpScreen from './pages/SignUp.js';
-import HomePage from './pages/HomePage';
-import ProfilePage from './pages/Profile';
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { db } from './firebaseConfig';
-import { getDoc, doc } from 'firebase/firestore';
 
 
 const Stack = createNativeStackNavigator();

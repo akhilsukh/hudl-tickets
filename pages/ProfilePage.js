@@ -1,8 +1,7 @@
 import {StyleSheet, Image, Text, ScrollView, View, Button} from "react-native";
 import React, { useState, useEffect } from 'react';
-import { db } from '../firebaseConfig.js';
 import { getDoc, doc } from 'firebase/firestore';
-import { getHighSchool } from "../assets/api/fire-service.js";
+import { getHighSchool } from "../api/fire-service";
 import HighSchoolNavigationButton from "../components/HighSchoolButton.js";
 
 
