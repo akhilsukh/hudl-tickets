@@ -29,7 +29,6 @@ const SignUp = () => {
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 createUser(userCredential)
-                navigation.reset("Explore Page")
             }
             ).catch(error => alert(error.message))
     }
